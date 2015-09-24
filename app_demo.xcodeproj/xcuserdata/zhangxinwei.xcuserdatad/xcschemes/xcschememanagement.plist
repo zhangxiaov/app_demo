@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>ChinTypewriting.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>Copy of app_demo.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>app_demo.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +22,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>EDBA41F71BB242FF004B9A62</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>EDFCA73A1BB1734F00AF49EA</key>
 		<dict>
 			<key>primary</key>

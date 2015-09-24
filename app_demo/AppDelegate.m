@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "KeyboardViewController.h"
 #import "ViewController.h"
 
 @interface AppDelegate ()
@@ -19,9 +20,17 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    ViewController *controller = [[ViewController alloc] initWithNibName:nil bundle:nil];
+    self.window.backgroundColor = [UIColor whiteColor];
     
-    self.window.rootViewController = controller;
+    
+//    navc.navigationBar.tintColor = [UIColor grayColor];
+    
+    ViewController *controller = [[ViewController alloc] init];
+//    [navc pushViewController:controller animated:YES];
+    navc = [[UINavigationController alloc] initWithRootViewController:controller];
+//    [self.window addSubview:controller.view];
+    self.window.rootViewController = navc;
+    
     [self.window makeKeyAndVisible];
     
     return YES;
