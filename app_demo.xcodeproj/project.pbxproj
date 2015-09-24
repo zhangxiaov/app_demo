@@ -34,6 +34,7 @@
 		EDFCA7541BB1734F00AF49EA /* app_demoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = app_demoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFCA7591BB1734F00AF49EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDFCA75A1BB1734F00AF49EA /* app_demoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = app_demoTests.m; sourceTree = "<group>"; };
+		EDFCA86C1BB17F6300AF49EA /* AppConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +58,7 @@
 		EDFCA7321BB1734F00AF49EA = {
 			isa = PBXGroup;
 			children = (
+				EDFCA7641BB176D500AF49EA /* Resources */,
 				EDFCA73D1BB1734F00AF49EA /* app_demo */,
 				EDFCA7571BB1734F00AF49EA /* app_demoTests */,
 				EDFCA73C1BB1734F00AF49EA /* Products */,
@@ -80,6 +82,7 @@
 				EDFCA7451BB1734F00AF49EA /* ViewController.h */,
 				EDFCA7461BB1734F00AF49EA /* ViewController.m */,
 				EDFCA73E1BB1734F00AF49EA /* Supporting Files */,
+				EDFCA86C1BB17F6300AF49EA /* AppConfig.h */,
 			);
 			path = app_demo;
 			sourceTree = "<group>";
@@ -108,6 +111,13 @@
 				EDFCA7591BB1734F00AF49EA /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EDFCA7641BB176D500AF49EA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
