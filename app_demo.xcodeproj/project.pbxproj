@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EDBA41FE1BB242FF004B9A62 /* KeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA41FD1BB242FF004B9A62 /* KeyboardViewController.m */; };
+		EDBA42081BB2496B004B9A62 /* KeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA41FD1BB242FF004B9A62 /* KeyboardViewController.m */; };
+		EDBA42221BB39162004B9A62 /* AppBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42211BB39162004B9A62 /* AppBookView.m */; };
+		EDBA42311BB3C0D8004B9A62 /* UIImage+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42301BB3C0D8004B9A62 /* UIImage+UIColor.m */; };
+		EDBA42341BB3DA2A004B9A62 /* AppContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42331BB3DA2A004B9A62 /* AppContentViewController.m */; };
+		EDBA42371BB3EDDD004B9A62 /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42361BB3EDDD004B9A62 /* AppUtils.m */; };
 		EDFCA7411BB1734F00AF49EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA7401BB1734F00AF49EA /* main.m */; };
 		EDFCA7441BB1734F00AF49EA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA7431BB1734F00AF49EA /* AppDelegate.m */; };
 		EDFCA7471BB1734F00AF49EA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA7461BB1734F00AF49EA /* ViewController.m */; };
@@ -24,6 +30,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EDBA41F81BB242FF004B9A62 /* ChinTypewriting.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ChinTypewriting.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDBA41FB1BB242FF004B9A62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EDBA41FC1BB242FF004B9A62 /* KeyboardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyboardViewController.h; sourceTree = "<group>"; };
+		EDBA41FD1BB242FF004B9A62 /* KeyboardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeyboardViewController.m; sourceTree = "<group>"; };
+		EDBA42201BB39162004B9A62 /* AppBookView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppBookView.h; sourceTree = "<group>"; };
+		EDBA42211BB39162004B9A62 /* AppBookView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppBookView.m; sourceTree = "<group>"; };
+		EDBA422B1BB3A257004B9A62 /* AppConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
+		EDBA422F1BB3C0D8004B9A62 /* UIImage+UIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIColor.h"; sourceTree = "<group>"; };
+		EDBA42301BB3C0D8004B9A62 /* UIImage+UIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIColor.m"; sourceTree = "<group>"; };
+		EDBA42321BB3DA2A004B9A62 /* AppContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppContentViewController.h; sourceTree = "<group>"; };
+		EDBA42331BB3DA2A004B9A62 /* AppContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppContentViewController.m; sourceTree = "<group>"; };
+		EDBA42351BB3EDDD004B9A62 /* AppUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUtils.h; sourceTree = "<group>"; };
+		EDBA42361BB3EDDD004B9A62 /* AppUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUtils.m; sourceTree = "<group>"; };
 		EDFCA73B1BB1734F00AF49EA /* app_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFCA73F1BB1734F00AF49EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDFCA7401BB1734F00AF49EA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -37,6 +56,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EDBA41F51BB242FF004B9A62 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EDFCA7381BB1734F00AF49EA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -54,12 +80,59 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EDBA41F91BB242FF004B9A62 /* ChinTypewriting */ = {
+			isa = PBXGroup;
+			children = (
+				EDBA41FC1BB242FF004B9A62 /* KeyboardViewController.h */,
+				EDBA41FD1BB242FF004B9A62 /* KeyboardViewController.m */,
+				EDBA41FA1BB242FF004B9A62 /* Supporting Files */,
+			);
+			path = ChinTypewriting;
+			sourceTree = "<group>";
+		};
+		EDBA41FA1BB242FF004B9A62 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EDBA41FB1BB242FF004B9A62 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EDBA42091BB2867D004B9A62 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EDBA420A1BB28C1A004B9A62 /* sj */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		EDBA420A1BB28C1A004B9A62 /* sj */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = sj;
+			sourceTree = "<group>";
+		};
+		EDBA42231BB3951D004B9A62 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				EDBA422F1BB3C0D8004B9A62 /* UIImage+UIColor.h */,
+				EDBA42301BB3C0D8004B9A62 /* UIImage+UIColor.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		EDFCA7321BB1734F00AF49EA = {
 			isa = PBXGroup;
 			children = (
+				EDBA42321BB3DA2A004B9A62 /* AppContentViewController.h */,
+				EDBA42331BB3DA2A004B9A62 /* AppContentViewController.m */,
 				EDFCA73D1BB1734F00AF49EA /* app_demo */,
 				EDFCA7571BB1734F00AF49EA /* app_demoTests */,
+				EDBA42231BB3951D004B9A62 /* Categories */,
+				EDBA41F91BB242FF004B9A62 /* ChinTypewriting */,
 				EDFCA73C1BB1734F00AF49EA /* Products */,
+				EDBA42091BB2867D004B9A62 /* Resources */,
 			);
 			sourceTree = "<group>";
 		};
@@ -68,6 +141,7 @@
 			children = (
 				EDFCA73B1BB1734F00AF49EA /* app_demo.app */,
 				EDFCA7541BB1734F00AF49EA /* app_demoTests.xctest */,
+				EDBA41F81BB242FF004B9A62 /* ChinTypewriting.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -75,11 +149,16 @@
 		EDFCA73D1BB1734F00AF49EA /* app_demo */ = {
 			isa = PBXGroup;
 			children = (
+				EDBA42201BB39162004B9A62 /* AppBookView.h */,
+				EDBA42211BB39162004B9A62 /* AppBookView.m */,
+				EDBA422B1BB3A257004B9A62 /* AppConfig.h */,
 				EDFCA7421BB1734F00AF49EA /* AppDelegate.h */,
 				EDFCA7431BB1734F00AF49EA /* AppDelegate.m */,
+				EDBA42351BB3EDDD004B9A62 /* AppUtils.h */,
+				EDBA42361BB3EDDD004B9A62 /* AppUtils.m */,
+				EDFCA73E1BB1734F00AF49EA /* Supporting Files */,
 				EDFCA7451BB1734F00AF49EA /* ViewController.h */,
 				EDFCA7461BB1734F00AF49EA /* ViewController.m */,
-				EDFCA73E1BB1734F00AF49EA /* Supporting Files */,
 			);
 			path = app_demo;
 			sourceTree = "<group>";
@@ -113,6 +192,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		EDBA41F71BB242FF004B9A62 /* ChinTypewriting */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EDBA42021BB242FF004B9A62 /* Build configuration list for PBXNativeTarget "ChinTypewriting" */;
+			buildPhases = (
+				EDBA41F41BB242FF004B9A62 /* Sources */,
+				EDBA41F51BB242FF004B9A62 /* Frameworks */,
+				EDBA41F61BB242FF004B9A62 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChinTypewriting;
+			productName = ChinTypewriting;
+			productReference = EDBA41F81BB242FF004B9A62 /* ChinTypewriting.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		EDFCA73A1BB1734F00AF49EA /* app_demo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EDFCA75E1BB1734F00AF49EA /* Build configuration list for PBXNativeTarget "app_demo" */;
@@ -157,6 +253,9 @@
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "张新伟";
 				TargetAttributes = {
+					EDBA41F71BB242FF004B9A62 = {
+						CreatedOnToolsVersion = 6.4;
+					};
 					EDFCA73A1BB1734F00AF49EA = {
 						CreatedOnToolsVersion = 6.3.2;
 					};
@@ -179,6 +278,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				EDBA41F71BB242FF004B9A62 /* ChinTypewriting */,
 				EDFCA73A1BB1734F00AF49EA /* app_demo */,
 				EDFCA7531BB1734F00AF49EA /* app_demoTests */,
 			);
@@ -186,6 +286,13 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EDBA41F61BB242FF004B9A62 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EDFCA7391BB1734F00AF49EA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -203,13 +310,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		EDBA41F41BB242FF004B9A62 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDBA41FE1BB242FF004B9A62 /* KeyboardViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EDFCA7371BB1734F00AF49EA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDBA42221BB39162004B9A62 /* AppBookView.m in Sources */,
+				EDBA42081BB2496B004B9A62 /* KeyboardViewController.m in Sources */,
 				EDFCA7471BB1734F00AF49EA /* ViewController.m in Sources */,
+				EDBA42341BB3DA2A004B9A62 /* AppContentViewController.m in Sources */,
 				EDFCA7441BB1734F00AF49EA /* AppDelegate.m in Sources */,
 				EDFCA7411BB1734F00AF49EA /* main.m in Sources */,
+				EDBA42311BB3C0D8004B9A62 /* UIImage+UIColor.m in Sources */,
+				EDBA42371BB3EDDD004B9A62 /* AppUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +352,32 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		EDBA42031BB242FF004B9A62 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ChinTypewriting/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		EDBA42041BB242FF004B9A62 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ChinTypewriting/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		EDFCA75C1BB1734F00AF49EA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -269,6 +415,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_GENERATE_MAP_FILE = YES;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -307,6 +454,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_GENERATE_MAP_FILE = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -371,6 +519,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EDBA42021BB242FF004B9A62 /* Build configuration list for PBXNativeTarget "ChinTypewriting" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EDBA42031BB242FF004B9A62 /* Debug */,
+				EDBA42041BB242FF004B9A62 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EDFCA7361BB1734F00AF49EA /* Build configuration list for PBXProject "app_demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -387,6 +544,7 @@
 				EDFCA7601BB1734F00AF49EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EDFCA7611BB1734F00AF49EA /* Build configuration list for PBXNativeTarget "app_demoTests" */ = {
 			isa = XCConfigurationList;
@@ -395,6 +553,7 @@
 				EDFCA7631BB1734F00AF49EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
