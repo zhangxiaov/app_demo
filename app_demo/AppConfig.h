@@ -18,4 +18,7 @@
 
 #define FONT_SIZE_MAX 15.0
 
+#define CONTENT_HEIGHT (SCREEN_HEIGHT - 40)
+#define CONTENT_WIDTH (SCREEN_WIDTH - 20)
+
 #endif

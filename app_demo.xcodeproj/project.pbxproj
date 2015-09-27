@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED0D86941BB42BAF0034CCD0 /* UIScrollView+UITouch.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0D86931BB42BAF0034CCD0 /* UIScrollView+UITouch.m */; };
 		EDBA41FE1BB242FF004B9A62 /* KeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA41FD1BB242FF004B9A62 /* KeyboardViewController.m */; };
 		EDBA42081BB2496B004B9A62 /* KeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA41FD1BB242FF004B9A62 /* KeyboardViewController.m */; };
 		EDBA42221BB39162004B9A62 /* AppBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42211BB39162004B9A62 /* AppBookView.m */; };
 		EDBA42311BB3C0D8004B9A62 /* UIImage+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42301BB3C0D8004B9A62 /* UIImage+UIColor.m */; };
 		EDBA42341BB3DA2A004B9A62 /* AppContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42331BB3DA2A004B9A62 /* AppContentViewController.m */; };
 		EDBA42371BB3EDDD004B9A62 /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42361BB3EDDD004B9A62 /* AppUtils.m */; };
+		EDD38DF01BB7BA41001878DC /* AppLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD38DEF1BB7BA41001878DC /* AppLabel.m */; };
 		EDFCA7411BB1734F00AF49EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA7401BB1734F00AF49EA /* main.m */; };
 		EDFCA7441BB1734F00AF49EA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA7431BB1734F00AF49EA /* AppDelegate.m */; };
 		EDFCA7471BB1734F00AF49EA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA7461BB1734F00AF49EA /* ViewController.m */; };
@@ -30,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ED0D86921BB42BAF0034CCD0 /* UIScrollView+UITouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+UITouch.h"; path = "app_demo/UIScrollView+UITouch.h"; sourceTree = "<group>"; };
+		ED0D86931BB42BAF0034CCD0 /* UIScrollView+UITouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+UITouch.m"; path = "app_demo/UIScrollView+UITouch.m"; sourceTree = "<group>"; };
 		EDBA41F81BB242FF004B9A62 /* ChinTypewriting.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ChinTypewriting.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDBA41FB1BB242FF004B9A62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDBA41FC1BB242FF004B9A62 /* KeyboardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyboardViewController.h; sourceTree = "<group>"; };
@@ -43,6 +47,8 @@
 		EDBA42331BB3DA2A004B9A62 /* AppContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppContentViewController.m; sourceTree = "<group>"; };
 		EDBA42351BB3EDDD004B9A62 /* AppUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUtils.h; sourceTree = "<group>"; };
 		EDBA42361BB3EDDD004B9A62 /* AppUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUtils.m; sourceTree = "<group>"; };
+		EDD38DEE1BB7BA41001878DC /* AppLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppLabel.h; sourceTree = "<group>"; };
+		EDD38DEF1BB7BA41001878DC /* AppLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppLabel.m; sourceTree = "<group>"; };
 		EDFCA73B1BB1734F00AF49EA /* app_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFCA73F1BB1734F00AF49EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDFCA7401BB1734F00AF49EA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -53,7 +59,6 @@
 		EDFCA7541BB1734F00AF49EA /* app_demoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = app_demoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFCA7591BB1734F00AF49EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDFCA75A1BB1734F00AF49EA /* app_demoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = app_demoTests.m; sourceTree = "<group>"; };
-		EDFCA86C1BB17F6300AF49EA /* AppConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +133,8 @@
 			children = (
 				EDBA42321BB3DA2A004B9A62 /* AppContentViewController.h */,
 				EDBA42331BB3DA2A004B9A62 /* AppContentViewController.m */,
+				ED0D86921BB42BAF0034CCD0 /* UIScrollView+UITouch.h */,
+				ED0D86931BB42BAF0034CCD0 /* UIScrollView+UITouch.m */,
 				EDFCA73D1BB1734F00AF49EA /* app_demo */,
 				EDFCA7571BB1734F00AF49EA /* app_demoTests */,
 				EDBA42231BB3951D004B9A62 /* Categories */,
@@ -155,6 +162,8 @@
 				EDBA422B1BB3A257004B9A62 /* AppConfig.h */,
 				EDFCA7421BB1734F00AF49EA /* AppDelegate.h */,
 				EDFCA7431BB1734F00AF49EA /* AppDelegate.m */,
+				EDD38DEE1BB7BA41001878DC /* AppLabel.h */,
+				EDD38DEF1BB7BA41001878DC /* AppLabel.m */,
 				EDBA42351BB3EDDD004B9A62 /* AppUtils.h */,
 				EDBA42361BB3EDDD004B9A62 /* AppUtils.m */,
 				EDFCA73E1BB1734F00AF49EA /* Supporting Files */,
@@ -188,13 +197,6 @@
 				EDFCA7591BB1734F00AF49EA /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		EDFCA7641BB176D500AF49EA /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDBA41FE1BB242FF004B9A62 /* KeyboardViewController.m in Sources */,
+				ED0D86941BB42BAF0034CCD0 /* UIScrollView+UITouch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +337,7 @@
 				EDBA42081BB2496B004B9A62 /* KeyboardViewController.m in Sources */,
 				EDFCA7471BB1734F00AF49EA /* ViewController.m in Sources */,
 				EDBA42341BB3DA2A004B9A62 /* AppContentViewController.m in Sources */,
+				EDD38DF01BB7BA41001878DC /* AppLabel.m in Sources */,
 				EDFCA7441BB1734F00AF49EA /* AppDelegate.m in Sources */,
 				EDFCA7411BB1734F00AF49EA /* main.m in Sources */,
 				EDBA42311BB3C0D8004B9A62 /* UIImage+UIColor.m in Sources */,

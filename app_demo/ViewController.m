@@ -107,7 +107,7 @@
 - (void)bookView:(AppBookView *)bookView didTap:(UIButton *)button {
     
     AppContentViewController *controller = [[AppContentViewController alloc] init];
-    controller.title = bookView.bookname;
+    controller.title = [bookView.bookname stringByDeletingPathExtension];
     controller.navigationController.navigationBarHidden = YES;
     
     [self.navigationController pushViewController:controller animated:NO];

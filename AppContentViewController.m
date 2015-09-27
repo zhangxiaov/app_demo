@@ -8,14 +8,19 @@
 
 #import "AppContentViewController.h"
 #import "AppConfig.h"
+#import "AppLabel.h"
 
-@interface AppContentViewController () {
+@interface AppContentViewController () <UIScrollViewDelegate>{
     int totalPages;
+    int startPageOffsetx;
     int currentPage;
+    NSInteger len ;
     NSString *content;
 }
 @property (nonatomic, strong) NSData *data;
 @property (nonatomic, strong) NSArray *labels;
+@property (nonatomic, strong) UIView *headerView;
+@property (nonatomic, strong) UIView *footerView;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @end
 
@@ -23,11 +28,18 @@
 
 - (void)viewDidLoad {
     
+    [super viewDidLoad];
     isTap = YES;
     totalPages = 0;
     currentPage = 0;
+    len = 500;
+    startPageOffsetx = 0;
     
+    [self.view addSubview:self.headerView];
+    [self.view addSubview:self.scrollView];
+    [self.view addSubview:self.footerView];
     [self.navigationController setNavigationBarHidden:isTap animated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     
     if (!content) {
         content = [[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding];
@@ -37,46 +49,150 @@
         // 整个文本size
         CGSize contentSize = [content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil].size;
         
-        if (contentSize.height < SCREEN_HEIGHT - 40) {
+        if (contentSize.height < CONTENT_HEIGHT) {
+            [self labels:1];
             ((UILabel *)self.labels[0]).text = content;
+            self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, CONTENT_HEIGHT);
         }else {
-            NSUInteger contentLength = content.length;
-            totalPages = contentSize.height / SCREEN_WIDTH - 40;
-            
+//            NSUInteger contentLength = content.length;
+//            totalPages = contentSize.height / CONTENT_HEIGHT;
+            totalPages = ceil(contentSize.height / CONTENT_HEIGHT);
+            [self labels:totalPages];
+            self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * totalPages, CONTENT_HEIGHT);
+//            NSRange *range = [content rangeOfString:<#(NSString *)#>]
+            len = 500;
         }
     }
 }
 
-- (NSArray *)labels {
+- (void)moveLabel {
+    int theLabel = 0;
     
-    NSMutableArray *a = [[NSMutableArray alloc] init];
-    
-    for (int i = 0; i < 0; i++) {
-        UILabel *label = [[UILabel alloc] init];
-        label.font = [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE_MAX];
-        label.numberOfLines = 0;
-        label.lineBreakMode = NSLineBreakByWordWrapping;
-        label.frame = CGRectMake(SCREEN_WIDTH*i, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 40);
+    int direction = self.scrollView.contentOffset.x - startPageOffsetx;
+    if (direction > 0) {
+        if (currentPage % 3 == 0) {
+            theLabel = 2;
+        }else {
+            theLabel = currentPage % 3 - 1;
+        }
         
-        [a addObject:label];
+        if (currentPage + 2 > totalPages - 1) {
+            return;
+        }
+
+        ((UILabel *)self.labels[theLabel]).text = [self updateText:currentPage + 2];
+        CGRect rect = CGRectMake((currentPage + 2)*SCREEN_WIDTH, 0, SCREEN_WIDTH, CONTENT_HEIGHT);
+        ((UILabel *)self.labels[theLabel]).frame = rect;
         
-        [self.scrollView addSubview:label];
+    }else if (direction < 0) {
+        if (currentPage % 3 == 2) {
+            theLabel = 0;
+        }else {
+            theLabel = currentPage % 3 + 1;
+        }
+
+        if (currentPage - 2 < 0) {
+            return;
+        }
+        ((AppLabel *)self.labels[theLabel]).text = [self updateText:currentPage - 2];
+        CGRect rect = CGRectMake((currentPage - 2)*SCREEN_WIDTH, 0, SCREEN_WIDTH, CONTENT_HEIGHT);
+        ((AppLabel *)self.labels[theLabel]).frame = rect;
+    }
+}
+
+- (NSString *)updateText:(NSInteger)page {
+    if (page < 0) {
+        return nil;
     }
     
-    return a;
+    NSLog(@"updatepage = %ld", (long)page);
+    
+    NSInteger startIndex = page * len;
+    NSRange range = NSMakeRange(startIndex, len);
+
+    if ((startIndex + len) > content.length) {
+        range = NSMakeRange(startIndex, content.length - startIndex);
+    }
+    
+    return [content substringWithRange:range];
+}
+
+- (NSArray *)labels:(NSInteger)n {
+    if (_labels == nil) {
+        NSMutableArray *a = [[NSMutableArray alloc] init];
+        
+        if (n > 2) {
+            n = 3;
+        }
+        
+        for (int i = 0; i < n; i++) {
+            AppLabel *label = [[AppLabel alloc] init];
+            label.font = [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE_MAX];
+            label.numberOfLines = 0;
+            label.lineBreakMode = NSLineBreakByWordWrapping;
+            label.frame = CGRectMake(SCREEN_WIDTH*i, 0, SCREEN_WIDTH, CONTENT_HEIGHT);
+            label.text = [self updateText:i];
+            label.textAlignment = NSTextAlignmentLeft;
+            label.labelIndex = i;
+            if (i == 0) {
+                label.backgroundColor = [UIColor redColor];
+            }else if ( i == 1) {
+                label.backgroundColor = [UIColor greenColor];
+            }else {
+                label.backgroundColor = [UIColor blueColor];
+            }
+            [a addObject:label];
+            
+            [self.scrollView addSubview:label];
+        }
+        
+        _labels = a;
+    }
+    
+    return _labels;
+    
 }
 
 - (NSData *)data {
+    if (_data == nil) {
+        NSString *str = [self.title stringByAppendingPathExtension:@"txt"];
+        NSString *path = [[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/"] stringByAppendingString:str];
+        _data = [NSData dataWithContentsOfFile:path];
+    }
+
+    return _data;
+}
+
+- (UIView *)headerView {
+    if (_headerView == nil) {
+        _headerView = [[UIView alloc] init];
+        _headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 20);
+        _headerView.backgroundColor = [UIColor grayColor];
+    }
     
-    NSString *str = self.title;
-    NSString *path = [[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/"] stringByAppendingString:str];
-    return [NSData dataWithContentsOfFile:path];
+    return _headerView;
+}
+
+- (UIView *)footerView {
+    if (_footerView == nil) {
+        _footerView = [[UIView alloc] init];
+        _footerView.frame = CGRectMake(0, SCREEN_HEIGHT - 20, SCREEN_WIDTH, 20);
+        _footerView.backgroundColor = [UIColor grayColor];
+    }
+    
+    return _footerView;
 }
 
 - (UIScrollView *)scrollView {
     if (_scrollView == nil) {
-        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 40, SCREEN_WIDTH*3, SCREEN_HEIGHT - 40)];
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, CONTENT_HEIGHT)];
         _scrollView.backgroundColor = [UIColor grayColor];
+        _scrollView.delegate = self;
+        _scrollView.scrollEnabled = YES;
+        _scrollView.showsHorizontalScrollIndicator = NO;
+        _scrollView.decelerationRate = 0.0;
+        _scrollView.bounces = NO;
+        _scrollView.pagingEnabled = YES;
     }
     
     return _scrollView;
@@ -88,5 +204,29 @@
     isTap = !isTap;
     [self.navigationController setNavigationBarHidden:isTap animated:YES];
 }
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    startPageOffsetx = scrollView.contentOffset.x;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    currentPage = floor(startPageOffsetx / SCREEN_WIDTH);
+    
+    int direction = self.scrollView.contentOffset.x - startPageOffsetx;
+    if (direction > 0 && currentPage < totalPages - 1) {
+        [self.scrollView setContentOffset:CGPointMake(SCREEN_WIDTH*(currentPage+1), 0) animated:NO];
+        [self moveLabel];
+    }else if (direction < 0 && currentPage > 0){
+        [self.scrollView setContentOffset:CGPointMake(SCREEN_WIDTH*(currentPage - 1), 0) animated:NO];
+        [self moveLabel];
+    }
+    
+    NSLog(@"currentpage = %d, direction = %d, totalpages = %d, offsetx = %f, width = %f",
+          currentPage, direction, totalPages, scrollView.contentOffset.x, scrollView.contentSize.width);
+}
+
+//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+//   
+//}
 
 @end
