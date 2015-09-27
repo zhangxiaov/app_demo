@@ -80,9 +80,9 @@
             return;
         }
 
-        ((UILabel *)self.labels[theLabel]).text = [self updateText:currentPage + 2];
+        ((AppLabel *)self.labels[theLabel]).label.text = [self updateText:currentPage + 2];
         CGRect rect = CGRectMake((currentPage + 2)*SCREEN_WIDTH, 0, SCREEN_WIDTH, CONTENT_HEIGHT);
-        ((UILabel *)self.labels[theLabel]).frame = rect;
+        ((AppLabel *)self.labels[theLabel]).frame = rect;
         
     }else if (direction < 0) {
         if (currentPage % 3 == 2) {
@@ -94,7 +94,7 @@
         if (currentPage - 2 < 0) {
             return;
         }
-        ((AppLabel *)self.labels[theLabel]).text = [self updateText:currentPage - 2];
+        ((AppLabel *)self.labels[theLabel]).label.text = [self updateText:currentPage - 2];
         CGRect rect = CGRectMake((currentPage - 2)*SCREEN_WIDTH, 0, SCREEN_WIDTH, CONTENT_HEIGHT);
         ((AppLabel *)self.labels[theLabel]).frame = rect;
     }
@@ -126,21 +126,16 @@
         }
         
         for (int i = 0; i < n; i++) {
-            AppLabel *label = [[AppLabel alloc] init];
-            label.font = [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE_MAX];
-            label.numberOfLines = 0;
-            label.lineBreakMode = NSLineBreakByWordWrapping;
-            label.frame = CGRectMake(SCREEN_WIDTH*i, 0, SCREEN_WIDTH, CONTENT_HEIGHT);
-            label.text = [self updateText:i];
-            label.textAlignment = NSTextAlignmentLeft;
-            label.labelIndex = i;
+            AppLabel *label = [[AppLabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH*i, 0, SCREEN_WIDTH, CONTENT_HEIGHT)];
             if (i == 0) {
-                label.backgroundColor = [UIColor redColor];
+                label.label.backgroundColor = [UIColor redColor];
             }else if ( i == 1) {
-                label.backgroundColor = [UIColor greenColor];
+                label.label.backgroundColor = [UIColor greenColor];
             }else {
-                label.backgroundColor = [UIColor blueColor];
+                label.label.backgroundColor = [UIColor blueColor];
             }
+            
+            label.label.text = [self updateText:i];
             [a addObject:label];
             
             [self.scrollView addSubview:label];

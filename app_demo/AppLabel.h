@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppLabel : UILabel
-@property (nonatomic, assign) NSInteger pageIndex;
-@property (nonatomic, assign) NSInteger labelIndex;
+@interface AppLabel : UIView
+@property (nonatomic, strong) UILabel *label;
 @end
