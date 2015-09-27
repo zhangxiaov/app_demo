@@ -209,7 +209,7 @@
     startPageOffsetx = scrollView.contentOffset.x;
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
     currentPage = floor(startPageOffsetx / SCREEN_WIDTH);
     
     int direction = self.scrollView.contentOffset.x - startPageOffsetx;
@@ -224,9 +224,5 @@
     NSLog(@"currentpage = %d, direction = %d, totalpages = %d, offsetx = %f, width = %f",
           currentPage, direction, totalPages, scrollView.contentOffset.x, scrollView.contentSize.width);
 }
-
-//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-//   
-//}
 
 @end
