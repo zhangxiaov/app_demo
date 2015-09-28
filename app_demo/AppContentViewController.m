@@ -47,7 +47,10 @@
         NSDictionary *dict = @{NSFontAttributeName : [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE_MAX]};
         
         // 整个文本size
-        CGSize contentSize = [content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil].size;
+        CGSize contentSize = [content boundingRectWithSize:CGSizeMake(CONTENT_WIDTH, MAXFLOAT)
+                                                   options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading |NSStringDrawingTruncatesLastVisibleLine
+                                                attributes:dict
+                                                   context:nil].size;
         
         if (contentSize.height < CONTENT_HEIGHT) {
             [self labels:1];
@@ -61,6 +64,7 @@
             self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * totalPages, CONTENT_HEIGHT);
 //            NSRange *range = [content rangeOfString:<#(NSString *)#>]
             len = 500;
+            
         }
     }
 }
@@ -127,14 +131,6 @@
         
         for (int i = 0; i < n; i++) {
             AppLabel *label = [[AppLabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH*i, 0, SCREEN_WIDTH, CONTENT_HEIGHT)];
-            if (i == 0) {
-                label.label.backgroundColor = [UIColor redColor];
-            }else if ( i == 1) {
-                label.label.backgroundColor = [UIColor greenColor];
-            }else {
-                label.label.backgroundColor = [UIColor blueColor];
-            }
-            
             label.label.text = [self updateText:i];
             [a addObject:label];
             

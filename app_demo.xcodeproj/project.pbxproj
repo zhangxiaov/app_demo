@@ -15,6 +15,7 @@
 		EDD38DF01BB7BA41001878DC /* AppLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD38DEF1BB7BA41001878DC /* AppLabel.m */; };
 		EDD38DF51BB7F75E001878DC /* AppContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD38DF21BB7F75E001878DC /* AppContentViewController.m */; };
 		EDD38DF61BB7F75E001878DC /* UIImage+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD38DF41BB7F75E001878DC /* UIImage+UIColor.m */; };
+		EDD38DF91BB80FEF001878DC /* UILabel+VerticalAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD38DF81BB80FEF001878DC /* UILabel+VerticalAlign.m */; };
 		EDFCA7411BB1734F00AF49EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA7401BB1734F00AF49EA /* main.m */; };
 		EDFCA7441BB1734F00AF49EA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA7431BB1734F00AF49EA /* AppDelegate.m */; };
 		EDFCA7471BB1734F00AF49EA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA7461BB1734F00AF49EA /* ViewController.m */; };
@@ -49,6 +50,8 @@
 		EDD38DF21BB7F75E001878DC /* AppContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppContentViewController.m; sourceTree = "<group>"; };
 		EDD38DF31BB7F75E001878DC /* UIImage+UIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIColor.h"; sourceTree = "<group>"; };
 		EDD38DF41BB7F75E001878DC /* UIImage+UIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIColor.m"; sourceTree = "<group>"; };
+		EDD38DF71BB80FEF001878DC /* UILabel+VerticalAlign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+VerticalAlign.h"; sourceTree = "<group>"; };
+		EDD38DF81BB80FEF001878DC /* UILabel+VerticalAlign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+VerticalAlign.m"; sourceTree = "<group>"; };
 		EDFCA73B1BB1734F00AF49EA /* app_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFCA73F1BB1734F00AF49EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDFCA7401BB1734F00AF49EA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -161,6 +164,8 @@
 				EDFCA73E1BB1734F00AF49EA /* Supporting Files */,
 				EDFCA7451BB1734F00AF49EA /* ViewController.h */,
 				EDFCA7461BB1734F00AF49EA /* ViewController.m */,
+				EDD38DF71BB80FEF001878DC /* UILabel+VerticalAlign.h */,
+				EDD38DF81BB80FEF001878DC /* UILabel+VerticalAlign.m */,
 			);
 			path = app_demo;
 			sourceTree = "<group>";
@@ -333,6 +338,7 @@
 				EDD38DF01BB7BA41001878DC /* AppLabel.m in Sources */,
 				EDFCA7441BB1734F00AF49EA /* AppDelegate.m in Sources */,
 				EDFCA7411BB1734F00AF49EA /* main.m in Sources */,
+				EDD38DF91BB80FEF001878DC /* UILabel+VerticalAlign.m in Sources */,
 				EDBA42371BB3EDDD004B9A62 /* AppUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
