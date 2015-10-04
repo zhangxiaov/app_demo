@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		ED0D86941BB42BAF0034CCD0 /* UIScrollView+UITouch.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0D86931BB42BAF0034CCD0 /* UIScrollView+UITouch.m */; };
 		EDBA41FE1BB242FF004B9A62 /* KeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA41FD1BB242FF004B9A62 /* KeyboardViewController.m */; };
 		EDBA42081BB2496B004B9A62 /* KeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA41FD1BB242FF004B9A62 /* KeyboardViewController.m */; };
 		EDBA42221BB39162004B9A62 /* AppBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42211BB39162004B9A62 /* AppBookView.m */; };
 		EDBA42371BB3EDDD004B9A62 /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42361BB3EDDD004B9A62 /* AppUtils.m */; };
+		EDD363E61BC0FB43008CD9AC /* UITouchScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD363E51BC0FB43008CD9AC /* UITouchScrollView.m */; };
 		EDD38DF01BB7BA41001878DC /* AppLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD38DEF1BB7BA41001878DC /* AppLabel.m */; };
 		EDD38DF51BB7F75E001878DC /* AppContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD38DF21BB7F75E001878DC /* AppContentViewController.m */; };
 		EDD38DF61BB7F75E001878DC /* UIImage+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD38DF41BB7F75E001878DC /* UIImage+UIColor.m */; };
@@ -33,8 +33,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		ED0D86921BB42BAF0034CCD0 /* UIScrollView+UITouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+UITouch.h"; sourceTree = "<group>"; };
-		ED0D86931BB42BAF0034CCD0 /* UIScrollView+UITouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+UITouch.m"; sourceTree = "<group>"; };
 		EDBA41F81BB242FF004B9A62 /* ChinTypewriting.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ChinTypewriting.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDBA41FB1BB242FF004B9A62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDBA41FC1BB242FF004B9A62 /* KeyboardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyboardViewController.h; sourceTree = "<group>"; };
@@ -44,6 +42,8 @@
 		EDBA422B1BB3A257004B9A62 /* AppConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
 		EDBA42351BB3EDDD004B9A62 /* AppUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUtils.h; sourceTree = "<group>"; };
 		EDBA42361BB3EDDD004B9A62 /* AppUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUtils.m; sourceTree = "<group>"; };
+		EDD363E41BC0FB43008CD9AC /* UITouchScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITouchScrollView.h; sourceTree = "<group>"; };
+		EDD363E51BC0FB43008CD9AC /* UITouchScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITouchScrollView.m; sourceTree = "<group>"; };
 		EDD38DEE1BB7BA41001878DC /* AppLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppLabel.h; sourceTree = "<group>"; };
 		EDD38DEF1BB7BA41001878DC /* AppLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppLabel.m; sourceTree = "<group>"; };
 		EDD38DF11BB7F75E001878DC /* AppContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppContentViewController.h; sourceTree = "<group>"; };
@@ -148,11 +148,11 @@
 			children = (
 				EDD38DF11BB7F75E001878DC /* AppContentViewController.h */,
 				EDD38DF21BB7F75E001878DC /* AppContentViewController.m */,
+				EDD363E41BC0FB43008CD9AC /* UITouchScrollView.h */,
+				EDD363E51BC0FB43008CD9AC /* UITouchScrollView.m */,
 				EDD38DF31BB7F75E001878DC /* UIImage+UIColor.h */,
 				EDD38DF41BB7F75E001878DC /* UIImage+UIColor.m */,
 				EDBA42201BB39162004B9A62 /* AppBookView.h */,
-				ED0D86921BB42BAF0034CCD0 /* UIScrollView+UITouch.h */,
-				ED0D86931BB42BAF0034CCD0 /* UIScrollView+UITouch.m */,
 				EDBA42211BB39162004B9A62 /* AppBookView.m */,
 				EDBA422B1BB3A257004B9A62 /* AppConfig.h */,
 				EDFCA7421BB1734F00AF49EA /* AppDelegate.h */,
@@ -322,7 +322,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDBA41FE1BB242FF004B9A62 /* KeyboardViewController.m in Sources */,
-				ED0D86941BB42BAF0034CCD0 /* UIScrollView+UITouch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +339,7 @@
 				EDFCA7411BB1734F00AF49EA /* main.m in Sources */,
 				EDD38DF91BB80FEF001878DC /* UILabel+VerticalAlign.m in Sources */,
 				EDBA42371BB3EDDD004B9A62 /* AppUtils.m in Sources */,
+				EDD363E61BC0FB43008CD9AC /* UITouchScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
