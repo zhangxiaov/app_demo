@@ -9,12 +9,12 @@
 #import "AppContentViewController.h"
 #import "AppConfig.h"
 #import "AppLabel.h"
+#import <CoreText/CoreText.h>
 
 @interface AppContentViewController () <UIScrollViewDelegate>{
     int totalPages;
     int startPageOffsetx;
     int currentPage;
-    NSInteger len ;
     NSString *content;
 }
 @property (nonatomic, strong) NSData *data;
@@ -22,6 +22,7 @@
 @property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong) UIView *footerView;
 @property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) NSMutableArray *ranges;
 @end
 
 @implementation AppContentViewController
@@ -32,8 +33,8 @@
     isTap = YES;
     totalPages = 0;
     currentPage = 0;
-    len = 500;
     startPageOffsetx = 0;
+    self.fontSize = 15.0f;
     
     [self.view addSubview:self.headerView];
     [self.view addSubview:self.scrollView];
@@ -43,28 +44,40 @@
     
     if (!content) {
         content = [[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding];
+        content = [content stringByReplacingOccurrencesOfString:@"\r\n" withString:@"\n"];
         
-        NSDictionary *dict = @{NSFontAttributeName : [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE_MAX]};
+        while (textPos < content.length) {
+            CGMutablePathRef path = CGPathCreateMutable();
+            CGRect textFrame = CGRectInset(self.view.bounds, NORMAL_PADDING, 20);
+            CGPathAddRect(path, NULL, textFrame);
+            
+            CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)self.attStr);
+            CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(textPos, 0), path, NULL);
+            CFRange range = CTFrameGetVisibleStringRange(frame);
+            textPos += range.length;
+            NSValue *value = [NSValue valueWithBytes:&range objCType:@encode(NSRange)];
+            [self.ranges addObject:value];
+            CFRelease(path);
+            ++totalPages;
+        }
         
-        // 整个文本size
-        CGSize contentSize = [content boundingRectWithSize:CGSizeMake(CONTENT_WIDTH, MAXFLOAT)
-                                                   options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading |NSStringDrawingTruncatesLastVisibleLine
-                                                attributes:dict
-                                                   context:nil].size;
+       
         
-        if (contentSize.height < CONTENT_HEIGHT) {
+//        NSDictionary *dict = @{NSFontAttributeName : [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE_MAX]};
+//        
+//        // 整个文本size
+//        CGSize contentSize = [content boundingRectWithSize:CGSizeMake(CONTENT_WIDTH, MAXFLOAT)
+//                                                   options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading |NSStringDrawingTruncatesLastVisibleLine
+//                                                attributes:dict
+//                                                   context:nil].size;
+//        
+        if (totalPages == 1) {
             [self labels:1];
             ((UILabel *)self.labels[0]).text = content;
             self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, CONTENT_HEIGHT);
         }else {
-//            NSUInteger contentLength = content.length;
-//            totalPages = contentSize.height / CONTENT_HEIGHT;
-            totalPages = ceil(contentSize.height / CONTENT_HEIGHT);
             [self labels:totalPages];
             self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * totalPages, CONTENT_HEIGHT);
-//            NSRange *range = [content rangeOfString:<#(NSString *)#>]
-            len = 500;
-            
         }
     }
 }
@@ -108,17 +121,21 @@
     if (page < 0) {
         return nil;
     }
-    
-    NSLog(@"updatepage = %ld", (long)page);
-    
-    NSInteger startIndex = page * len;
-    NSRange range = NSMakeRange(startIndex, len);
 
-    if ((startIndex + len) > content.length) {
-        range = NSMakeRange(startIndex, content.length - startIndex);
+    NSValue *value = self.ranges[page];
+    NSRange range;
+    [value getValue:&range];
+    return [content substringWithRange:range];
+}
+
+#pragma property
+
+- (NSMutableArray *)ranges {
+    if (_ranges == nil) {
+        _ranges = [[NSMutableArray alloc] init];
     }
     
-    return [content substringWithRange:range];
+    return _ranges;
 }
 
 - (NSArray *)labels:(NSInteger)n {
@@ -133,6 +150,14 @@
             AppLabel *label = [[AppLabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH*i, 0, SCREEN_WIDTH, CONTENT_HEIGHT)];
             label.label.text = [self updateText:i];
             [a addObject:label];
+            
+//            if (i == 0) {
+//                label.backgroundColor = [UIColor redColor];
+//            }else if (i == 1) {
+//                label.backgroundColor = [UIColor greenColor];
+//            }else {
+//                label.backgroundColor = [UIColor blueColor];
+//            }
             
             [self.scrollView addSubview:label];
         }
@@ -189,6 +214,50 @@
     return _scrollView;
 }
 
+- (NSString *)fontName {
+    if (_fontName == nil) {
+        _fontName = @"Heiti SC";
+    }
+    
+    return _fontName;
+}
+
+- (UIColor *)color {
+    if (_color == nil) {
+        _color = [UIColor blackColor];
+    }
+    
+    return _color;
+}
+
+- (UIColor *)strokeColor {
+    if (_strokeColor == nil) {
+        _strokeColor = [UIColor whiteColor];
+        self.strokeWidth = 0.0;
+    }
+    
+    return _strokeColor;
+}
+
+- (NSAttributedString *)attStr {
+    if (_attStr == nil) {
+        
+        CTFontRef fontRef = CTFontCreateWithName((CFStringRef)self.fontName,self.fontSize, NULL);
+
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              (id)self.color.CGColor, kCTForegroundColorAttributeName,
+                              (id)CFBridgingRelease(fontRef), kCTFontAttributeName,
+                              (id)self.strokeColor.CGColor, (NSString *) kCTStrokeColorAttributeName,
+                              (id)[NSNumber numberWithFloat: self.strokeWidth], (NSString *)kCTStrokeWidthAttributeName,
+                              nil];
+        _attStr = [[NSAttributedString alloc] initWithString:content attributes:dict];
+        
+        CFRelease(fontRef);
+    }
+    
+    return _attStr;
+}
+
 #pragma mark
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -212,8 +281,8 @@
         [self moveLabel];
     }
     
-    NSLog(@"currentpage = %d, direction = %d, totalpages = %d, offsetx = %f, width = %f",
-          currentPage, direction, totalPages, scrollView.contentOffset.x, scrollView.contentSize.width);
+    NSLog(@"currentpage = %d, direction = %d, totalpages = %d, offsetx = %f, width = %f, len = %ld",
+          currentPage, direction, totalPages, scrollView.contentOffset.x, scrollView.contentSize.width, content.length);
 }
 
 @end
