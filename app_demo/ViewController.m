@@ -61,15 +61,18 @@
         
         _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, [AppBookView height]*row)];
 
-        NSInteger count = self.data.count;
+//        NSInteger count = self.data.count;
+        
+        NSInteger count = 10;
         
         for (int i = 0; i < count; i++) {
             AppBookView *book = [[AppBookView alloc]init];
             book.delegate = self;
             
-            NSLog(@"book name == %@", self.data[i]);
+//            NSLog(@"book name == %@", self.data[i]);
             
             [book setCover:@"" name:self.data[i] author:@"kongzi" bookid:i];
+//            [book setCover:@"" name:@"test" author:@"kongzi" bookid:i];
             
             CGFloat left = 0.0;
             CGFloat top = 0.0;

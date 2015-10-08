@@ -12,7 +12,7 @@
 #import <CoreText/CoreText.h>
 #import "UITouchScrollView.h"
 
-@interface AppContentViewController () <UIScrollViewDelegate, UIScrollViewTouchesDelegate>{
+@interface AppContentViewController () <UIScrollViewDelegate>{
     int totalPages;
     int startPageOffsetx;
     int currentPage;
@@ -72,7 +72,7 @@
 //        
     if (totalPages == 1) {
         [self labels:1];
-        ((UILabel *)self.labels[0]).text = [self.attStr.string substringFromIndex:0];
+        ((AppLabel *)self.labels[0]).label.text = [self.attStr.string substringFromIndex:0];
         self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, CONTENT_HEIGHT);
     }else {
         [self labels:totalPages];
@@ -202,7 +202,7 @@
     if (_scrollView == nil) {
         _scrollView = [[UITouchScrollView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, CONTENT_HEIGHT)];
         _scrollView.backgroundColor = [UIColor grayColor];
-        _scrollView.touchesdelegate = self;
+//        _scrollView.touchesdelegate = self;
         _scrollView.delegate = self;
         _scrollView.scrollEnabled = YES;
         _scrollView.showsHorizontalScrollIndicator = NO;
@@ -216,7 +216,7 @@
 
 - (NSString *)fontName {
     if (_fontName == nil) {
-        _fontName = @"Heiti SC";
+        _fontName = @"STHeitiSC-Light";
     }
     
     return _fontName;
@@ -252,12 +252,13 @@
                               nil];
         
         NSString *content = [[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding];
+//        NSString *content = @"fafafafafafafaffafafaf发放奖励金啊的；的感觉啊放假啊啦放假啊放假啊； ；啊放假啊谁来激发了；示";
         content = [content stringByReplacingOccurrencesOfString:@"\r\n" withString:@"\n"];
         len = content.length;
         
         _attStr = [[NSAttributedString alloc] initWithString:content attributes:dict];
         
-        CFRelease(fontRef);
+//        CFRelease(fontRef);
     }
     
     return _attStr;
@@ -265,15 +266,8 @@
 
 #pragma mark
 
-- (void)scrollViewTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event whichView:(id)scrollView {
-    isTap = !isTap;
-    [self.navigationController setNavigationBarHidden:isTap animated:YES];
-}
-
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     startPageOffsetx = scrollView.contentOffset.x;
-    dragging = YES;
-//    scrollView.dragging
 }
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {

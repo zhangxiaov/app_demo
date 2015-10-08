@@ -16,10 +16,10 @@
     if (self) {
         _label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, CONTENT_WIDTH, CONTENT_HEIGHT)];
         _label.backgroundColor = [UIColor whiteColor];
-        _label.font = [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE_MAX];
+        _label.font = [UIFont fontWithName:@"STHeitiSC-Light" size:FONT_SIZE_MAX];
         _label.numberOfLines = 0;
-        _label.lineBreakMode = NSLineBreakByWordWrapping;
-        _label.textAlignment = NSTextAlignmentLeft;
+//        _label.lineBreakMode = NSLineBreakByWordWrapping;
+//        _label.textAlignment = NSTextAlignmentLeft;
 //        _label setver
         [self addSubview:_label];
     }

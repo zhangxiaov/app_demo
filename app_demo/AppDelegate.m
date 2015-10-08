@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "KeyboardViewController.h"
 #import "ViewController.h"
 
 @interface AppDelegate ()
@@ -23,12 +22,11 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     
-//    navc.navigationBar.tintColor = [UIColor grayColor];
     
     ViewController *controller = [[ViewController alloc] init];
-//    [navc pushViewController:controller animated:YES];
+
     navc = [[UINavigationController alloc] initWithRootViewController:controller];
-//    [self.window addSubview:controller.view];
+
     self.window.rootViewController = navc;
     
     [self.window makeKeyAndVisible];
