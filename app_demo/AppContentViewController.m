@@ -22,7 +22,7 @@
 @property (nonatomic, strong) NSData *data;
 @property (nonatomic, strong) NSArray *labels;
 @property (nonatomic, strong) UIView *headerView;
-@property (nonatomic, strong) UIView *footerView;
+@property (nonatomic, strong) UILabel *footerView;
 @property (nonatomic, strong) UITouchScrollView *scrollView;
 @property (nonatomic, strong) NSMutableArray *ranges;
 @end
@@ -60,16 +60,19 @@
         ++totalPages;
     }
     
-   
+//    CGFloat h = CONTENT_HEIGHT;
+//    CGFloat w = CONTENT_WIDTH;
+//    
+//    NSMutableString *bufstr;
+//    NSDictionary *dict = @{NSFontAttributeName : [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE_MAX]};
+//
+//    CGSize contentSize = [bufstr boundingRectWithSize:CGSizeMake(w, MAXFLOAT)
+//                                              options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading |NSStringDrawingTruncatesLastVisibleLine
+//                                           attributes:dict
+//                                              context:nil].size;
     
-//        NSDictionary *dict = @{NSFontAttributeName : [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE_MAX]};
-//        
-//        // 整个文本size
-//        CGSize contentSize = [content boundingRectWithSize:CGSizeMake(CONTENT_WIDTH, MAXFLOAT)
-//                                                   options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading |NSStringDrawingTruncatesLastVisibleLine
-//                                                attributes:dict
-//                                                   context:nil].size;
-//        
+    
+    
     if (totalPages == 1) {
         [self labels:1];
         ((UILabel *)self.labels[0]).text = [self.attStr.string substringFromIndex:0];
@@ -79,6 +82,7 @@
         self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * totalPages, CONTENT_HEIGHT);
     }
 
+    _footerView.text = [NSString stringWithFormat:@"%d/%d",  1, totalPages];
 }
 
 - (void)moveLabel {
@@ -127,6 +131,17 @@
     return [self.attStr.string substringWithRange:range];
 }
 
+- (void)updateFooter {
+    int direction = self.scrollView.contentOffset.x - startPageOffsetx;
+    
+    if (direction > 0) {
+        _footerView.text = [NSString stringWithFormat:@"%d/%d",  currentPage + 1 + 1, totalPages];
+    }else if (direction < 0) {
+        _footerView.text = [NSString stringWithFormat:@"%d/%d",  currentPage + 1 - 1, totalPages];
+    }
+    
+}
+
 #pragma property
 
 - (NSMutableArray *)ranges {
@@ -172,7 +187,9 @@
     if (_data == nil) {
         NSString *str = [self.title stringByAppendingPathExtension:@"txt"];
         NSString *path = [[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/"] stringByAppendingString:str];
+        NSLog(@"t:%f", [NSDate timeIntervalSinceReferenceDate]);
         _data = [NSData dataWithContentsOfFile:path];
+        NSLog(@"t:%f", [NSDate timeIntervalSinceReferenceDate]);
     }
 
     return _data;
@@ -190,9 +207,11 @@
 
 - (UIView *)footerView {
     if (_footerView == nil) {
-        _footerView = [[UIView alloc] init];
-        _footerView.frame = CGRectMake(0, SCREEN_HEIGHT - 20, SCREEN_WIDTH, 20);
+        _footerView = [[UILabel alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 20, SCREEN_WIDTH, 20)];
         _footerView.backgroundColor = [UIColor grayColor];
+        _footerView.text = [NSString stringWithFormat:@"%d/%d",  currentPage, totalPages];
+        _footerView.textColor = [UIColor whiteColor];
+        
     }
     
     return _footerView;
@@ -257,7 +276,7 @@
         
         _attStr = [[NSAttributedString alloc] initWithString:content attributes:dict];
         
-        CFRelease(fontRef);
+//        CFRelease(fontRef);
     }
     
     return _attStr;
@@ -287,6 +306,8 @@
         [self.scrollView setContentOffset:CGPointMake(SCREEN_WIDTH*(currentPage - 1), 0) animated:NO];
         [self moveLabel];
     }
+    
+    [self updateFooter];
     
     NSLog(@"currentpage = %d, direction = %d, totalpages = %d, offsetx = %f, width = %f, len = %ld",
           currentPage, direction, totalPages, scrollView.contentOffset.x, scrollView.contentSize.width, len);

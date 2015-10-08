@@ -11,6 +11,7 @@
 		EDBA42081BB2496B004B9A62 /* KeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA41FD1BB242FF004B9A62 /* KeyboardViewController.m */; };
 		EDBA42221BB39162004B9A62 /* AppBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42211BB39162004B9A62 /* AppBookView.m */; };
 		EDBA42371BB3EDDD004B9A62 /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42361BB3EDDD004B9A62 /* AppUtils.m */; };
+		EDBA423B1BC60388004B9A62 /* ClientServer.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA423A1BC60388004B9A62 /* ClientServer.m */; };
 		EDD363E61BC0FB43008CD9AC /* UITouchScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD363E51BC0FB43008CD9AC /* UITouchScrollView.m */; };
 		EDD38DF01BB7BA41001878DC /* AppLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD38DEF1BB7BA41001878DC /* AppLabel.m */; };
 		EDD38DF51BB7F75E001878DC /* AppContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD38DF21BB7F75E001878DC /* AppContentViewController.m */; };
@@ -42,6 +43,8 @@
 		EDBA422B1BB3A257004B9A62 /* AppConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
 		EDBA42351BB3EDDD004B9A62 /* AppUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUtils.h; sourceTree = "<group>"; };
 		EDBA42361BB3EDDD004B9A62 /* AppUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUtils.m; sourceTree = "<group>"; };
+		EDBA42391BC60388004B9A62 /* ClientServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientServer.h; sourceTree = "<group>"; };
+		EDBA423A1BC60388004B9A62 /* ClientServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientServer.m; sourceTree = "<group>"; };
 		EDD363E41BC0FB43008CD9AC /* UITouchScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITouchScrollView.h; sourceTree = "<group>"; };
 		EDD363E51BC0FB43008CD9AC /* UITouchScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITouchScrollView.m; sourceTree = "<group>"; };
 		EDD38DEE1BB7BA41001878DC /* AppLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppLabel.h; sourceTree = "<group>"; };
@@ -122,6 +125,15 @@
 			path = sj;
 			sourceTree = "<group>";
 		};
+		EDBA42381BC6035E004B9A62 /* net */ = {
+			isa = PBXGroup;
+			children = (
+				EDBA42391BC60388004B9A62 /* ClientServer.h */,
+				EDBA423A1BC60388004B9A62 /* ClientServer.m */,
+			);
+			path = net;
+			sourceTree = "<group>";
+		};
 		EDFCA7321BB1734F00AF49EA = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +158,7 @@
 		EDFCA73D1BB1734F00AF49EA /* app_demo */ = {
 			isa = PBXGroup;
 			children = (
+				EDBA42381BC6035E004B9A62 /* net */,
 				EDD38DF11BB7F75E001878DC /* AppContentViewController.h */,
 				EDD38DF21BB7F75E001878DC /* AppContentViewController.m */,
 				EDD363E41BC0FB43008CD9AC /* UITouchScrollView.h */,
@@ -340,6 +353,7 @@
 				EDD38DF91BB80FEF001878DC /* UILabel+VerticalAlign.m in Sources */,
 				EDBA42371BB3EDDD004B9A62 /* AppUtils.m in Sources */,
 				EDD363E61BC0FB43008CD9AC /* UITouchScrollView.m in Sources */,
+				EDBA423B1BC60388004B9A62 /* ClientServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
