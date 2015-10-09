@@ -61,9 +61,9 @@
         
         _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, [AppBookView height]*row)];
 
-//        NSInteger count = self.data.count;
+        NSInteger count = self.data.count;
         
-        NSInteger count = 10;
+//        NSInteger count = 10;
         
         for (int i = 0; i < count; i++) {
             AppBookView *book = [[AppBookView alloc]init];
