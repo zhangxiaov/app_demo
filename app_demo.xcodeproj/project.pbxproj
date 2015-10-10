@@ -13,6 +13,8 @@
 		EDBA42221BB39162004B9A62 /* AppBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42211BB39162004B9A62 /* AppBookView.m */; };
 		EDBA42371BB3EDDD004B9A62 /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42361BB3EDDD004B9A62 /* AppUtils.m */; };
 		EDD343A21BC6879D00204C80 /* ClientServer.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD343A11BC6879D00204C80 /* ClientServer.m */; };
+		EDD343A51BC6A74C00204C80 /* ReadDataByBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD343A41BC6A74C00204C80 /* ReadDataByBlock.m */; };
+		EDD343A71BC6C1D300204C80 /* test.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDD343A61BC6C1D300204C80 /* test.txt */; };
 		EDD363E61BC0FB43008CD9AC /* UITouchScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD363E51BC0FB43008CD9AC /* UITouchScrollView.m */; };
 		EDD38DF01BB7BA41001878DC /* AppLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD38DEF1BB7BA41001878DC /* AppLabel.m */; };
 		EDD38DF51BB7F75E001878DC /* AppContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD38DF21BB7F75E001878DC /* AppContentViewController.m */; };
@@ -47,6 +49,9 @@
 		EDBA42361BB3EDDD004B9A62 /* AppUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUtils.m; sourceTree = "<group>"; };
 		EDD343A01BC6879D00204C80 /* ClientServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientServer.h; sourceTree = "<group>"; };
 		EDD343A11BC6879D00204C80 /* ClientServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientServer.m; sourceTree = "<group>"; };
+		EDD343A31BC6A74C00204C80 /* ReadDataByBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadDataByBlock.h; sourceTree = "<group>"; };
+		EDD343A41BC6A74C00204C80 /* ReadDataByBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadDataByBlock.m; sourceTree = "<group>"; };
+		EDD343A61BC6C1D300204C80 /* test.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = test.txt; sourceTree = "<group>"; };
 		EDD363E41BC0FB43008CD9AC /* UITouchScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITouchScrollView.h; sourceTree = "<group>"; };
 		EDD363E51BC0FB43008CD9AC /* UITouchScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITouchScrollView.m; sourceTree = "<group>"; };
 		EDD38DEE1BB7BA41001878DC /* AppLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppLabel.h; sourceTree = "<group>"; };
@@ -124,6 +129,7 @@
 		EDFCA7321BB1734F00AF49EA = {
 			isa = PBXGroup;
 			children = (
+				EDD343A61BC6C1D300204C80 /* test.txt */,
 				ED602A3E1BC4CD4600DB1A3B /* libsqlite3.0.dylib */,
 				EDFCA73D1BB1734F00AF49EA /* app_demo */,
 				EDFCA7571BB1734F00AF49EA /* app_demoTests */,
@@ -148,6 +154,8 @@
 				ED602A401BC4CD9E00DB1A3B /* sql */,
 				EDB293D01BC1062700290C56 /* UTF8FileParser.h */,
 				EDB293D11BC1062700290C56 /* UTF8FileParser.m */,
+				EDD343A31BC6A74C00204C80 /* ReadDataByBlock.h */,
+				EDD343A41BC6A74C00204C80 /* ReadDataByBlock.m */,
 				EDD38DF11BB7F75E001878DC /* AppContentViewController.h */,
 				EDD38DF21BB7F75E001878DC /* AppContentViewController.m */,
 				EDD363E41BC0FB43008CD9AC /* UITouchScrollView.h */,
@@ -278,6 +286,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDD343A71BC6C1D300204C80 /* test.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +306,7 @@
 			files = (
 				EDD38DF51BB7F75E001878DC /* AppContentViewController.m in Sources */,
 				EDBA42221BB39162004B9A62 /* AppBookView.m in Sources */,
+				EDD343A51BC6A74C00204C80 /* ReadDataByBlock.m in Sources */,
 				EDD38DF61BB7F75E001878DC /* UIImage+UIColor.m in Sources */,
 				EDFCA7471BB1734F00AF49EA /* ViewController.m in Sources */,
 				EDD38DF01BB7BA41001878DC /* AppLabel.m in Sources */,

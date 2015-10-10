@@ -11,6 +11,7 @@
 #import "AppLabel.h"
 #import <CoreText/CoreText.h>
 #import "UITouchScrollView.h"
+#import "SqlOP.h"
 
 @interface AppContentViewController () <UIScrollViewDelegate>{
     int totalPages;
@@ -56,6 +57,9 @@
         textPos += range.length;
         NSValue *value = [NSValue valueWithBytes:&range objCType:@encode(NSRange)];
         [self.ranges addObject:value];
+        
+        CFRelease(framesetter);
+        CFRelease(frame);
         CFRelease(path);
         ++totalPages;
     }
@@ -83,6 +87,32 @@
     }
 
     _footerView.text = [NSString stringWithFormat:@"%d/%d",  1, totalPages];
+    
+    int lineCharsCount = floor(CONTENT_WIDTH / FONT_SIZE_CONTENT);
+    int linesCount = floor(CONTENT_HEIGHT / FONT_SIZE_CONTENT);
+    
+    
+    NSLog(@"byte len := %d", 3*lineCharsCount*linesCount);
+    NSLog(@"char count := %d", lineCharsCount*linesCount);
+
+
+    NSString *sqlCreateTable = @"CREATE TABLE IF NOT EXISTS PERSONINFO (ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER, address TEXT)";
+    
+    NSString *sql1 = [NSString stringWithFormat:
+                      @"INSERT INTO '%@' ('%@', '%@', '%@') VALUES ('%@', '%@', '%@')",
+                      @"PERSONINFO", @"name", @"age", @"address", @"张三", @"23", @"西城区"];
+    
+    NSString *sql2 = [NSString stringWithFormat:
+                      @"INSERT INTO '%@' ('%@', '%@', '%@') VALUES ('%@', '%@', '%@')",
+                      @"PERSONINFO", @"name", @"age", @"address", @"老六", @"20", @"东城区"];
+    
+    SqlOP *sql = [[SqlOP alloc] init];
+    [sql execSql:sqlCreateTable];
+    [sql execSql:sql1];
+    
+    [sql test];
+    
+    NSLog(@"%@", NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0]);
 }
 
 - (void)moveLabel {
@@ -149,6 +179,8 @@
         _ranges = [[NSMutableArray alloc] init];
     }
     
+//    NSLog(@"%@", _ranges);
+    
     return _ranges;
 }
 
@@ -186,7 +218,7 @@
 - (NSData *)data {
     if (_data == nil) {
         NSString *str = [self.title stringByAppendingPathExtension:@"txt"];
-        NSString *path = [[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/"] stringByAppendingString:str];
+        NSString *path = [[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/"] stringByAppendingString:@"test.txt"];
         NSLog(@"t:%f", [NSDate timeIntervalSinceReferenceDate]);
         _data = [NSData dataWithContentsOfFile:path];
         NSLog(@"t:%f", [NSDate timeIntervalSinceReferenceDate]);

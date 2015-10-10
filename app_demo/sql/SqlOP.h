@@ -11,4 +11,7 @@
 
 @interface SqlOP : NSObject
 @property sqlite3 *db;
+
+-(void)execSql:(NSString *)sql;
+-(void)test;
 @end
