@@ -12,6 +12,7 @@
 #import <CoreText/CoreText.h>
 #import "UITouchScrollView.h"
 #import "SqlOP.h"
+#import "ReadDataByBlock.h"
 
 @interface AppContentViewController () <UIScrollViewDelegate>{
     int totalPages;
@@ -25,7 +26,7 @@
 @property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong) UILabel *footerView;
 @property (nonatomic, strong) UITouchScrollView *scrollView;
-@property (nonatomic, strong) NSMutableArray *ranges;
+@property (nonatomic, strong) ReadDataByBlock *readData;
 @end
 
 @implementation AppContentViewController
@@ -33,53 +34,51 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    _readData = [[ReadDataByBlock alloc] initWithTitle:self.title];
+    
+    totalPages = _readData.possibleTotalPages;
+    currentPage = _readData.curPage;
+    
     isTap = YES;
-    totalPages = 0;
-    currentPage = 0;
+    
     startPageOffsetx = 0;
-    self.fontSize = 15.0f;
     
     [self.view addSubview:self.headerView];
     [self.view addSubview:self.scrollView];
     [self.view addSubview:self.footerView];
     [self.navigationController setNavigationBarHidden:isTap animated:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    [self attStr];
-        
-    while (textPos < len) {
-        CGMutablePathRef path = CGPathCreateMutable();
-        CGRect textFrame = CGRectInset(self.view.bounds, NORMAL_PADDING, 20);
-        CGPathAddRect(path, NULL, textFrame);
-        
-        CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)self.attStr);
-        CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(textPos, 0), path, NULL);
-        CFRange range = CTFrameGetVisibleStringRange(frame);
-        textPos += range.length;
-        NSValue *value = [NSValue valueWithBytes:&range objCType:@encode(NSRange)];
-        [self.ranges addObject:value];
-        
-        CFRelease(framesetter);
-        CFRelease(frame);
-        CFRelease(path);
-        ++totalPages;
-    }
+  
     
-//    CGFloat h = CONTENT_HEIGHT;
-//    CGFloat w = CONTENT_WIDTH;
-//    
-//    NSMutableString *bufstr;
-//    NSDictionary *dict = @{NSFontAttributeName : [UIFont fontWithName:@"Heiti SC" size:FONT_SIZE_MAX]};
-//
-//    CGSize contentSize = [bufstr boundingRectWithSize:CGSizeMake(w, MAXFLOAT)
-//                                              options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading |NSStringDrawingTruncatesLastVisibleLine
-//                                           attributes:dict
-//                                              context:nil].size;
+    
+//    [self attStr];
+//        
+//    while (textPos < len) {
+//        CGMutablePathRef path = CGPathCreateMutable();
+//        CGRect textFrame = CGRectInset(self.view.bounds, NORMAL_PADDING, 20);
+//        CGPathAddRect(path, NULL, textFrame);
+//        
+//        CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)self.attStr);
+//        CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(textPos, 0), path, NULL);
+//        CFRange range = CTFrameGetVisibleStringRange(frame);
+//        textPos += range.length;
+//        NSValue *value = [NSValue valueWithBytes:&range objCType:@encode(NSRange)];
+//        [self.ranges addObject:value];
+//        
+//        CFRelease(framesetter);
+//        CFRelease(frame);
+//        CFRelease(path);
+//        ++totalPages;
+//    }
+    
     
     
     
     if (totalPages == 1) {
         [self labels:1];
-        ((AppLabel *)self.labels[0]).label.text = [self.attStr.string substringFromIndex:0];
+//        ((AppLabel *)self.labels[0]).label.text = [self.attStr.string substringFromIndex:0];
+        ((AppLabel *)self.labels[0]).label.text = [_readData dataAtPos:0 isReverse:NO];
         self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, CONTENT_HEIGHT);
     }else {
         [self labels:totalPages];
@@ -87,32 +86,32 @@
     }
 
     _footerView.text = [NSString stringWithFormat:@"%d/%d",  1, totalPages];
-    
-    int lineCharsCount = floor(CONTENT_WIDTH / FONT_SIZE_CONTENT);
-    int linesCount = floor(CONTENT_HEIGHT / FONT_SIZE_CONTENT);
-    
-    
-    NSLog(@"byte len := %d", 3*lineCharsCount*linesCount);
-    NSLog(@"char count := %d", lineCharsCount*linesCount);
-
-
-    NSString *sqlCreateTable = @"CREATE TABLE IF NOT EXISTS PERSONINFO (ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER, address TEXT)";
-    
-    NSString *sql1 = [NSString stringWithFormat:
-                      @"INSERT INTO '%@' ('%@', '%@', '%@') VALUES ('%@', '%@', '%@')",
-                      @"PERSONINFO", @"name", @"age", @"address", @"张三", @"23", @"西城区"];
-    
-    NSString *sql2 = [NSString stringWithFormat:
-                      @"INSERT INTO '%@' ('%@', '%@', '%@') VALUES ('%@', '%@', '%@')",
-                      @"PERSONINFO", @"name", @"age", @"address", @"老六", @"20", @"东城区"];
-    
-    SqlOP *sql = [[SqlOP alloc] init];
-    [sql execSql:sqlCreateTable];
-    [sql execSql:sql1];
-    
-    [sql test];
-    
-    NSLog(@"%@", NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0]);
+//
+//    int lineCharsCount = floor(CONTENT_WIDTH / FONT_SIZE_CONTENT);
+//    int linesCount = floor(CONTENT_HEIGHT / FONT_SIZE_CONTENT);
+//    
+//    
+//    NSLog(@"byte len := %d", 3*lineCharsCount*linesCount);
+//    NSLog(@"char count := %d", lineCharsCount*linesCount);
+//
+//
+//    NSString *sqlCreateTable = @"CREATE TABLE IF NOT EXISTS PERSONINFO (ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER, address TEXT)";
+//    
+//    NSString *sql1 = [NSString stringWithFormat:
+//                      @"INSERT INTO '%@' ('%@', '%@', '%@') VALUES ('%@', '%@', '%@')",
+//                      @"PERSONINFO", @"name", @"age", @"address", @"张三", @"23", @"西城区"];
+//    
+//    NSString *sql2 = [NSString stringWithFormat:
+//                      @"INSERT INTO '%@' ('%@', '%@', '%@') VALUES ('%@', '%@', '%@')",
+//                      @"PERSONINFO", @"name", @"age", @"address", @"老六", @"20", @"东城区"];
+//    
+//    SqlOP *sql = [[SqlOP alloc] init];
+//    [sql execSql:sqlCreateTable];
+//    [sql execSql:sql1];
+//    
+//    [sql test];
+//    
+//    NSLog(@"%@", NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0]);
 }
 
 - (void)moveLabel {
@@ -130,7 +129,8 @@
             return;
         }
 
-        ((AppLabel *)self.labels[theLabel]).label.text = [self updateText:currentPage + 2];
+//        ((AppLabel *)self.labels[theLabel]).label.text = [self updateText:currentPage + 2];
+        ((AppLabel *)self.labels[theLabel]).label.text = [_readData dataAtPos:0 isReverse:NO];
         CGRect rect = CGRectMake((currentPage + 2)*SCREEN_WIDTH, 0, SCREEN_WIDTH, CONTENT_HEIGHT);
         ((AppLabel *)self.labels[theLabel]).frame = rect;
         
@@ -144,45 +144,25 @@
         if (currentPage - 2 < 0) {
             return;
         }
-        ((AppLabel *)self.labels[theLabel]).label.text = [self updateText:currentPage - 2];
+//        ((AppLabel *)self.labels[theLabel]).label.text = [self updateText:currentPage - 2];
+        ((AppLabel *)self.labels[theLabel]).label.text = [_readData dataAtPos:0 isReverse:YES];
         CGRect rect = CGRectMake((currentPage - 2)*SCREEN_WIDTH, 0, SCREEN_WIDTH, CONTENT_HEIGHT);
         ((AppLabel *)self.labels[theLabel]).frame = rect;
     }
-}
-
-- (NSString *)updateText:(NSInteger)page {
-    if (page < 0) {
-        return nil;
-    }
-
-    NSValue *value = self.ranges[page];
-    NSRange range;
-    [value getValue:&range];
-    return [self.attStr.string substringWithRange:range];
 }
 
 - (void)updateFooter {
     int direction = self.scrollView.contentOffset.x - startPageOffsetx;
     
     if (direction > 0) {
-        _footerView.text = [NSString stringWithFormat:@"%d/%d",  currentPage + 1 + 1, totalPages];
+        _footerView.text = [NSString stringWithFormat:@"%d/%d",  _readData.curPage + 1 + 1, totalPages];
     }else if (direction < 0) {
-        _footerView.text = [NSString stringWithFormat:@"%d/%d",  currentPage + 1 - 1, totalPages];
+        _footerView.text = [NSString stringWithFormat:@"%d/%d",  _readData.curPage + 1 - 1, totalPages];
     }
     
 }
 
 #pragma property
-
-- (NSMutableArray *)ranges {
-    if (_ranges == nil) {
-        _ranges = [[NSMutableArray alloc] init];
-    }
-    
-//    NSLog(@"%@", _ranges);
-    
-    return _ranges;
-}
 
 - (NSArray *)labels:(NSInteger)n {
     if (_labels == nil) {
@@ -194,7 +174,8 @@
         
         for (int i = 0; i < n; i++) {
             AppLabel *label = [[AppLabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH*i, 0, SCREEN_WIDTH, CONTENT_HEIGHT)];
-            label.label.text = [self updateText:i];
+//            label.label.text = [self updateText:i];
+            label.label.text = [_readData dataAtPos:0 isReverse:NO];
             [a addObject:label];
             
 //            if (i == 0) {
@@ -213,18 +194,6 @@
     
     return _labels;
     
-}
-
-- (NSData *)data {
-    if (_data == nil) {
-        NSString *str = [self.title stringByAppendingPathExtension:@"txt"];
-        NSString *path = [[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/"] stringByAppendingString:@"test.txt"];
-        NSLog(@"t:%f", [NSDate timeIntervalSinceReferenceDate]);
-        _data = [NSData dataWithContentsOfFile:path];
-        NSLog(@"t:%f", [NSDate timeIntervalSinceReferenceDate]);
-    }
-
-    return _data;
 }
 
 - (UIView *)headerView {
@@ -263,56 +232,6 @@
     }
     
     return _scrollView;
-}
-
-- (NSString *)fontName {
-    if (_fontName == nil) {
-        _fontName = @"STHeitiSC-Light";
-    }
-    
-    return _fontName;
-}
-
-- (UIColor *)color {
-    if (_color == nil) {
-        _color = [UIColor blackColor];
-    }
-    
-    return _color;
-}
-
-- (UIColor *)strokeColor {
-    if (_strokeColor == nil) {
-        _strokeColor = [UIColor whiteColor];
-        self.strokeWidth = 0.0;
-    }
-    
-    return _strokeColor;
-}
-
-- (NSAttributedString *)attStr {
-    if (_attStr == nil) {
-        
-        CTFontRef fontRef = CTFontCreateWithName((CFStringRef)self.fontName,self.fontSize, NULL);
-
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                              (id)self.color.CGColor, kCTForegroundColorAttributeName,
-                              (id)CFBridgingRelease(fontRef), kCTFontAttributeName,
-                              (id)self.strokeColor.CGColor, (NSString *) kCTStrokeColorAttributeName,
-                              (id)[NSNumber numberWithFloat: self.strokeWidth], (NSString *)kCTStrokeWidthAttributeName,
-                              nil];
-        
-        NSString *content = [[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding];
-//        NSString *content = @"fafafafafafafaffafafaf发放奖励金啊的；的感觉啊放假啊啦放假啊放假啊； ；啊放假啊谁来激发了；示";
-        content = [content stringByReplacingOccurrencesOfString:@"\r\n" withString:@"\n"];
-        len = content.length;
-        
-        _attStr = [[NSAttributedString alloc] initWithString:content attributes:dict];
-        
-//        CFRelease(fontRef);
-    }
-    
-    return _attStr;
 }
 
 #pragma mark

@@ -12,11 +12,11 @@
     bool isTap;
     int textPos;
 }
-@property (nonatomic, strong) NSString *fontName;
-@property (nonatomic, assign) CGFloat fontSize;
-@property (nonatomic, strong) UIColor *color;
-@property (retain, nonatomic) UIColor* strokeColor;
-@property (assign, readwrite) float strokeWidth;
-@property (nonatomic, strong) NSAttributedString *attStr;
+//@property (nonatomic, strong) NSString *fontName;
+//@property (nonatomic, assign) CGFloat fontSize;
+//@property (nonatomic, strong) UIColor *color;
+//@property (retain, nonatomic) UIColor* strokeColor;
+//@property (assign, readwrite) float strokeWidth;
+//@property (nonatomic, strong) NSAttributedString *attStr;
 
 @end
