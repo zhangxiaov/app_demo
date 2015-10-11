@@ -14,10 +14,12 @@
 @property (nonatomic, strong) NSString *filePath;
 @property (nonatomic, assign) unsigned long long dataPosition;
 @property (nonatomic, assign) unsigned long long dataLen;
-@property (nonatomic, assign) int byteLenForZh;
+@property (nonatomic, assign) int oneLabelBytes;
 @property (nonatomic, assign) int curPage;
 @property (nonatomic, assign) int possibleTotalPages;
 
+@property (nonatomic, strong) NSArray *array;
+
 - (instancetype)initWithTitle:(NSString *)title ;
-- (NSString *)dataAtPos:(unsigned long long)pos isReverse:(BOOL)isReverse;
+- (NSString *)skip:(unsigned long long)pos isReverse:(BOOL)isReverse;
 @end
