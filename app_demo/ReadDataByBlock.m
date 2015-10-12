@@ -38,8 +38,6 @@
         if (_oneLabelBytes > 0) {
             _possibleTotalPages =  (int)_dataLen / _oneLabelBytes;
         }
-        
-        [self addObserver:self forKeyPath:@"curPage" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     }
     
     return self;
@@ -75,13 +73,30 @@
     memset(&r, 0, sizeof(NSRange));
     
     if (isReverse) {
-        unsigned long location = _dataPosition - _oneLabelBytes;
+        unsigned long location = _dataPosition - p - _oneLabelBytes;
         [handle seekToFileOffset:location];
     }else {
         [handle seekToFileOffset:_dataPosition];
     }
     
-    content = [ReadDataByBlock strByDataForUTF8:[handle readDataOfLength:_oneLabelBytes] visibleRange:&r];
+    if (_dataPosition == 11350) {
+        NSLog(@"");
+    }
+    
+    if (_dataLen - _dataPosition < _oneLabelBytes) {
+        NSData *d = [handle readDataOfLength:_dataLen - _dataPosition];
+
+        if ((content = [[NSString alloc] initWithData:[handle readDataOfLength:_dataLen - _dataPosition] encoding:NSUTF8StringEncoding]) == nil) {
+            
+            unsigned long l = handle.offsetInFile;
+            NSData *d = [handle readDataOfLength:_dataLen - _dataPosition];
+            content = [ReadDataByBlock strByDataForUTF8:[handle readDataOfLength:_dataLen - _dataPosition] visibleRange:&r];
+        }else {
+            content = [[NSString alloc] initWithData:[handle readDataOfLength:_dataLen - _dataPosition] encoding:NSUTF8StringEncoding];
+        }
+    }else {
+        content = [ReadDataByBlock strByDataForUTF8:[handle readDataOfLength:_oneLabelBytes] visibleRange:&r];
+    }
     
     NSAttributedString *attStr = [[NSAttributedString alloc] initWithString:content attributes:self.dict];
 
@@ -99,16 +114,20 @@
     unsigned long visibleStrBytesLen = [[visibleStr dataUsingEncoding:NSUTF8StringEncoding] length];
     _dataPosition += visibleStrBytesLen + 1; // next char startpoint
     
+    NSLog(@"pos = %lld", _dataPosition);
+    
     CFRelease(framesetter);
     CFRelease(frame);
     CFRelease(path);
-    
-    NSLog(@"test");
     
     return [content substringToIndex:range.length];
 }
 
 + (NSString *)strByDataForUTF8:(NSData *)data visibleRange:(NSRange *)range {
+    
+    if (data.length == 0) {
+        return nil;
+    }
     
     unsigned long s = 0;
     unsigned long end = data.length - 1;
@@ -139,16 +158,6 @@
     str = [[NSString alloc] initWithData:[data subdataWithRange:*range] encoding:NSUTF8StringEncoding];
     
     return str;
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"curPage"]) {
-        
-    }
-}
-
-- (void)dealloc {
-    [self removeObserver:self forKeyPath:@"curPage"];
 }
 
 @end

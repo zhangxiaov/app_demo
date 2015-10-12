@@ -38,7 +38,7 @@
     _readData = [[ReadDataByBlock alloc] initWithTitle:self.title];
     
     totalPages = _readData.possibleTotalPages;
-    pageDragging = 1;
+    pageDragging = 0;
     
     isTap = YES;
     
@@ -52,41 +52,19 @@
   
     if (totalPages == 1) {
         [self labels:1];
-//        ((AppLabel *)self.labels[0]).label.text = [_readData strAtPos:0 isReverse:NO];
         ((AppLabel *)self.labels[0]).label.text = _readData.array[0];
         self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, CONTENT_HEIGHT);
     }else {
         [self labels:totalPages];
+        ((AppLabel *)self.labels[0]).label.text = [_readData skip:0 isReverse:NO];
+        ((AppLabel *)self.labels[1]).label.text = [_readData skip:0 isReverse:NO];
+
         self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * totalPages, CONTENT_HEIGHT);
     }
 
-    _footerView.text = [NSString stringWithFormat:@"%d/%d",  1, totalPages];
-//
-//    int lineCharsCount = floor(CONTENT_WIDTH / FONT_SIZE_CONTENT);
-//    int linesCount = floor(CONTENT_HEIGHT / FONT_SIZE_CONTENT);
-//    
-//    
-//    NSLog(@"byte len := %d", 3*lineCharsCount*linesCount);
-//    NSLog(@"char count := %d", lineCharsCount*linesCount);
-//
-//
-//    NSString *sqlCreateTable = @"CREATE TABLE IF NOT EXISTS PERSONINFO (ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER, address TEXT)";
-//    
-//    NSString *sql1 = [NSString stringWithFormat:
-//                      @"INSERT INTO '%@' ('%@', '%@', '%@') VALUES ('%@', '%@', '%@')",
-//                      @"PERSONINFO", @"name", @"age", @"address", @"张三", @"23", @"西城区"];
-//    
-//    NSString *sql2 = [NSString stringWithFormat:
-//                      @"INSERT INTO '%@' ('%@', '%@', '%@') VALUES ('%@', '%@', '%@')",
-//                      @"PERSONINFO", @"name", @"age", @"address", @"老六", @"20", @"东城区"];
-//    
-//    SqlOP *sql = [[SqlOP alloc] init];
-//    [sql execSql:sqlCreateTable];
-//    [sql execSql:sql1];
-//    
-//    [sql test];
-//    
-//    NSLog(@"%@", NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0]);
+    _footerView.text = [NSString stringWithFormat:@"%d/%d",  0, totalPages - 1];
+
+    
 }
 
 - (void)moveLabel {
@@ -95,44 +73,30 @@
     
     int direction = self.scrollView.contentOffset.x - startPageOffsetx;
     if (direction > 0) {
-        if (pageDragging % 3 == 0) {
-            theLabel = 2;
-        }else {
-            theLabel = pageDragging % 3 - 1;
-        }
+        theLabel = (pageDragging + 2) % 3;
         
-        if (pageDragging + 2 > totalPages - 1) {
-            return;
-        }
-        
-         ((AppLabel *)self.labels[theLabel]).label.text = [_readData skip:0 isReverse:NO];
+        NSString * s = [_readData skip:0 isReverse:NO];
+
+        NSLog(@"thelabel = %d, %@, pos = %ld", theLabel, s, _readData.dataPosition);
+         ((AppLabel *)self.labels[theLabel]).label.text = s;
 
     }else if (direction < 0) {
-        if (pageDragging % 3 == 2) {
-            theLabel = 0;
-            NSString *s1 = ((AppLabel *)self.labels[1]).label.text;
-            NSString *s2 = ((AppLabel *)self.labels[2]).label.text;
-            skip = [s1 dataUsingEncoding:NSUTF8StringEncoding].length + [s2 dataUsingEncoding:NSUTF8StringEncoding].length;
-
-        }else {
-            theLabel = pageDragging % 3 + 1;
-            
-            if (theLabel == 1) {
-                NSString *s0 = ((AppLabel *)self.labels[0]).label.text;
-                NSString *s2 = ((AppLabel *)self.labels[2]).label.text;
-                skip = [s0 dataUsingEncoding:NSUTF8StringEncoding].length + [s2 dataUsingEncoding:NSUTF8StringEncoding].length;
-
-            }else {
-                NSString *s0 = ((AppLabel *)self.labels[0]).label.text;
-                NSString *s1 = ((AppLabel *)self.labels[1]).label.text;
-                skip = [s1 dataUsingEncoding:NSUTF8StringEncoding].length + [s0 dataUsingEncoding:NSUTF8StringEncoding].length;
-
-            }
-        }
-
+        
         if (pageDragging - 2 < 0) {
             return;
         }
+        
+        theLabel = (pageDragging - 2) % 3;
+        
+        NSString *s0 = ((AppLabel *)self.labels[0]).label.text;
+        NSString *s1 = ((AppLabel *)self.labels[1]).label.text;
+        NSString *s2 = ((AppLabel *)self.labels[2]).label.text;
+        
+        unsigned long len1 = [s0 dataUsingEncoding:NSUTF8StringEncoding].length;
+        unsigned long len2 = [s1 dataUsingEncoding:NSUTF8StringEncoding].length;
+        unsigned long len3 = [s2 dataUsingEncoding:NSUTF8StringEncoding].length;
+
+        skip = len1 + len2 + len3;
         
          ((AppLabel *)self.labels[theLabel]).label.text = [_readData skip:skip isReverse:YES];
 
@@ -148,11 +112,19 @@
     int direction = self.scrollView.contentOffset.x - startPageOffsetx;
     
     if (direction > 0) {
-        _footerView.text = [NSString stringWithFormat:@"%d/%d",  ++ pageDragging, totalPages];
+        _footerView.text = [NSString stringWithFormat:@"%d/%d",  ++ pageDragging, totalPages - 1];
     }else if (direction < 0) {
-        _footerView.text = [NSString stringWithFormat:@"%d/%d",  -- pageDragging, totalPages];
+        _footerView.text = [NSString stringWithFormat:@"%d/%d",  -- pageDragging, totalPages - 1];
     }
     
+}
+
+- (void)reloadData {
+    if (_readData.dataPosition < _readData.dataLen) {
+        int a = (int)(_readData.dataLen - _readData.dataPosition) / _readData.oneLabelBytes + 1;
+        totalPages += a;
+        self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * totalPages, CONTENT_HEIGHT);
+    }
 }
 
 #pragma property
@@ -167,8 +139,6 @@
         
         for (int i = 0; i < n; i++) {
             AppLabel *label = [[AppLabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH*i, 0, SCREEN_WIDTH, CONTENT_HEIGHT)];
-//            label.label.text = [self updateText:i];
-            label.label.text = [_readData skip:0 isReverse:NO];
             [a addObject:label];
             
 //            if (i == 0) {
@@ -181,9 +151,8 @@
             
             [self.scrollView addSubview:label];
         }
-        
+    
         _readData.curPage = 1;
-        
         _labels = a;
     }
     
@@ -233,17 +202,24 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     startPageOffsetx = scrollView.contentOffset.x;
+    
+//    NSLog(@"start : %d", startPageOffsetx);
 }
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    int pageDidDrag = floor(startPageOffsetx / SCREEN_WIDTH); // from 0
+    pageDragging = floor(startPageOffsetx / SCREEN_WIDTH); // from 0
     
     int direction = self.scrollView.contentOffset.x - startPageOffsetx;
-    if (direction > 0 && pageDidDrag < totalPages - 1) {
-        [self.scrollView setContentOffset:CGPointMake(SCREEN_WIDTH*(pageDidDrag+1), 0) animated:NO];
+    if (direction > 0 && pageDragging < totalPages - 1) {
+        
+        if (pageDragging == totalPages - 1 - 1){
+            [self reloadData];
+        }
+        
+        [self.scrollView setContentOffset:CGPointMake(SCREEN_WIDTH*(pageDragging + 1), 0) animated:NO];
         [self moveLabel];
-    }else if (direction < 0 && pageDidDrag > 0){
-        [self.scrollView setContentOffset:CGPointMake(SCREEN_WIDTH*(pageDidDrag - 1), 0) animated:NO];
+    }else if (direction < 0 && pageDragging > 0){
+        [self.scrollView setContentOffset:CGPointMake(SCREEN_WIDTH*(pageDragging - 1), 0) animated:NO];
         [self moveLabel];
     }
     
@@ -252,7 +228,7 @@
 //    NSLog(@"currentpage = %d, direction = %d, totalpages = %d, offsetx = %f, width = %f, len = %ld",
 //          currentPage, direction, totalPages, scrollView.contentOffset.x, scrollView.contentSize.width, len);
     
-    NSLog(@"pos = %lld, %d", _readData.dataPosition, _readData.curPage);
+//    NSLog(@"pos = %lld, %d", _readData.dataPosition, _readData.curPage);
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
