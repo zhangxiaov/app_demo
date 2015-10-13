@@ -13,6 +13,7 @@
 
 @interface ReadDataByBlock ()
 @property (nonatomic, strong) NSDictionary *dict;
+@property (nonatomic, strong) NSMutableArray *array;
 @end
 
 @implementation ReadDataByBlock
@@ -20,11 +21,11 @@
 - (instancetype)initWithTitle:(NSString *)title {
     
     if (_filePath == nil) {
-        
         _curPage = 1;
+        _posArray = [[NSMutableArray alloc] initWithObjects:[[NSNumber alloc] initWithLong:0], nil];
+        _array = [[NSMutableArray alloc] init];
         
         NSString *str = [title stringByAppendingPathExtension:@"txt"];
-        
         _filePath = [[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/"] stringByAppendingString:str];
         
         NSFileHandle *handle = [NSFileHandle fileHandleForReadingAtPath:_filePath];
@@ -32,8 +33,8 @@
         
         int lineCharsCount = floor(CONTENT_WIDTH / FONT_SIZE_CONTENT);
         int linesCount = floor(CONTENT_HEIGHT / FONT_SIZE_CONTENT);
-        
         _oneLabelBytes = 3*lineCharsCount*linesCount;
+        
         _dataPosition = 0;
         if (_oneLabelBytes > 0) {
             _possibleTotalPages =  (int)_dataLen / _oneLabelBytes;
@@ -41,14 +42,6 @@
     }
     
     return self;
-}
-
-- (NSArray *)array {
-    if (_array == nil) {
-        _array = [[NSArray alloc] initWithObjects:@"", @"", @"", nil];
-    }
-    
-    return _array;
 }
 
 - (NSDictionary *)dict {
@@ -65,65 +58,76 @@
     return _dict;
 }
 
-- (NSString *)skip:(unsigned long long)p isReverse:(BOOL)isReverse {
-    
-    NSFileHandle *handle = [NSFileHandle fileHandleForReadingAtPath:_filePath];
-    NSString *content;
-    NSRange r;
-    memset(&r, 0, sizeof(NSRange));
-    
-    if (isReverse) {
-        unsigned long location = _dataPosition - p - _oneLabelBytes;
-        [handle seekToFileOffset:location];
-    }else {
-        [handle seekToFileOffset:_dataPosition];
-    }
-    
-    if (_dataPosition == 11350) {
-        NSLog(@"");
-    }
-    
-    if (_dataLen - _dataPosition < _oneLabelBytes) {
-        NSData *d = [handle readDataOfLength:_dataLen - _dataPosition];
-
-        if ((content = [[NSString alloc] initWithData:[handle readDataOfLength:_dataLen - _dataPosition] encoding:NSUTF8StringEncoding]) == nil) {
-            
-            unsigned long l = handle.offsetInFile;
-            NSData *d = [handle readDataOfLength:_dataLen - _dataPosition];
-            content = [ReadDataByBlock strByDataForUTF8:[handle readDataOfLength:_dataLen - _dataPosition] visibleRange:&r];
+- (NSString *)strForPage:(int)page isReverse:(BOOL)isReverse {
+    if (_posArray.count > page + 1 && _posArray.count != 1) {
+        long location = ((NSNumber *)_posArray[page]).longValue;
+        long e = 0;
+        if (_posArray.count < page + 1) {
+            e = _dataLen;
         }else {
-            content = [[NSString alloc] initWithData:[handle readDataOfLength:_dataLen - _dataPosition] encoding:NSUTF8StringEncoding];
+            e = ((NSNumber *)_posArray[page+1]).longValue;
         }
-    }else {
-        content = [ReadDataByBlock strByDataForUTF8:[handle readDataOfLength:_oneLabelBytes] visibleRange:&r];
+        
+        long len = e - location;
+        NSFileHandle *handle = [NSFileHandle fileHandleForReadingAtPath:_filePath];
+        [handle seekToFileOffset:location];
+        NSData *data = [handle readDataOfLength:len - 1];
+        NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        
+        return str;
+    }else if (isReverse == NO) {
+        if (_dataPosition == _dataLen) {
+            return nil;
+        }
+        
+        NSFileHandle *handle = [NSFileHandle fileHandleForReadingAtPath:_filePath];
+        [handle seekToFileOffset:_dataPosition];
+        NSString *content = [self strByDataForUTF8:[handle readDataOfLength:_oneLabelBytes]];
+        NSAttributedString *attStr = [[NSAttributedString alloc] initWithString:content attributes:self.dict];
+        
+        CGMutablePathRef path = CGPathCreateMutable();
+        CGRect rect = CGRectMake(NORMAL_PADDING, 20, CONTENT_WIDTH, CONTENT_HEIGHT);
+        CGRect textFrame = CGRectInset(rect, NORMAL_PADDING, 20);
+        CGPathAddRect(path, NULL, textFrame);
+        CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attStr);
+        CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
+        CFRange range = CTFrameGetVisibleStringRange(frame);
+        
+        NSString *visibleStr = [content substringToIndex:range.length];
+        unsigned long visibleStrBytesLen = [[visibleStr dataUsingEncoding:NSUTF8StringEncoding] length];
+        NSNumber *n2 = [[NSNumber alloc] initWithLong:visibleStrBytesLen];
+        [_array addObject:n2];
+        _dataPosition += visibleStrBytesLen + 1; // next char startpoint
+        
+        if (_dataPosition >= _dataLen) {
+            _dataPosition = _dataLen;
+        }
+        
+        NSLog(@"pos = %lld", _dataPosition);
+        
+        CFRelease(framesetter);
+        CFRelease(frame);
+        CFRelease(path);
+        
+        NSNumber *n = [[NSNumber alloc] initWithLong:_dataPosition];
+        [_posArray addObject:n];
+        
+        return [content substringToIndex:range.length];
     }
     
-    NSAttributedString *attStr = [[NSAttributedString alloc] initWithString:content attributes:self.dict];
-
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGRect rect = CGRectMake(NORMAL_PADDING, 20, CONTENT_WIDTH, CONTENT_HEIGHT);
-    CGRect textFrame = CGRectInset(rect, NORMAL_PADDING, 20);
-    CGPathAddRect(path, NULL, textFrame);
-    
-    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attStr);
-    CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
-    CFRange range = CTFrameGetVisibleStringRange(frame);
-    
-    
-    NSString *visibleStr = [content substringToIndex:range.length];
-    unsigned long visibleStrBytesLen = [[visibleStr dataUsingEncoding:NSUTF8StringEncoding] length];
-    _dataPosition += visibleStrBytesLen + 1; // next char startpoint
-    
-    NSLog(@"pos = %lld", _dataPosition);
-    
-    CFRelease(framesetter);
-    CFRelease(frame);
-    CFRelease(path);
-    
-    return [content substringToIndex:range.length];
+    return nil;
 }
 
-+ (NSString *)strByDataForUTF8:(NSData *)data visibleRange:(NSRange *)range {
+- (void)test {
+    
+    __block long total = 0;
+    [_array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        total += ((NSNumber *)obj).longValue;
+    }];
+    NSLog(@"%ld", total);
+}
+
+- (NSString *)strByDataForUTF8:(NSData *)data{
     
     if (data.length == 0) {
         return nil;
@@ -136,27 +140,30 @@
     char c = '\0';
     while (s < end) {
         [data getBytes:&c range:NSMakeRange(s, sizeof(c))];
-        if ((c & 0x40) == 0) {
+//        if ((c & 0x40) == 0) {
+        if ((c & 0x40) == 0 && (c & 0x80) != 0) {
             ++ s;
         }else {
             break;
         }
     }
     
-    while (end > 0) {
-        [data getBytes:&c range:NSMakeRange(end, sizeof(c))];
-        if ((c & 0x40) == 0) {
-            -- end;
-        }else {
-            break;
+    if (_dataPosition + data.length == _dataLen) {
+        NSLog(@"end");
+    }else {
+        while (end > 0) {
+            [data getBytes:&c range:NSMakeRange(end, sizeof(c))];
+//            if ((c & 0x40) == 0) {
+            if ((c & 0x40) == 0 && (c & 0x80) != 0) {
+                -- end;
+            }else {
+                break;
+            }
         }
     }
     
-    range->location = s;
-    range->length = end - s;
-
-    str = [[NSString alloc] initWithData:[data subdataWithRange:*range] encoding:NSUTF8StringEncoding];
-    
+    NSRange range = NSMakeRange(s, end - s);
+    str = [[NSString alloc] initWithData:[data subdataWithRange:range] encoding:NSUTF8StringEncoding];
     return str;
 }
 
