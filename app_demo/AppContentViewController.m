@@ -87,7 +87,7 @@
     }
     
     NSString * s = [_readData strForPage:thePage isReverse:isReverse];
-    NSLog(@"page = %d, s = %@", thePage, s);
+//    NSLog(@"page = %d, s = %@", thePage, s);
     
     if (s == nil) {
         return;

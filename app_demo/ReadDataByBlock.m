@@ -71,7 +71,7 @@
         long len = e - location;
         NSFileHandle *handle = [NSFileHandle fileHandleForReadingAtPath:_filePath];
         [handle seekToFileOffset:location];
-        NSData *data = [handle readDataOfLength:len - 1];
+        NSData *data = [handle readDataOfLength:len];
         NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         
         return str;
@@ -97,7 +97,7 @@
         unsigned long visibleStrBytesLen = [[visibleStr dataUsingEncoding:NSUTF8StringEncoding] length];
         NSNumber *n2 = [[NSNumber alloc] initWithLong:visibleStrBytesLen];
         [_array addObject:n2];
-        _dataPosition += visibleStrBytesLen + 1; // next char startpoint
+        _dataPosition += visibleStrBytesLen; // next char startpoint
         
         if (_dataPosition >= _dataLen) {
             _dataPosition = _dataLen;
@@ -163,6 +163,7 @@
     }
     
     NSRange range = NSMakeRange(s, end - s);
+    NSLog(@"loc = %d, len = %d", s, end - s);
     str = [[NSString alloc] initWithData:[data subdataWithRange:range] encoding:NSUTF8StringEncoding];
     return str;
 }
