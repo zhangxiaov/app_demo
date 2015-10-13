@@ -67,6 +67,10 @@
 
 - (NSString *)skip:(unsigned long long)p isReverse:(BOOL)isReverse {
     
+    if (_dataPosition >= _dataLen) {
+        return nil;
+    }
+    
     NSFileHandle *handle = [NSFileHandle fileHandleForReadingAtPath:_filePath];
     NSString *content;
     NSRange r;
@@ -84,15 +88,15 @@
     }
     
     if (_dataLen - _dataPosition < _oneLabelBytes) {
-        NSData *d = [handle readDataOfLength:_dataLen - _dataPosition];
-
-        if ((content = [[NSString alloc] initWithData:[handle readDataOfLength:_dataLen - _dataPosition] encoding:NSUTF8StringEncoding]) == nil) {
-            
-            unsigned long l = handle.offsetInFile;
-            NSData *d = [handle readDataOfLength:_dataLen - _dataPosition];
+        NSData *d = [handle readDataOfLength:_dataLen - _dataPosition +1];
+        
+        content = [[NSString alloc] initWithData:d encoding:NSUTF8StringEncoding];
+        
+        if (content == nil) {
+            // back
+            _dataPosition = _dataLen - d.length;
+            [handle seekToFileOffset:_dataPosition];
             content = [ReadDataByBlock strByDataForUTF8:[handle readDataOfLength:_dataLen - _dataPosition] visibleRange:&r];
-        }else {
-            content = [[NSString alloc] initWithData:[handle readDataOfLength:_dataLen - _dataPosition] encoding:NSUTF8StringEncoding];
         }
     }else {
         content = [ReadDataByBlock strByDataForUTF8:[handle readDataOfLength:_oneLabelBytes] visibleRange:&r];
