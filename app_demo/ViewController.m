@@ -11,7 +11,7 @@
 #import "AppConfig.h"
 #import "AppContentViewController.h"
 
-@interface ViewController () <AppBookViewDelegate>
+@interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) NSArray *data;
 @property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong) UIView *footerView;
@@ -33,9 +33,11 @@
     self.title = @"home";
     
     //#C7C1AA
+    [self data];
+    
     self.view.backgroundColor = [UIColor whiteColor];
-    self.tableView.tableHeaderView = self.headerView;
-    self.tableView.tableFooterView = self.footerView;
+//    self.tableView.tableHeaderView = self.headerView;
+//    self.tableView.tableFooterView = self.footerView;
     
 //    self.navigationController pushViewController:<#(UIViewController *)#> animated:<#(BOOL)#>
 }
@@ -51,44 +53,7 @@
 - (UIView *)headerView {
     if (_headerView == nil) {
         
-        int n = [self.data count];
-        int row = n/3 + 1;
-        if (n % 3 == 0) {
-            row = n/3;
-        }
-
-        CGFloat STATUS_HEIGHT = [[UIApplication sharedApplication] statusBarFrame].size.height;
-        
-        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, [AppBookView height]*row)];
-
-        NSInteger count = self.data.count;
-        
-//        NSInteger count = 10;
-        
-        for (int i = 0; i < count; i++) {
-            AppBookView *book = [[AppBookView alloc]init];
-            book.delegate = self;
-            
-//            NSLog(@"book name == %@", self.data[i]);
-            
-            [book setCover:@"" name:self.data[i] author:@"kongzi" bookid:i];
-//            [book setCover:@"" name:@"test" author:@"kongzi" bookid:i];
-            
-            CGFloat left = 0.0;
-            CGFloat top = 0.0;
-            
-            if ((i+1)%3 == 0) {
-                top = ((i+1)/3-1)*([AppBookView height] + 10);
-                left = 3*NORMAL_PADDING + 2*[AppBookView width];
-            }else {
-                top = (i+1)/3*([AppBookView height] + 10);
-                left = (i+1)%3*NORMAL_PADDING + ((i+1)%3-1)*[AppBookView width];
             }
-            
-            book.frame = CGRectMake(left, top, [AppBookView width], [AppBookView height]);
-            [_headerView addSubview:book];
-        }
-    }
     
     return _headerView;
 }
@@ -111,6 +76,33 @@
     
     AppContentViewController *controller = [[AppContentViewController alloc] init];
     controller.title = [bookView.bookname stringByDeletingPathExtension];
+    controller.navigationController.navigationBarHidden = YES;
+    
+    [self.navigationController pushViewController:controller animated:NO];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.data.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"bookcell"];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"bookcell"];
+    }
+    
+    cell.detailTextLabel.text = self.data[indexPath.row];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    AppContentViewController *controller = [[AppContentViewController alloc] init];
+    controller.title = [self.data[indexPath.row] stringByDeletingPathExtension];
     controller.navigationController.navigationBarHidden = YES;
     
     [self.navigationController pushViewController:controller animated:NO];

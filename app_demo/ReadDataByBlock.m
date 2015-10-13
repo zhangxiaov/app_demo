@@ -12,11 +12,7 @@
 #import <CoreText/CoreText.h>
 
 @interface ReadDataByBlock ()
-@property (nonatomic, assign) int dataPosition;
-@property (nonatomic, assign) int from;
-@property (nonatomic, assign) int to;
-@property (nonatomic, assign) NSData *data;
-@property (nonatomic, strong) NSString *filePath;
+@property (nonatomic, strong) NSDictionary *dict;
 @end
 
 @implementation ReadDataByBlock
@@ -24,38 +20,85 @@
 - (instancetype)initWithTitle:(NSString *)title {
     
     if (_filePath == nil) {
+        
+        _curPage = 1;
+        
         NSString *str = [title stringByAppendingPathExtension:@"txt"];
+        
         _filePath = [[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/"] stringByAppendingString:str];
-    }
-    
-    if (byteLenForZh == 0) {
+        
+        NSFileHandle *handle = [NSFileHandle fileHandleForReadingAtPath:_filePath];
+        _dataLen = [handle seekToEndOfFile];
+        
         int lineCharsCount = floor(CONTENT_WIDTH / FONT_SIZE_CONTENT);
         int linesCount = floor(CONTENT_HEIGHT / FONT_SIZE_CONTENT);
         
-        byteLenForZh = 3*lineCharsCount*linesCount;
+        _oneLabelBytes = 3*lineCharsCount*linesCount;
+        _dataPosition = 0;
+        if (_oneLabelBytes > 0) {
+            _possibleTotalPages =  (int)_dataLen / _oneLabelBytes;
+        }
     }
     
     return self;
 }
 
-- (NSString *)updateFrame {
+- (NSArray *)array {
+    if (_array == nil) {
+        _array = [[NSArray alloc] initWithObjects:@"", @"", @"", nil];
+    }
+    
+    return _array;
+}
+
+- (NSDictionary *)dict {
+    if (_dict == nil) {
+        CTFontRef fontRef = CTFontCreateWithName((CFStringRef)@"STHeitiSC-Light",FONT_SIZE_CONTENT, NULL);
+        _dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                 (id)[UIColor blackColor].CGColor, kCTForegroundColorAttributeName,
+                 (id)CFBridgingRelease(fontRef), kCTFontAttributeName,
+                 (id) [UIColor whiteColor].CGColor, (NSString *) kCTStrokeColorAttributeName,
+                 (id)[NSNumber numberWithFloat: 0.0f], (NSString *)kCTStrokeWidthAttributeName,
+                 nil];
+    }
+    
+    return _dict;
+}
+
+- (NSString *)skip:(unsigned long long)p isReverse:(BOOL)isReverse {
     
     NSFileHandle *handle = [NSFileHandle fileHandleForReadingAtPath:_filePath];
-    _data = [handle readDataOfLength:byteLenForZh];
-    NSString *s = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
+    NSString *content;
+    NSRange r;
+    memset(&r, 0, sizeof(NSRange));
     
-    CTFontRef fontRef = CTFontCreateWithName((CFStringRef)@"STHeitiSC-Light",FONT_SIZE_CONTENT, NULL);
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          (id)[UIColor blackColor].CGColor, kCTForegroundColorAttributeName,
-                          (id)CFBridgingRelease(fontRef), kCTFontAttributeName,
-                          (id) [UIColor whiteColor].CGColor, (NSString *) kCTStrokeColorAttributeName,
-                          (id)[NSNumber numberWithFloat: 0.0], (NSString *)kCTStrokeWidthAttributeName,
-                          nil];
+    if (isReverse) {
+        unsigned long location = _dataPosition - p - _oneLabelBytes;
+        [handle seekToFileOffset:location];
+    }else {
+        [handle seekToFileOffset:_dataPosition];
+    }
     
-    NSString *content = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
-    content = [content stringByReplacingOccurrencesOfString:@"\r\n" withString:@"\n"];
+    if (_dataPosition == 11350) {
+        NSLog(@"");
+    }
     
-    NSAttributedString *attStr = [[NSAttributedString alloc] initWithString:content attributes:dict];
+    if (_dataLen - _dataPosition < _oneLabelBytes) {
+        NSData *d = [handle readDataOfLength:_dataLen - _dataPosition];
+
+        if ((content = [[NSString alloc] initWithData:[handle readDataOfLength:_dataLen - _dataPosition] encoding:NSUTF8StringEncoding]) == nil) {
+            
+            unsigned long l = handle.offsetInFile;
+            NSData *d = [handle readDataOfLength:_dataLen - _dataPosition];
+            content = [ReadDataByBlock strByDataForUTF8:[handle readDataOfLength:_dataLen - _dataPosition] visibleRange:&r];
+        }else {
+            content = [[NSString alloc] initWithData:[handle readDataOfLength:_dataLen - _dataPosition] encoding:NSUTF8StringEncoding];
+        }
+    }else {
+        content = [ReadDataByBlock strByDataForUTF8:[handle readDataOfLength:_oneLabelBytes] visibleRange:&r];
+    }
+    
+    NSAttributedString *attStr = [[NSAttributedString alloc] initWithString:content attributes:self.dict];
 
     CGMutablePathRef path = CGPathCreateMutable();
     CGRect rect = CGRectMake(NORMAL_PADDING, 20, CONTENT_WIDTH, CONTENT_HEIGHT);
@@ -66,24 +109,29 @@
     CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
     CFRange range = CTFrameGetVisibleStringRange(frame);
     
-    return [content substringToIndex:range.length];
     
-//    return [content ];
-//    textPos += range.length;
-//    NSValue *value = [NSValue valueWithBytes:&range objCType:@encode(NSRange)];
-//    [self.ranges addObject:value];
-//    
-//    
-////    CFRelease(fontRef);
-//    CFRelease(framesetter);
-//    CFRelease(frame);
-//    CFRelease(path);
-//    ++totalPages;
+    NSString *visibleStr = [content substringToIndex:range.length];
+    unsigned long visibleStrBytesLen = [[visibleStr dataUsingEncoding:NSUTF8StringEncoding] length];
+    _dataPosition += visibleStrBytesLen + 1; // next char startpoint
+    
+    NSLog(@"pos = %lld", _dataPosition);
+    
+    CFRelease(framesetter);
+    CFRelease(frame);
+    CFRelease(path);
+    
+    return [content substringToIndex:range.length];
 }
 
-- (NSRange)DataCanVisibleForUTF8:(NSData *)data {
++ (NSString *)strByDataForUTF8:(NSData *)data visibleRange:(NSRange *)range {
+    
+    if (data.length == 0) {
+        return nil;
+    }
+    
     unsigned long s = 0;
     unsigned long end = data.length - 1;
+    NSString *str;
     
     char c = '\0';
     while (s < end) {
@@ -104,8 +152,12 @@
         }
     }
     
-    return NSMakeRange(s, end);
-}
+    range->location = s;
+    range->length = end - s;
 
+    str = [[NSString alloc] initWithData:[data subdataWithRange:*range] encoding:NSUTF8StringEncoding];
+    
+    return str;
+}
 
 @end

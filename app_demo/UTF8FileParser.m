@@ -98,6 +98,7 @@
       //_file_start_pos = 0;
       break;
     }
+
     temp_start_pos += 3;
   }
   _file_start_pos = temp_start_pos;
