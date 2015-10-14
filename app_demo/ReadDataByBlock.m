@@ -29,6 +29,11 @@
         _filePath = [[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/"] stringByAppendingString:str];
         
         // rm \r
+        // ======================
+        
+        
+        NSArray *array = [NSBundle allFrameworks];
+        NSLog(@"%@",array);
         
 //        NSString *dpath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
 //        NSString *path = [dpath stringByAppendingPathComponent:@"test.txt"];
@@ -57,7 +62,9 @@
 //        if (b) {
 //            NSLog(@"write success ");
 //        }
-//        
+//
+        
+        //========================
         NSFileHandle *handle = [NSFileHandle fileHandleForReadingAtPath:_filePath];
         _dataLen = [handle seekToEndOfFile];
         

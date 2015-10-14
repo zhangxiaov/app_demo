@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		ED5AF7C71BCE2C1600612E3C /* testb.txt in Resources */ = {isa = PBXBuildFile; fileRef = ED5AF7C61BCE2C1600612E3C /* testb.txt */; };
+		ED5AF7E21BCE461300612E3C /* AppMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5AF7E11BCE461300612E3C /* AppMainViewController.m */; };
+		ED5AF7E51BCE466800612E3C /* AppHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5AF7E41BCE466800612E3C /* AppHomeViewController.m */; };
+		ED5AF7E81BCE47A800612E3C /* AppFindBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5AF7E71BCE47A800612E3C /* AppFindBookViewController.m */; };
 		ED602A3F1BC4CD4600DB1A3B /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED602A3E1BC4CD4600DB1A3B /* libsqlite3.0.dylib */; };
 		ED602A431BC4CDCF00DB1A3B /* SqlOP.m in Sources */ = {isa = PBXBuildFile; fileRef = ED602A421BC4CDCF00DB1A3B /* SqlOP.m */; };
 		EDB293D21BC1062700290C56 /* UTF8FileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB293D11BC1062700290C56 /* UTF8FileParser.m */; };
@@ -39,6 +42,12 @@
 
 /* Begin PBXFileReference section */
 		ED5AF7C61BCE2C1600612E3C /* testb.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = testb.txt; path = ../../testb.txt; sourceTree = "<group>"; };
+		ED5AF7E01BCE461300612E3C /* AppMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppMainViewController.h; sourceTree = "<group>"; };
+		ED5AF7E11BCE461300612E3C /* AppMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppMainViewController.m; sourceTree = "<group>"; };
+		ED5AF7E31BCE466800612E3C /* AppHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppHomeViewController.h; sourceTree = "<group>"; };
+		ED5AF7E41BCE466800612E3C /* AppHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppHomeViewController.m; sourceTree = "<group>"; };
+		ED5AF7E61BCE47A800612E3C /* AppFindBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppFindBookViewController.h; sourceTree = "<group>"; };
+		ED5AF7E71BCE47A800612E3C /* AppFindBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppFindBookViewController.m; sourceTree = "<group>"; };
 		ED602A3E1BC4CD4600DB1A3B /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		ED602A411BC4CDCF00DB1A3B /* SqlOP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqlOP.h; sourceTree = "<group>"; };
 		ED602A421BC4CDCF00DB1A3B /* SqlOP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqlOP.m; sourceTree = "<group>"; };
@@ -169,6 +178,12 @@
 				EDFCA73E1BB1734F00AF49EA /* Supporting Files */,
 				EDFCA7451BB1734F00AF49EA /* ViewController.h */,
 				EDFCA7461BB1734F00AF49EA /* ViewController.m */,
+				ED5AF7E01BCE461300612E3C /* AppMainViewController.h */,
+				ED5AF7E11BCE461300612E3C /* AppMainViewController.m */,
+				ED5AF7E31BCE466800612E3C /* AppHomeViewController.h */,
+				ED5AF7E41BCE466800612E3C /* AppHomeViewController.m */,
+				ED5AF7E61BCE47A800612E3C /* AppFindBookViewController.h */,
+				ED5AF7E71BCE47A800612E3C /* AppFindBookViewController.m */,
 				EDD38DF71BB80FEF001878DC /* UILabel+VerticalAlign.h */,
 				EDD38DF81BB80FEF001878DC /* UILabel+VerticalAlign.m */,
 			);
@@ -311,7 +326,10 @@
 				EDFCA7411BB1734F00AF49EA /* main.m in Sources */,
 				EDD38DF91BB80FEF001878DC /* UILabel+VerticalAlign.m in Sources */,
 				EDD343A21BC6879D00204C80 /* ClientServer.m in Sources */,
+				ED5AF7E51BCE466800612E3C /* AppHomeViewController.m in Sources */,
 				ED602A431BC4CDCF00DB1A3B /* SqlOP.m in Sources */,
+				ED5AF7E21BCE461300612E3C /* AppMainViewController.m in Sources */,
+				ED5AF7E81BCE47A800612E3C /* AppFindBookViewController.m in Sources */,
 				EDBA42371BB3EDDD004B9A62 /* AppUtils.m in Sources */,
 				EDD363E61BC0FB43008CD9AC /* UITouchScrollView.m in Sources */,
 			);
