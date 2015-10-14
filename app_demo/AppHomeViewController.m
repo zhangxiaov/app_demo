@@ -1,47 +1,40 @@
 //
-//  ViewController.m
+//  AppHomeViewController.m
 //  app_demo
 //
-//  Created by 张新伟 on 15/9/22.
+//  Created by zhangxinwei on 15/10/14.
 //  Copyright (c) 2015年 张新伟. All rights reserved.
 //
 
-#import "ViewController.h"
-#import "AppBookView.h"
-#import "AppConfig.h"
+#import "AppHomeViewController.h"
 #import "AppContentViewController.h"
 
-@interface ViewController () <UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating>
-@property (nonatomic, strong) NSArray *data;
+@interface AppHomeViewController () <UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating>
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *data;
 @property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong) UIView *footerView;
 @property (nonatomic, strong) UISearchController *searchController;
 @property (nonatomic, strong) NSMutableArray *visableArray;
 @property (nonatomic, strong) NSMutableArray *dataSourceArray;
-
-
 @end
 
-@implementation ViewController
+@implementation AppHomeViewController
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.title = @"Home";
+    }
+    
+    return self;
+}
 
 - (void)viewDidLoad {
-//    UIButton *btn = [[UIButton alloc] init];
-//    [btn setTitle:@"点击" forState:UIControlStateNormal];
-//    btn.backgroundColor = [UIColor grayColor];
-//    btn.frame = CGRectMake(20, 100, 100, 30);
-//    [btn addTarget:self action:@selector(didTap) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    [self.view addSubview:btn];
     
     [super viewDidLoad];
     
-//    UISearchBar *searchbar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
-//    searchbar.placeholder = @"搜索";
-    
-
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-    UIView *v = _searchController.view;
-    
     _searchController.searchResultsUpdater = self;
     _searchController.dimsBackgroundDuringPresentation = NO;
     [_searchController.searchBar sizeToFit];
@@ -57,10 +50,6 @@
     self.visableArray = self.data;
     
     self.view.backgroundColor = [UIColor whiteColor];
-//    self.tableView.tableHeaderView = self.headerView;
-//    self.tableView.tableFooterView = self.footerView;
-    
-//    self.navigationController pushViewController:<#(UIViewController *)#> animated:<#(BOOL)#>
 }
 
 - (UIView *)footerView {
@@ -74,7 +63,7 @@
 - (UIView *)headerView {
     if (_headerView == nil) {
         
-            }
+    }
     
     return _headerView;
 }
@@ -91,16 +80,7 @@
     return data;
 }
 
-#pragma mark
-
-- (void)bookView:(AppBookView *)bookView didTap:(UIButton *)button {
-    
-    AppContentViewController *controller = [[AppContentViewController alloc] init];
-    controller.title = [bookView.bookname stringByDeletingPathExtension];
-    controller.navigationController.navigationBarHidden = YES;
-    
-    [self.navigationController pushViewController:controller animated:NO];
-}
+#pragma mark UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 60;
@@ -122,7 +102,7 @@
     if (self.visableArray) {
         cell.detailTextLabel.text = self.visableArray[indexPath.row];
     }else {
-       cell.detailTextLabel.text = self.data[indexPath.row];
+        cell.detailTextLabel.text = self.data[indexPath.row];
     }
     
     return cell;

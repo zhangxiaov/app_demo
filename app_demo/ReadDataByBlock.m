@@ -28,6 +28,43 @@
         NSString *str = [title stringByAppendingPathExtension:@"txt"];
         _filePath = [[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/"] stringByAppendingString:str];
         
+        // rm \r
+        // ======================
+        
+        
+        NSArray *array = [NSBundle allFrameworks];
+        NSLog(@"%@",array);
+        
+//        NSString *dpath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+//        NSString *path = [dpath stringByAppendingPathComponent:@"test.txt"];
+//        
+//        NSFileManager *fm = [NSFileManager defaultManager];
+//        
+//        
+//        NSString *con = [NSString stringWithContentsOfFile:_filePath encoding:NSUTF8StringEncoding error:nil];
+//        con = [con stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+//        
+//        if (![fm fileExistsAtPath:path]) {
+//            [fm createFileAtPath:path contents:[con dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
+//        }
+//        
+//
+//        
+//
+//        NSFileHandle *h = [NSFileHandle fileHandleForWritingAtPath:_filePath];
+//        [h seekToFileOffset:0];
+//        
+//        NSData *data = [con dataUsingEncoding:NSUTF8StringEncoding];
+//        [h writeData:data];
+//        [h closeFile];
+//        
+//        BOOL b = [con writeToFile:[_filePath stringByAppendingString:@".txt"] atomically:NO encoding:NSUTF8StringEncoding error:nil];
+//        if (b) {
+//            NSLog(@"write success ");
+//        }
+//
+        
+        //========================
         NSFileHandle *handle = [NSFileHandle fileHandleForReadingAtPath:_filePath];
         _dataLen = [handle seekToEndOfFile];
         

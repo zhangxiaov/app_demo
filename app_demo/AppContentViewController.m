@@ -67,8 +67,6 @@
     }
 
     _footerView.text = [NSString stringWithFormat:@"%d/%d",  0, totalPages - 1];
-
-    
 }
 
 - (void)moveLabel {

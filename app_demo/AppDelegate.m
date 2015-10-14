@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import "AppMainViewController.h"
 
 @interface AppDelegate ()
 
@@ -37,7 +38,10 @@
 //
 //    NSArray *a = @[i0, i1];
 //    navc.toolbarItems = a;
-    self.window.rootViewController = navc;
+//    self.window.rootViewController = navc;
+    
+    AppMainViewController *main = [[AppMainViewController alloc] init];
+    self.window.rootViewController = main;
     
     [self.window makeKeyAndVisible];
     
