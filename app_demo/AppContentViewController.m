@@ -56,8 +56,12 @@
         self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, CONTENT_HEIGHT);
     }else {
         [self labels:totalPages];
-        ((AppLabel *)self.labels[0]).label.text = [_readData strForPage:0 isReverse:NO];
-        ((AppLabel *)self.labels[1]).label.text = [_readData strForPage:1 isReverse:NO];
+        
+        NSString *s = [_readData strForPage:0 isReverse:NO];
+        ((AppLabel *)self.labels[0]).label.text = s;
+        
+        NSString *s2 = [_readData strForPage:1 isReverse:NO];
+        ((AppLabel *)self.labels[1]).label.text = s2;
 
         self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * totalPages, CONTENT_HEIGHT);
     }

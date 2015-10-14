@@ -33,7 +33,7 @@
         
         int lineCharsCount = floor(CONTENT_WIDTH / FONT_SIZE_CONTENT);
         int linesCount = floor(CONTENT_HEIGHT / FONT_SIZE_CONTENT);
-        _oneLabelBytes = 3*lineCharsCount*linesCount;
+        _oneLabelBytes = 4*lineCharsCount*linesCount;
         
         _dataPosition = 0;
         if (_oneLabelBytes > 0) {
@@ -61,12 +61,7 @@
 - (NSString *)strForPage:(int)page isReverse:(BOOL)isReverse {
     if (_posArray.count > page + 1 && _posArray.count != 1) {
         long location = ((NSNumber *)_posArray[page]).longValue;
-        long e = 0;
-        if (_posArray.count < page + 1) {
-            e = _dataLen;
-        }else {
-            e = ((NSNumber *)_posArray[page+1]).longValue;
-        }
+        long e = ((NSNumber *)_posArray[page+1]).longValue;
         
         long len = e - location;
         NSFileHandle *handle = [NSFileHandle fileHandleForReadingAtPath:_filePath];
@@ -82,7 +77,9 @@
         
         NSFileHandle *handle = [NSFileHandle fileHandleForReadingAtPath:_filePath];
         [handle seekToFileOffset:_dataPosition];
-        NSString *content = [self strByDataForUTF8:[handle readDataOfLength:_oneLabelBytes]];
+        
+        NSData *d2 = [handle readDataOfLength:_oneLabelBytes];
+        NSString *content = [self strByDataForUTF8:d2];
         NSAttributedString *attStr = [[NSAttributedString alloc] initWithString:content attributes:self.dict];
         
         CGMutablePathRef path = CGPathCreateMutable();
@@ -92,16 +89,20 @@
         CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attStr);
         CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
         CFRange range = CTFrameGetVisibleStringRange(frame);
-        
+
         NSString *visibleStr = [content substringToIndex:range.length];
         unsigned long visibleStrBytesLen = [[visibleStr dataUsingEncoding:NSUTF8StringEncoding] length];
         NSNumber *n2 = [[NSNumber alloc] initWithLong:visibleStrBytesLen];
         [_array addObject:n2];
         _dataPosition += visibleStrBytesLen; // next char startpoint
         
-        if (_dataPosition >= _dataLen) {
-            _dataPosition = _dataLen;
+        if (_dataPosition == 14264) {
+            NSLog(@"fsfs");
         }
+        
+//        if (_dataPosition >= _dataLen - 1) {
+//            _dataPosition = _dataLen;
+//        }
         
         NSLog(@"pos = %lld", _dataPosition);
         
@@ -140,8 +141,7 @@
     char c = '\0';
     while (s < end) {
         [data getBytes:&c range:NSMakeRange(s, sizeof(c))];
-//        if ((c & 0x40) == 0) {
-        if ((c & 0x40) == 0 && (c & 0x80) != 0) {
+        if ((c & 0x40) == 0) {
             ++ s;
         }else {
             break;
@@ -149,22 +149,74 @@
     }
     
     if (_dataPosition + data.length == _dataLen) {
-        NSLog(@"end");
+        ;
     }else {
         while (end > 0) {
             [data getBytes:&c range:NSMakeRange(end, sizeof(c))];
-//            if ((c & 0x40) == 0) {
-            if ((c & 0x40) == 0 && (c & 0x80) != 0) {
+            if ((c & 0x40) == 0) {
                 -- end;
             }else {
-                break;
+                [data getBytes:&c range:NSMakeRange(end, sizeof(c))];
+                Byte b = c;
+                int append = 0;
+                
+                if ((b & 0x80) == 0) {
+                    append += 0;
+                    break;
+                }
+                if ((b & 0x20) == 0) {
+                    append += 1;
+                    if (end + append + 1 <= data.length) {
+                        end += append;
+                    }else {
+                        end -= 1;
+                    }
+                    break;
+                }
+                if ((b & 0x10) == 0) {
+                    append += 2;
+                    if (end + append + 1 <= data.length) {
+                        end += append;
+                    }else {
+                        end -= 1;
+                    }
+                    break;
+                }
+                if ((b & 0x08) == 0) {
+                    append += 3;
+                    if (end + append + 1 <= data.length) {
+                        end += append;
+                    }else {
+                        end -= 1;
+                    }
+                    break;
+                }
+                if ((b & 0x04) == 0) {
+                    append += 4;
+                    if (end + append + 1 <= data.length) {
+                        end += append;
+                    }else {
+                        end -= 1;
+                    }
+                    break;
+                }
+                if ((b & 0x02) == 0) {
+                    append += 5;
+                    if (end + append + 1 <= data.length) {
+                        end += append;
+                    }else {
+                        end -= 1;
+                    }
+                    break;
+                }
+
             }
         }
     }
     
-    NSRange range = NSMakeRange(s, end - s);
-    NSLog(@"loc = %d, len = %d", s, end - s);
-    str = [[NSString alloc] initWithData:[data subdataWithRange:range] encoding:NSUTF8StringEncoding];
+    NSRange range = NSMakeRange(s, end - s + 1);
+    NSData * d = [data subdataWithRange:range];
+    str = [[NSString alloc] initWithData:d encoding:NSUTF8StringEncoding];
     return str;
 }
 
