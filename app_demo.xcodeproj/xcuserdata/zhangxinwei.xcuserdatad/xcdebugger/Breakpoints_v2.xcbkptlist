@@ -2,8 +2,6 @@
 <Bucket
    type = "1"
    version = "2.0">
-<<<<<<< HEAD
-=======
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
@@ -22,15 +20,14 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "app_demo/ReadDataByBlock.m"
-            timestampString = "466438912.386248"
+            timestampString = "466496791.216893"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "-strForPage:isReverse:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
->>>>>>> 7f89268f310cf7cc162a340fd5b2f68afcc2692f
 </Bucket>

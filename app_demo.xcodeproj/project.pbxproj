@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED5AF7C71BCE2C1600612E3C /* testb.txt in Resources */ = {isa = PBXBuildFile; fileRef = ED5AF7C61BCE2C1600612E3C /* testb.txt */; };
 		ED602A3F1BC4CD4600DB1A3B /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED602A3E1BC4CD4600DB1A3B /* libsqlite3.0.dylib */; };
 		ED602A431BC4CDCF00DB1A3B /* SqlOP.m in Sources */ = {isa = PBXBuildFile; fileRef = ED602A421BC4CDCF00DB1A3B /* SqlOP.m */; };
 		EDB293D21BC1062700290C56 /* UTF8FileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB293D11BC1062700290C56 /* UTF8FileParser.m */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ED5AF7C61BCE2C1600612E3C /* testb.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = testb.txt; path = ../../testb.txt; sourceTree = "<group>"; };
 		ED602A3E1BC4CD4600DB1A3B /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		ED602A411BC4CDCF00DB1A3B /* SqlOP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqlOP.h; sourceTree = "<group>"; };
 		ED602A421BC4CDCF00DB1A3B /* SqlOP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqlOP.m; sourceTree = "<group>"; };
@@ -105,16 +107,9 @@
 		EDBA42091BB2867D004B9A62 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				EDBA420A1BB28C1A004B9A62 /* sj */,
+				ED5AF7C61BCE2C1600612E3C /* testb.txt */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		EDBA420A1BB28C1A004B9A62 /* sj */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = sj;
 			sourceTree = "<group>";
 		};
 		EDD3439F1BC6879D00204C80 /* net */ = {
@@ -287,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDD343A71BC6C1D300204C80 /* test.txt in Resources */,
+				ED5AF7C71BCE2C1600612E3C /* testb.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
