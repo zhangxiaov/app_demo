@@ -8,14 +8,13 @@
 
 #import "AppHomeViewController.h"
 #import "AppContentViewController.h"
+#import "AppConfig.h"
 
-@interface AppHomeViewController () <UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating>
+@interface AppHomeViewController () <UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *data;
-@property (nonatomic, strong) UIView *headerView;
-@property (nonatomic, strong) UIView *footerView;
 @property (nonatomic, strong) UISearchController *searchController;
-@property (nonatomic, strong) NSMutableArray *visableArray;
+@property (nonatomic, strong) NSMutableArray *searchData;
 @property (nonatomic, strong) NSMutableArray *dataSourceArray;
 @end
 
@@ -34,43 +33,48 @@
     
     [super viewDidLoad];
     
-    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-    _searchController.searchResultsUpdater = self;
-    _searchController.dimsBackgroundDuringPresentation = NO;
-    [_searchController.searchBar sizeToFit];
-    self.tableView.tableHeaderView = _searchController.searchBar;
+    self.tableView.tableHeaderView = self.searchController.searchBar;
     
-    _searchController.searchBar.backgroundColor = [UIColor redColor];
-    
-    self.title = @"home";
-    
-    //#C7C1AA
     [self data];
     
-    self.visableArray = self.data;
+    self.searchData = self.data;
     
     self.view.backgroundColor = [UIColor whiteColor];
-}
-
-- (UIView *)footerView {
-    if (_footerView == nil) {
-        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-    }
     
-    return _footerView;
-}
-
-- (UIView *)headerView {
-    if (_headerView == nil) {
-        
-    }
-    
-    return _headerView;
+    [self.view addSubview:self.tableView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (UISearchController *)searchController {
+    if (_searchController == nil) {
+        _searchController = [[UISearchController alloc] init];
+        self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+        _searchController.searchResultsUpdater = self;
+        [_searchController setHidesNavigationBarDuringPresentation:NO];
+        [_searchController setDimsBackgroundDuringPresentation:NO];
+        [_searchController.searchBar sizeToFit];
+        _searchController.searchBar.keyboardType = UIKeyboardTypeNamePhonePad;
+
+        _searchController.searchBar.tintColor = [UIColor redColor];
+        _searchController.searchBar.barTintColor = UIColorFromHex(0xeeeeee);
+    }
+    
+    return _searchController;
+}
+
+- (UITableView *)tableView {
+    if (_tableView == nil) {
+        _tableView = [[UITableView alloc] init];
+        _tableView.frame = self.view.bounds;
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+    }
+    
+    return _tableView;
 }
 
 - (NSArray *)data {
@@ -87,10 +91,10 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (!self.visableArray && self.visableArray.count == 0) {
-        _visableArray = _data;
+    if (!self.searchData && self.searchData.count == 0) {
+        _searchData = _data;
     }
-    return _visableArray.count;
+    return _searchData.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -99,8 +103,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"bookcell"];
     }
     
-    if (self.visableArray) {
-        cell.detailTextLabel.text = self.visableArray[indexPath.row];
+    if (self.searchData) {
+        cell.detailTextLabel.text = self.searchData[indexPath.row];
     }else {
         cell.detailTextLabel.text = self.data[indexPath.row];
     }
@@ -113,19 +117,24 @@
     controller.title = [self.data[indexPath.row] stringByDeletingPathExtension];
     controller.navigationController.navigationBarHidden = YES;
     
+    self.hidesBottomBarWhenPushed = YES;
+    [self.navigationController setNavigationBarHidden:YES];
+    
     [self.navigationController pushViewController:controller animated:NO];
 }
+
+#pragma mark UISearchResultsUpdating
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController{
     NSString *filterString = searchController.searchBar.text;
     
     if ([filterString isEqualToString:@""] || !filterString) {
-        self.visableArray = self.data;
+        self.searchData = self.data;
     }else {
-        self.visableArray = [[NSMutableArray alloc] init];
+        self.searchData = [[NSMutableArray alloc] init];
         for (NSString *s in self.data) {
             if ([s containsString:filterString]) {
-                [self.visableArray addObject:s];
+                [self.searchData addObject:s];
             }
         }
     }

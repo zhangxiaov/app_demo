@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		ED5AF7C71BCE2C1600612E3C /* testb.txt in Resources */ = {isa = PBXBuildFile; fileRef = ED5AF7C61BCE2C1600612E3C /* testb.txt */; };
 		ED5AF7E21BCE461300612E3C /* AppMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5AF7E11BCE461300612E3C /* AppMainViewController.m */; };
 		ED5AF7E51BCE466800612E3C /* AppHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5AF7E41BCE466800612E3C /* AppHomeViewController.m */; };
 		ED5AF7E81BCE47A800612E3C /* AppFindBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5AF7E71BCE47A800612E3C /* AppFindBookViewController.m */; };
@@ -41,7 +40,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		ED5AF7C61BCE2C1600612E3C /* testb.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = testb.txt; path = ../../testb.txt; sourceTree = "<group>"; };
 		ED5AF7E01BCE461300612E3C /* AppMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppMainViewController.h; sourceTree = "<group>"; };
 		ED5AF7E11BCE461300612E3C /* AppMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppMainViewController.m; sourceTree = "<group>"; };
 		ED5AF7E31BCE466800612E3C /* AppHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppHomeViewController.h; sourceTree = "<group>"; };
@@ -113,10 +111,9 @@
 			path = sql;
 			sourceTree = "<group>";
 		};
-		EDBA42091BB2867D004B9A62 /* Resources */ = {
+		EDB1BE341BCE76A1002DA59D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				ED5AF7C61BCE2C1600612E3C /* testb.txt */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -133,12 +130,12 @@
 		EDFCA7321BB1734F00AF49EA = {
 			isa = PBXGroup;
 			children = (
+				EDB1BE341BCE76A1002DA59D /* Resources */,
 				EDD343A61BC6C1D300204C80 /* test.txt */,
 				ED602A3E1BC4CD4600DB1A3B /* libsqlite3.0.dylib */,
 				EDFCA73D1BB1734F00AF49EA /* app_demo */,
 				EDFCA7571BB1734F00AF49EA /* app_demoTests */,
 				EDFCA73C1BB1734F00AF49EA /* Products */,
-				EDBA42091BB2867D004B9A62 /* Resources */,
 			);
 			sourceTree = "<group>";
 		};
@@ -297,7 +294,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDD343A71BC6C1D300204C80 /* test.txt in Resources */,
-				ED5AF7C71BCE2C1600612E3C /* testb.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

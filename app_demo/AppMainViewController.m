@@ -18,6 +18,7 @@
         
         AppHomeViewController *homevc = [[AppHomeViewController alloc] init];
         UINavigationController *nc1 = [[UINavigationController alloc] initWithRootViewController:homevc];
+        
         AppFindBookViewController *find = [[AppFindBookViewController alloc] init];
         UINavigationController *nc2 = [[UINavigationController alloc] initWithRootViewController:find];
         
