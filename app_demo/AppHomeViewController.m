@@ -8,14 +8,15 @@
 
 #import "AppHomeViewController.h"
 #import "AppContentViewController.h"
+#import "AppConfig.h"
+#import "UIImage+UIColor.h"
+#import "AppTableViewCell.h"
 
-@interface AppHomeViewController () <UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating>
+@interface AppHomeViewController () <UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *data;
-@property (nonatomic, strong) UIView *headerView;
-@property (nonatomic, strong) UIView *footerView;
 @property (nonatomic, strong) UISearchController *searchController;
-@property (nonatomic, strong) NSMutableArray *visableArray;
+@property (nonatomic, strong) NSMutableArray *searchData;
 @property (nonatomic, strong) NSMutableArray *dataSourceArray;
 @end
 
@@ -34,43 +35,72 @@
     
     [super viewDidLoad];
     
-    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-    _searchController.searchResultsUpdater = self;
-    _searchController.dimsBackgroundDuringPresentation = NO;
-    [_searchController.searchBar sizeToFit];
-    self.tableView.tableHeaderView = _searchController.searchBar;
+    self.tableView.tableHeaderView = self.searchController.searchBar;
     
-    _searchController.searchBar.backgroundColor = [UIColor redColor];
-    
-    self.title = @"home";
-    
-    //#C7C1AA
     [self data];
     
-    self.visableArray = self.data;
+    self.searchData = self.data;
     
-    self.view.backgroundColor = [UIColor whiteColor];
-}
-
-- (UIView *)footerView {
-    if (_footerView == nil) {
-        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-    }
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:UIColorFromHex(0x38373C)] forBarMetrics:UIBarMetricsDefault];
     
-    return _footerView;
-}
-
-- (UIView *)headerView {
-    if (_headerView == nil) {
-        
-    }
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
-    return _headerView;
+    
+    [self.view addSubview:self.tableView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (UISearchController *)searchController {
+    if (_searchController == nil) {
+        _searchController = [[UISearchController alloc] init];
+        self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+        _searchController.searchResultsUpdater = self;
+        [_searchController setHidesNavigationBarDuringPresentation:NO];
+        [_searchController setDimsBackgroundDuringPresentation:NO];
+        [_searchController.searchBar sizeToFit];
+        _searchController.searchBar.keyboardType = UIKeyboardTypeASCIICapable;
+
+        _searchController.searchBar.layer.borderColor = UIColorFromHex(0xff0000).CGColor;
+        _searchController.searchBar.layer.borderWidth = 1.0;
+        _searchController.searchBar.tintColor = [UIColor redColor];
+        _searchController.searchBar.barTintColor = UIColorFromHex(0xEFEFF4);
+        
+        for (UIView *view in _searchController.searchBar.subviews) {
+            if ([view isKindOfClass:[UITextField class]]) {
+                UITextField *textField= (UITextField *)view;
+                textField.layer.borderColor = UIColorFromHex(0xE1E2E5).CGColor;
+                textField.layer.borderWidth = 1.0;
+                return _searchController;
+            }
+            
+            // for before iOS7.0
+            for (UIView * s2 in view.subviews) {
+                if ([s2 isKindOfClass:NSClassFromString(@"UISearchBarTextField")]) {
+                    s2.layer.cornerRadius = 14;
+                    s2.layer.borderWidth = 1.0;
+                    s2.layer.borderColor = UIColorFromHex(0xff0000).CGColor;
+                    return _searchController;
+                }
+            }
+        }
+    }
+    
+    return _searchController;
+}
+
+- (UITableView *)tableView {
+    if (_tableView == nil) {
+        _tableView = [[UITableView alloc] init];
+        _tableView.frame = self.view.bounds;
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+    }
+    
+    return _tableView;
 }
 
 - (NSArray *)data {
@@ -87,22 +117,24 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (!self.visableArray && self.visableArray.count == 0) {
-        _visableArray = _data;
+    if (!self.searchData && self.searchData.count == 0) {
+        _searchData = _data;
     }
-    return _visableArray.count;
+    return _searchData.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"bookcell"];
+    AppTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"bookcell"];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"bookcell"];
+        cell = [[AppTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"bookcell"];
+        cell.infoLabel.text = @"fafafafafaafafafafafsfdfkajslfjfl;asfjasflas;fjasffa;fjdsfasjfals;fjdsf;lasfsfj";
+        cell.progressLabel.text = @"80%";
     }
     
-    if (self.visableArray) {
-        cell.detailTextLabel.text = self.visableArray[indexPath.row];
+    if (self.searchData) {
+        cell.nameLabel.text = self.searchData[indexPath.row];
     }else {
-        cell.detailTextLabel.text = self.data[indexPath.row];
+        cell.nameLabel.text = self.data[indexPath.row];
     }
     
     return cell;
@@ -113,19 +145,31 @@
     controller.title = [self.data[indexPath.row] stringByDeletingPathExtension];
     controller.navigationController.navigationBarHidden = YES;
     
-    [self.navigationController pushViewController:controller animated:NO];
+    self.hidesBottomBarWhenPushed = YES;
+    
+    [self.navigationController pushViewController:controller animated:YES];
 }
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"test");
+}
+
+#pragma mark UISearchResultsUpdating
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController{
     NSString *filterString = searchController.searchBar.text;
     
     if ([filterString isEqualToString:@""] || !filterString) {
-        self.visableArray = self.data;
+        self.searchData = self.data;
     }else {
-        self.visableArray = [[NSMutableArray alloc] init];
+        self.searchData = [[NSMutableArray alloc] init];
         for (NSString *s in self.data) {
             if ([s containsString:filterString]) {
-                [self.visableArray addObject:s];
+                [self.searchData addObject:s];
             }
         }
     }

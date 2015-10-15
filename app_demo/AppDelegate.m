@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import "AppMainViewController.h"
+#import "AppConfig.h"
 
 @interface AppDelegate ()
 
@@ -42,6 +43,8 @@
     
     AppMainViewController *main = [[AppMainViewController alloc] init];
     self.window.rootViewController = main;
+
+    [[UINavigationBar appearance] setBackgroundColor:UIColorFromHex(0x38373D)];
     
     [self.window makeKeyAndVisible];
     
