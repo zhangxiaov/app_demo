@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreText/CoreText.h>
 
-@interface DemoLabel : UIView
+@interface DemoLabel : UIView <NSCoding>
+@property (nonatomic, copy) NSString *text;
 
 @end

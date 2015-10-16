@@ -10,6 +10,7 @@
 #import "UIImage+UIColor.h"
 #import "AppConfig.h"
 
+
 static const NSString *identifier = @"bookcell";
 
 @interface AppTableViewCell ()
