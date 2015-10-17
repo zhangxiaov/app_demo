@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import "AppMainViewController.h"
+#import "AppConfig.h"
 
 @interface AppDelegate ()
 
@@ -25,23 +26,15 @@
     
     
     ViewController *controller = [[ViewController alloc] init];
-
     navc = [[UINavigationController alloc] initWithRootViewController:controller];
-//    navc.toolbarHidden = NO;
-//    [navc.toolbar setBarTintColor:[UIColor orangeColor]];
-//    [navc.toolbar setBackgroundImage:[UIImage imageNamed:@""] forToolbarPosition:UIBarPositionBottom barMetrics:UIBarMetricsDefault];
+    self.window.rootViewController = navc;
+    navc.navigationBarHidden = YES;
     
-//    
-//    UIBarButtonItem *i0 = [[UIBarButtonItem alloc] initWithTitle:@"fafa" style:UIBarButtonItemStyleDone target:self action:@selector(test)];
-//    
-//    UIBarButtonItem *i1 = [[UIBarButtonItem alloc] initWithTitle:@"eeee" style:UIBarButtonItemStyleDone target:self action:@selector(test)];
-//
-//    NSArray *a = @[i0, i1];
-//    navc.toolbarItems = a;
-//    self.window.rootViewController = navc;
+    // ====================
     
-    AppMainViewController *main = [[AppMainViewController alloc] init];
-    self.window.rootViewController = main;
+//    AppMainViewController *main = [[AppMainViewController alloc] init];
+//    self.window.rootViewController = main;
+
     
     [self.window makeKeyAndVisible];
     
