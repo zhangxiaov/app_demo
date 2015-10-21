@@ -7,10 +7,20 @@
 //
 
 #import "DemoLabel.h"
+<<<<<<< HEAD
 #import "UIImage+UIColor.h"
 
 static inline double radians (double degrees) {return degrees * M_PI/180;}
 
+=======
+#import <CoreText/CoreText.h>
+#import "Regx.h"
+
+static inline double radians (double degrees) {return degrees * M_PI/180;}
+@interface DemoLabel ()
+@property (nonatomic, strong) NSArray *array;
+@end
+>>>>>>> 5758417b96e384a3ba88b5bb68bca83e41e607e2
 
 @implementation DemoLabel
 
@@ -19,6 +29,17 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
     if (self) {
         _text = @"发放拉开合法身份了fkdjfdkfhekjb发送<img src=MISAskAddFile@2x.png width=300 height=40 />的反馈撒返回尽快释放发到空间发电机发电撒风k看到积分卡发卡量发空间发";
     }
+    
+//    UIImage *img = [self imageWithColor:[UIColor grayColor]];
+//    UIImageView *v = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MISAskAddFile"]];
+//    v.frame = CGRectMake(0, 0, 30, 30);
+    
+//    UIImageView *v2 = [[UIImageView alloc] initWithImage:[self rotatedImageWith:[UIImage imageNamed:@"MISAskAddFile"] degrees:90]];
+////    v2.frame = CGRectMake(50, 50, 30, 30);
+//    v2.backgroundColor = [UIColor yellowColor];
+//    
+//    [self addSubview:v2];
+////    [self addSubview:v];
     
     return self;
 }
@@ -165,8 +186,8 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 - (UIImage *)rotatedImageWith:(UIImage *)image degrees:(CGFloat)degrees {
     // calculate the size of the rotated view's containing box for our drawing space
     UIView *rotatedViewBox = [[UIView alloc] initWithFrame:CGRectMake(0,0,image.size.width, image.size.height)];
-    CGAffineTransform t = CGAffineTransformMakeRotation(degrees * M_PI / 180);
-    rotatedViewBox.transform = t;
+//    CGAffineTransform t = CGAffineTransformMakeRotation(degrees * M_PI / 180);
+//    rotatedViewBox.transform = t;
     CGSize rotatedSize = rotatedViewBox.frame.size;
     
     // Create the bitmap context
@@ -174,21 +195,52 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
     CGContextRef bitmap = UIGraphicsGetCurrentContext();
     
     // Move the origin to the middle of the image so we will rotate and scale around the center.
-    CGContextTranslateCTM(bitmap, rotatedSize.width/2, rotatedSize.height/2);
+//    CGContextTranslateCTM(bitmap, rotatedSize.width/2, rotatedSize.height/2);
     
     //   // Rotate the image context
-    CGContextRotateCTM(bitmap, degrees * M_PI / 180);
+//    CGContextRotateCTM(bitmap, degrees * M_PI / 180);
     
     // Now, draw the rotated/scaled image into the context
-    CGContextScaleCTM(bitmap, 1.0, -1.0);
-    CGContextDrawImage(bitmap, CGRectMake(-image.size.width / 2, -image.size.height / 2, image.size.width, image.size.height), [image CGImage]);
+    
+//    CGContextRotateCTM(bitmap, 10);
+    
+//    CGContextTranslateCTM(bitmap, 0, 10);
+    CGContextScaleCTM(bitmap, .5, .5);
+    CGContextRotateCTM(bitmap, radians ( 22.));
+    CGContextTranslateCTM(bitmap, 40, 20);
+    
+//    CGContextDrawImage(bitmap, CGRectMake(-image.size.width / 2, -image.size.height / 2, image.size.width, image.size.height), [image CGImage]);
+    CGContextSetFillColorWithColor(bitmap, [UIColor grayColor].CGColor);
+    CGContextFillRect(bitmap, rotatedViewBox.frame);
+    
+    translateCoordSystem(bitmap, image.size.height);
+    CGContextDrawImage(bitmap, CGRectMake(0, 0, image.size.width, image.size.height), [image CGImage]);
     
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
-    
 }
 
+void translateCoordSystem(CGContextRef context, CGFloat f) {
+    CGContextTranslateCTM(context, 0.0f, f);
+    CGContextScaleCTM(context, 1.0f, -1.0f);
+}
+
+- (UIImage *)imageWithColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0, 0, 1, 1);
+    UIGraphicsBeginImageContext(rect.size);
+
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, color.CGColor);
+    CGContextFillRect(context, rect);
+    
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return img;
+}
+
+<<<<<<< HEAD
 - (UIImage *)translateImageWith:(UIImage *)image x:(CGFloat)x y:(CGFloat)y {
     UIBezierPath *circle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, 300, 300)];
     
@@ -210,13 +262,52 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
     
     return bezierImage;
 }
+=======
+
+>>>>>>> 5758417b96e384a3ba88b5bb68bca83e41e607e2
 
 #pragma mark inherit
 
 - (void)drawRect:(CGRect)rect {
 //    [self contentSetting];
-    [self test];
+//    UIImage *image = [UIImage imageNamed:@"MISAskAddFile"];
+        [super drawRect:rect];
+    
+    
+    Regx *r = [[Regx alloc] init];
+        NSAttributedString *attriString = [r test];
+        
+        CGContextRef ctx = UIGraphicsGetCurrentContext();
+        CGContextConcatCTM(ctx, CGAffineTransformScale(CGAffineTransformMakeTranslation(0, rect.size.height), 1.f, -1.f));
+        
+        CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attriString);
+        CGMutablePathRef path = CGPathCreateMutable();
+        CGPathAddRect(path, NULL, rect);
+        
+        CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
+        CFRelease(path);
+        CFRelease(framesetter);
+        
+        CTFrameDraw(frame, ctx);
+        CFRelease(frame);
 }
+
+- (void)parse {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"txt"];
+    NSFileManager *fm = [NSFileManager defaultManager];
+    
+    NSString *s = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    CTFontRef font = CTFontCreateWithName((CFStringRef)@"Arial", 15.0, NULL);
+    UIColor *color = [UIColor greenColor];
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:(id)color.CGColor,kCTForegroundColorAttributeName,
+                          (__bridge id)font, kCTFontAttributeName, nil];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:s];
+    
+//    attr addAttributes:<#(NSDictionary *)#> range:<#(NSRange)#>
+    
+}
+
+
 
 #pragma mark nscoding
 
