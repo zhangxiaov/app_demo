@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED571E3B1BD735DC007D5B66 /* Regx.m in Sources */ = {isa = PBXBuildFile; fileRef = ED571E3A1BD735DC007D5B66 /* Regx.m */; };
 		ED5AF7E21BCE461300612E3C /* AppMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5AF7E11BCE461300612E3C /* AppMainViewController.m */; };
 		ED5AF7E51BCE466800612E3C /* AppHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5AF7E41BCE466800612E3C /* AppHomeViewController.m */; };
 		ED5AF7E81BCE47A800612E3C /* AppFindBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5AF7E71BCE47A800612E3C /* AppFindBookViewController.m */; };
@@ -43,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ED571E391BD735DC007D5B66 /* Regx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Regx.h; sourceTree = "<group>"; };
+		ED571E3A1BD735DC007D5B66 /* Regx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Regx.m; sourceTree = "<group>"; };
 		ED5AF7E01BCE461300612E3C /* AppMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppMainViewController.h; sourceTree = "<group>"; };
 		ED5AF7E11BCE461300612E3C /* AppMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppMainViewController.m; sourceTree = "<group>"; };
 		ED5AF7E31BCE466800612E3C /* AppHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppHomeViewController.h; sourceTree = "<group>"; };
@@ -141,6 +144,8 @@
 			children = (
 				ED5AFB781BD0B76D00612E3C /* Resources */,
 				EDD343A61BC6C1D300204C80 /* test.txt */,
+				ED571E391BD735DC007D5B66 /* Regx.h */,
+				ED571E3A1BD735DC007D5B66 /* Regx.m */,
 				ED602A3E1BC4CD4600DB1A3B /* libsqlite3.0.dylib */,
 				EDFCA73D1BB1734F00AF49EA /* app_demo */,
 				EDFCA7571BB1734F00AF49EA /* app_demoTests */,
@@ -340,6 +345,7 @@
 				EDD343A21BC6879D00204C80 /* ClientServer.m in Sources */,
 				ED5AF7E51BCE466800612E3C /* AppHomeViewController.m in Sources */,
 				ED602A431BC4CDCF00DB1A3B /* SqlOP.m in Sources */,
+				ED571E3B1BD735DC007D5B66 /* Regx.m in Sources */,
 				ED5AF7E21BCE461300612E3C /* AppMainViewController.m in Sources */,
 				ED5AF7E81BCE47A800612E3C /* AppFindBookViewController.m in Sources */,
 				EDBA42371BB3EDDD004B9A62 /* AppUtils.m in Sources */,

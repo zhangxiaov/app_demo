@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "DemoLabel.h"
 #import "AppConfig.h"
+#import "Regx.h"
 
 @interface ViewController ()
 
@@ -23,6 +24,9 @@
     label.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:label];
+    
+    Regx *r = [[Regx alloc] init];
+    [r test];
 }
 
 @end
