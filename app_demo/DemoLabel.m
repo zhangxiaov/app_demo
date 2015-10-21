@@ -7,12 +7,6 @@
 //
 
 #import "DemoLabel.h"
-<<<<<<< HEAD
-#import "UIImage+UIColor.h"
-
-static inline double radians (double degrees) {return degrees * M_PI/180;}
-
-=======
 #import <CoreText/CoreText.h>
 #import "Regx.h"
 
@@ -20,7 +14,6 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 @interface DemoLabel ()
 @property (nonatomic, strong) NSArray *array;
 @end
->>>>>>> 5758417b96e384a3ba88b5bb68bca83e41e607e2
 
 @implementation DemoLabel
 
@@ -239,32 +232,6 @@ void translateCoordSystem(CGContextRef context, CGFloat f) {
     
     return img;
 }
-
-<<<<<<< HEAD
-- (UIImage *)translateImageWith:(UIImage *)image x:(CGFloat)x y:(CGFloat)y {
-    UIBezierPath *circle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, 300, 300)];
-    
-    UIGraphicsBeginImageContext(CGSizeMake(200, 200));
-    
-    //this gets the graphic context
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    //you can stroke and/or fill
-    CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
-    CGContextSetFillColorWithColor(context, [UIColor lightGrayColor].CGColor);
-    [circle fill];
-    [circle stroke];
-    
-    //now get the image from the context
-    UIImage *bezierImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    
-    return bezierImage;
-}
-=======
-
->>>>>>> 5758417b96e384a3ba88b5bb68bca83e41e607e2
 
 #pragma mark inherit
 
