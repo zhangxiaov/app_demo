@@ -8,11 +8,25 @@
 
 #import "DemoLabel.h"
 #import <CoreText/CoreText.h>
-#import "Regx.h"
+
+/* Callbacks */
+static void deallocCallback( void* ref ){
+//    [(__bridge id)ref release];
+}
+static CGFloat ascentCallback( void *ref ){
+    return [(NSString*)[(__bridge NSDictionary*)ref objectForKey:@"height"] floatValue];
+}
+static CGFloat descentCallback( void *ref ){
+    return [(NSString*)[(__bridge NSDictionary*)ref objectForKey:@"descent"] floatValue];
+}
+static CGFloat widthCallback( void* ref ){
+    return [(NSString*)[(__bridge NSDictionary*)ref objectForKey:@"width"] floatValue];
+}
+
 
 static inline double radians (double degrees) {return degrees * M_PI/180;}
 @interface DemoLabel ()
-@property (nonatomic, strong) NSArray *array;
+
 @end
 
 @implementation DemoLabel
@@ -20,257 +34,142 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _text = @"发放拉开合法身份了fkdjfdkfhekjb发送<img src=MISAskAddFile@2x.png width=300 height=40 />的反馈撒返回尽快释放发到空间发电机发电撒风k看到积分卡发卡量发空间发";
+        _text = @"<font color=red >发放拉开合法身份了fkdjfdkfhekjb发送<img src=MISAskAddFile@2x.png width=40 height=40 />的反馈撒返回尽快释放发到空间发电机发电撒风k看到积分卡发卡量发空间发";
+        _font = @"Arial";
+        _color = [UIColor blackColor];
+        _strokeColor = [UIColor redColor];
+        _strokeWidth = 5.0;
+        _fontSize = 15.0;
+        _images = [NSMutableArray array];
+
     }
-    
-//    UIImage *img = [self imageWithColor:[UIColor grayColor]];
-//    UIImageView *v = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MISAskAddFile"]];
-//    v.frame = CGRectMake(0, 0, 30, 30);
-    
-//    UIImageView *v2 = [[UIImageView alloc] initWithImage:[self rotatedImageWith:[UIImage imageNamed:@"MISAskAddFile"] degrees:90]];
-////    v2.frame = CGRectMake(50, 50, 30, 30);
-//    v2.backgroundColor = [UIColor yellowColor];
-//    
-//    [self addSubview:v2];
-////    [self addSubview:v];
     
     return self;
 }
 
-- (void)test {
-    
-    // 图纸
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    //===== cgcontextfillrect fill color
-//    CGContextSetFillColorWithColor(context, [UIColor redColor].CGColor);
-//    CGContextFillRect(context, CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height));
-
-    
-    // ====== kcgpathfill : fill color
-//    CGContextAddRect(context, CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height));
-//    CGContextSetFillColorWithColor(context, [UIColor redColor].CGColor);
-////    CGContextDrawPath(context, kCGPathEOFill);
-//    CGContextFillPath(context);
-    
-    
-    //===== line
-    //===== kcgpathfillstroke : fill color and stroke
-//    CGContextMoveToPoint(context, 0, 0);
-//    CGContextAddLineToPoint(context, 300, 300);
-//    CGContextAddLineToPoint(context, 59, 100);
-//    CGContextMoveToPoint(context, 0, 0);
-//    CGContextAddLineToPoint(context, 40, 400);
-//    CGContextSetLineWidth(context, 5.0);
-////    CGContextDrawPath(context, kCGPathFillStroke);
-//    CGContextStrokePath(context);
-    
-    //===== line CGContextSetLineCap
-//    CGContextMoveToPoint(context, 10, 10);
-//    CGContextAddLineToPoint(context, 300, 300);
-//    CGContextAddLineToPoint(context, 59, 100);
-//    CGContextMoveToPoint(context, 0, 0);
-//    CGContextAddLineToPoint(context, 40, 400);
-//    CGContextSetLineWidth(context, 5.0);
-//    CGContextSetLineCap(context, kCGLineCapSquare);
-//    CGContextDrawPath(context, kCGPathFillStroke);
-    
-    //===== CGContextSetLineDash
-//    CGContextMoveToPoint(context, 10, 10);
-//    CGContextAddLineToPoint(context, 300, 300);
-//    CGContextAddLineToPoint(context, 59, 100);
-//    CGContextMoveToPoint(context, 0, 0);
-//    CGContextAddLineToPoint(context, 40, 400);
-//    CGContextSetLineWidth(context, 5.0);
-//    float  lengths[] = {10,20};
-//    CGContextSetLineDash(context, 0, lengths, 2);
-//    CGContextDrawPath(context, kCGPathFillStroke);
-    
-    //===== CGContextAddArc
-    // 100,100 圆心  20 randius
-//    CGContextAddArc(context, 100, 100, 50, 0, M_PI, 1);
-//    CGContextAddLineToPoint(context, 100, 100);
-//    CGContextScaleCTM(context, 1.0, -1.0);
-//    CGContextDrawPath(context, kCGPathStroke);
-    
-    //===== CGContextAddArcToPoint
-//    CGContextMoveToPoint(context, 100, 50);
-//    CGContextAddLineToPoint(context, 200, 100);
-//    CGContextAddLineToPoint(context, 100, 150);
-//    CGContextMoveToPoint(context, 100, 50);
-//    CGContextAddArcToPoint(context, 200, 100, 100, 150, 50);
-//    CGContextDrawPath(context, kCGPathStroke);
-    
-    //===== path
-//    CGMutablePathRef path = CGPathCreateMutable();
-//    CGPathMoveToPoint(path, NULL, 50, 50);
-//    CGPathMoveToPoint(path, NULL, 100, 100);
-//    CGPathAddLineToPoint(path, NULL, 50, 200);
-//    CGPathAddRect(path, NULL, CGRectMake(50, 200, 50, 50));
-//    CGContextAddPath(context, path);
-//    CGContextDrawPath(context, kCGPathStroke);
-    
-    // rotate img
-    UIImageView *v1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MISAskAddFile@2x"]];
-//    v1.frame = CGRectMake(40, 40, v1.frame.size.width, v1.frame.size.height);
-    
-    UIImageView *v2 = [[UIImageView alloc] init];
-    v2.frame = CGRectMake(0, 0, 200, 200);
-//    v2.image = [self rotatedImageWith:[UIImage imageNamed:@"MISAskAddFile@2x"] degrees:90];
-    v2.image = [self translateImageWith:[UIImage imageNamed:@"MISAskAddFile"] x:50.0 y:50.0];
-
-    
-    [self addSubview:v1];
-    [self addSubview:v2];
-    //===== 
-}
-
 - (void)contentSetting {
-    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:_text];
-    int textLen = attr.length;
-    
-    //text alignment
-    CTTextAlignment alignment = kCTLeftTextAlignment;
-    CTParagraphStyleSetting alignmentStyle;
-    alignmentStyle.spec = kCTParagraphStyleSpecifierAlignment;
-    alignmentStyle.value = &alignment;
-    alignmentStyle.valueSize = sizeof(alignment);
-    
-    CGFloat firstLineindent = 30.0f;
-    CTParagraphStyleSetting firstLineStyle;
-    firstLineStyle.spec = kCTParagraphStyleSpecifierFirstLineHeadIndent;
-    firstLineStyle.value = &firstLineindent;
-    firstLineStyle.valueSize = sizeof(firstLineindent);
-    
-    CGFloat lineSpace = 30.0f;
-    CTParagraphStyleSetting lineSpaceStyle;
-    lineSpaceStyle.spec = kCTParagraphStyleSpecifierLineSpacing;
-    lineSpaceStyle.value = &lineSpace;
-    lineSpaceStyle.valueSize = sizeof(lineSpace);
-    
-    CTParagraphStyleSetting setting[] = {alignmentStyle, firstLineStyle, lineSpaceStyle};
-    CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(setting, 3);
-    
-    NSDictionary *dict = [NSDictionary dictionaryWithObject:(__bridge id)paragraphStyle forKey:(id)kCTParagraphStyleAttributeName];
-    [attr addAttributes:dict range:NSMakeRange(0, textLen)];
-    
-    CTFontRef font = CTFontCreateWithName((CFStringRef)@"STHeitiSC-Light", 30.0f, NULL);
-    NSDictionary *d2 = [NSDictionary dictionaryWithObjectsAndKeys:(id)[UIColor redColor].CGColor, kCTForegroundColorAttributeName,
-                        (__bridge id)font, kCTFontAttributeName, nil];
-    [attr addAttributes:d2 range:NSMakeRange(0, 1)];
-    
-    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attr);
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGPathAddRect(path, NULL, CGRectMake(10, 10, self.bounds.size.width - 20, self.bounds.size.height - 20));
-    CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetTextMatrix(context, CGAffineTransformIdentity);
-    CGContextSaveGState(context);
-    CGContextTranslateCTM(context, 0, self.bounds.size.height);
-    CGContextScaleCTM(context, 1.0, -1.0);
-    
-    CTFrameDraw(frame, context);
-    
-    CGPathRelease(path);
-    CFRelease(framesetter);
-}
-
-- (UIImage *)rotatedImageWith:(UIImage *)image degrees:(CGFloat)degrees {
-    // calculate the size of the rotated view's containing box for our drawing space
-    UIView *rotatedViewBox = [[UIView alloc] initWithFrame:CGRectMake(0,0,image.size.width, image.size.height)];
-//    CGAffineTransform t = CGAffineTransformMakeRotation(degrees * M_PI / 180);
-//    rotatedViewBox.transform = t;
-    CGSize rotatedSize = rotatedViewBox.frame.size;
-    
-    // Create the bitmap context
-    UIGraphicsBeginImageContext(rotatedSize);
-    CGContextRef bitmap = UIGraphicsGetCurrentContext();
-    
-    // Move the origin to the middle of the image so we will rotate and scale around the center.
-//    CGContextTranslateCTM(bitmap, rotatedSize.width/2, rotatedSize.height/2);
-    
-    //   // Rotate the image context
-//    CGContextRotateCTM(bitmap, degrees * M_PI / 180);
-    
-    // Now, draw the rotated/scaled image into the context
-    
-//    CGContextRotateCTM(bitmap, 10);
-    
-//    CGContextTranslateCTM(bitmap, 0, 10);
-    CGContextScaleCTM(bitmap, .5, .5);
-    CGContextRotateCTM(bitmap, radians ( 22.));
-    CGContextTranslateCTM(bitmap, 40, 20);
-    
-//    CGContextDrawImage(bitmap, CGRectMake(-image.size.width / 2, -image.size.height / 2, image.size.width, image.size.height), [image CGImage]);
-    CGContextSetFillColorWithColor(bitmap, [UIColor grayColor].CGColor);
-    CGContextFillRect(bitmap, rotatedViewBox.frame);
-    
-    translateCoordSystem(bitmap, image.size.height);
-    CGContextDrawImage(bitmap, CGRectMake(0, 0, image.size.width, image.size.height), [image CGImage]);
-    
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
-
-void translateCoordSystem(CGContextRef context, CGFloat f) {
-    CGContextTranslateCTM(context, 0.0f, f);
-    CGContextScaleCTM(context, 1.0f, -1.0f);
-}
-
-- (UIImage *)imageWithColor:(UIColor *)color {
-    CGRect rect = CGRectMake(0, 0, 1, 1);
-    UIGraphicsBeginImageContext(rect.size);
-
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, color.CGColor);
-    CGContextFillRect(context, rect);
-    
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return img;
+  
 }
 
 #pragma mark inherit
 
 - (void)drawRect:(CGRect)rect {
-//    [self contentSetting];
-//    UIImage *image = [UIImage imageNamed:@"MISAskAddFile"];
-        [super drawRect:rect];
     
     
-    Regx *r = [[Regx alloc] init];
-        NSAttributedString *attriString = [r test];
-        
-        CGContextRef ctx = UIGraphicsGetCurrentContext();
-        CGContextConcatCTM(ctx, CGAffineTransformScale(CGAffineTransformMakeTranslation(0, rect.size.height), 1.f, -1.f));
-        
-        CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attriString);
-        CGMutablePathRef path = CGPathCreateMutable();
-        CGPathAddRect(path, NULL, rect);
-        
-        CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
-        CFRelease(path);
-        CFRelease(framesetter);
-        
-        CTFrameDraw(frame, ctx);
-        CFRelease(frame);
 }
 
-- (void)parse {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"txt"];
-    NSFileManager *fm = [NSFileManager defaultManager];
+- (void)parse:(NSString *)originStr {
+    NSMutableAttributedString *mAttr = [[NSMutableAttributedString alloc] init];
+    NSRegularExpression *regx = [[NSRegularExpression alloc] initWithPattern:@"(.*?)(<[^>]+>|\\Z)" options:NSRegularExpressionCaseInsensitive|NSRegularExpressionDotMatchesLineSeparators error:nil];
+    NSArray *matches = [regx matchesInString:originStr options:0 range:NSMakeRange(0, [originStr length])];
     
-    NSString *s = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-    CTFontRef font = CTFontCreateWithName((CFStringRef)@"Arial", 15.0, NULL);
-    UIColor *color = [UIColor greenColor];
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:(id)color.CGColor,kCTForegroundColorAttributeName,
-                          (__bridge id)font, kCTFontAttributeName, nil];
-    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:s];
-    
-//    attr addAttributes:<#(NSDictionary *)#> range:<#(NSRange)#>
+//    for (NSTextCheckingResult *result in matches) {
+    for (int i = 0; i < matches.count; i ++) {
+        NSTextCheckingResult *result = [matches objectAtIndex:i];
+        NSArray *matches2 = [[originStr substringWithRange:result.range] componentsSeparatedByString:@"<"];
+        CTFontRef font = CTFontCreateWithName((CFStringRef)self.font, self.fontSize, NULL);
+        
+        NSDictionary *d = [[NSDictionary alloc] initWithObjectsAndKeys:(__bridge id)font, kCTFontAttributeName,
+                           (id)self.color.CGColor , kCTForegroundColorAttributeName,
+                           (id)self.strokeColor.CGColor, kCTStrokeColorAttributeName,
+                           (id)[NSNumber numberWithFloat:self.strokeWidth], kCTStrokeWidthAttributeName,nil];
+        
+        [mAttr appendAttributedString:[[NSAttributedString alloc] initWithString:[matches2 objectAtIndex:0] attributes:d]];
+        
+        if ([matches2 count] > 1) {
+            NSString *tag = (NSString *)[matches2 objectAtIndex:1];
+            if ([tag hasPrefix:@"font"]) {
+                NSRegularExpression *rgex_color = [[NSRegularExpression alloc] initWithPattern:@"(?<=color=)\\w+" options:0 error:nil];
+                [rgex_color enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+                    SEL colorSel = NSSelectorFromString([NSString stringWithFormat:@"%@Color", [tag substringWithRange:result.range]]);
+                    self.color = [UIColor performSelector:colorSel];
+                }];
+                
+                NSRegularExpression *rgex_face = [[NSRegularExpression alloc] initWithPattern:@"(?<=face=)\\w+" options:0 error:nil];
+                [rgex_face enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+                    self.font = [tag substringWithRange:result.range];
+                }];
+                
+                NSRegularExpression *rgex_fontsize = [[NSRegularExpression alloc] initWithPattern:@"(?<=fontSize=)\\w+" options:0 error:nil];
+                [rgex_fontsize enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+                    self.fontSize = [tag substringWithRange:result.range].floatValue;
+                }];
+
+                NSRegularExpression *rgex_strokeColor = [[NSRegularExpression alloc] initWithPattern:@"(?<=strokeColor=)\\w+" options:0 error:nil];
+                [rgex_strokeColor enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+                    SEL colorSel = NSSelectorFromString([NSString stringWithFormat:@"%@Color", [tag substringWithRange:result.range]]);
+                    self.strokeColor = [UIColor performSelector:colorSel];
+                }];
+
+                NSRegularExpression *rgex_strokeWidth = [[NSRegularExpression alloc] initWithPattern:@"(?<=strokeWidth=)\\w+" options:0 error:nil];
+                [rgex_strokeWidth enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+                    self.strokeWidth = [tag substringWithRange:result.range].floatValue;
+                }];
+                
+            }else if ([tag hasPrefix:@"img"]) {
+                __block NSNumber* width = [NSNumber numberWithInt:0];
+                __block NSNumber* height = [NSNumber numberWithInt:0];
+                __block NSString* fileName = @"";
+                
+                //width
+                NSRegularExpression* widthRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=width=)\\d+" options:0 error:NULL];
+                [widthRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
+                    width = [NSNumber numberWithInt: [[tag substringWithRange: match.range] intValue] ];
+                }];
+                
+                //height
+                NSRegularExpression* faceRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=height=)\\d+" options:0 error:NULL];
+                [faceRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
+                    height = [NSNumber numberWithInt: [[tag substringWithRange:match.range] intValue]];
+                }];
+                
+                //image name
+                NSRegularExpression* srcRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=src=)[^\\s]+" options:0 error:NULL];
+                [srcRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
+                    fileName = [tag substringWithRange: match.range];
+                }];
+                
+                // add imagename, width height location info
+                [self.images addObject:
+                 [NSDictionary dictionaryWithObjectsAndKeys:
+                  width, @"width",
+                  height, @"height",
+                  fileName, @"fileName",
+                  [NSNumber numberWithInt: [mAttr length]], @"location",
+                  nil]
+                 ];
+
+                //render space when drawing text
+                CTRunDelegateCallbacks callbacks;
+                callbacks.version = kCTRunDelegateVersion1;
+                callbacks.getAscent = ascentCallback;
+                callbacks.getDescent = descentCallback;
+                callbacks.getWidth = widthCallback;
+                callbacks.dealloc = deallocCallback;
+                
+                NSDictionary* imgAttr = [NSDictionary dictionaryWithObjectsAndKeys:width, @"width", height, @"height", nil];
+                
+                CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (__bridge void *)(imgAttr)); //3
+                NSDictionary *attrDictionaryDelegate = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                        (__bridge id)delegate, (NSString*)kCTRunDelegateAttributeName,
+                                                        nil];
+                
+                //add a space to the text so that it can call the delegate
+                [mAttr appendAttributedString:[[NSAttributedString alloc] initWithString:@" " attributes:attrDictionaryDelegate]];
+
+            }else if ([tag hasPrefix:@"a "]) {
+                //href=1000
+                __block NSString *val = @"";
+                NSRegularExpression* regx = [[NSRegularExpression alloc] initWithPattern:@"(?<=href=)[^>|^\\s]+" options:0 error:NULL];
+                [regx enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
+                    val = [tag substringWithRange: match.range];
+                }];
+                [self.as addObject:[NSDictionary dictionaryWithObjectsAndKeys:val, @"href", [NSNumber numberWithInt:[mAttr length]], @"location", nil]];
+            }else if ([tag hasPrefix:@"/a"]) {
+                [self.ends addObject:[NSNumber numberWithInt:[mAttr length]]];
+            }
+        }
+    }
     
 }
 
