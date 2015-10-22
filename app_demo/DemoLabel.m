@@ -102,14 +102,26 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 //    CGContextDrawPath(context, kCGPathStroke);
     
     //===== path
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, NULL, 50, 50);
-    CGPathMoveToPoint(path, NULL, 100, 100);
-    CGPathAddLineToPoint(path, NULL, 50, 200);
-    CGPathAddRect(path, NULL, CGRectMake(50, 200, 50, 50));
-    CGContextAddPath(context, path);
-    CGContextDrawPath(context, kCGPathStroke);
+//    CGMutablePathRef path = CGPathCreateMutable();
+//    CGPathMoveToPoint(path, NULL, 50, 50);
+//    CGPathMoveToPoint(path, NULL, 100, 100);
+//    CGPathAddLineToPoint(path, NULL, 50, 200);
+//    CGPathAddRect(path, NULL, CGRectMake(50, 200, 50, 50));
+//    CGContextAddPath(context, path);
+//    CGContextDrawPath(context, kCGPathStroke);
     
+    // rotate img
+    UIImageView *v1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MISAskAddFile@2x"]];
+//    v1.frame = CGRectMake(40, 40, v1.frame.size.width, v1.frame.size.height);
+    
+    UIImageView *v2 = [[UIImageView alloc] init];
+    v2.frame = CGRectMake(0, 0, 200, 200);
+//    v2.image = [self rotatedImageWith:[UIImage imageNamed:@"MISAskAddFile@2x"] degrees:90];
+    v2.image = [self translateImageWith:[UIImage imageNamed:@"MISAskAddFile"] x:50.0 y:50.0];
+
+    
+    [self addSubview:v1];
+    [self addSubview:v2];
     //===== 
 }
 
@@ -220,8 +232,6 @@ void translateCoordSystem(CGContextRef context, CGFloat f) {
     
     return img;
 }
-
-
 
 #pragma mark inherit
 
