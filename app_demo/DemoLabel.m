@@ -10,6 +10,7 @@
 #import <CoreText/CoreText.h>
 
 /* Callbacks */
+
 static void deallocCallback( void* ref ){
 //    [(__bridge id)ref release];
 }
@@ -23,50 +24,33 @@ static CGFloat widthCallback( void* ref ){
     return [(NSString*)[(__bridge NSDictionary*)ref objectForKey:@"width"] floatValue];
 }
 
-
-static inline double radians (double degrees) {return degrees * M_PI/180;}
-@interface DemoLabel ()
-
-@end
-
 @implementation DemoLabel
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _text = @"<font color=red >发放拉开合法身份了fkdjfdkfhekjb发送<img src=MISAskAddFile@2x.png width=40 height=40 />的反馈撒返回尽快释放发到空间发电机发电撒风k看到积分卡发卡量发空间发";
-        _font = @"Arial";
+        _font = @"ArialMT";
         _color = [UIColor blackColor];
         _strokeColor = [UIColor redColor];
-        _strokeWidth = 5.0;
+        _strokeWidth = .0;
         _fontSize = 15.0;
-        _images = [NSMutableArray array];
-
+        _imageRects = [[NSMutableArray alloc] init];
+        _linkRects = [[NSMutableArray alloc] init];
+        _linkValue = [[NSMutableArray alloc] init];
+        NSLog(@"%f", [UIScreen mainScreen].bounds.size.width);
     }
     
     return self;
 }
 
-- (void)contentSetting {
-  
-}
-
-#pragma mark inherit
-
-- (void)drawRect:(CGRect)rect {
-    
-    
-}
-
-- (void)parse:(NSString *)originStr {
-    NSMutableAttributedString *mAttr = [[NSMutableAttributedString alloc] init];
+- (void)buildAttribute {
+    _mAttr = [[NSMutableAttributedString alloc] init];
     NSRegularExpression *regx = [[NSRegularExpression alloc] initWithPattern:@"(.*?)(<[^>]+>|\\Z)" options:NSRegularExpressionCaseInsensitive|NSRegularExpressionDotMatchesLineSeparators error:nil];
-    NSArray *matches = [regx matchesInString:originStr options:0 range:NSMakeRange(0, [originStr length])];
+    NSArray *matches = [regx matchesInString:_originString options:0 range:NSMakeRange(0, [_originString length])];
     
-//    for (NSTextCheckingResult *result in matches) {
     for (int i = 0; i < matches.count; i ++) {
         NSTextCheckingResult *result = [matches objectAtIndex:i];
-        NSArray *matches2 = [[originStr substringWithRange:result.range] componentsSeparatedByString:@"<"];
+        NSArray *matches2 = [[_originString substringWithRange:result.range] componentsSeparatedByString:@"<"];
         CTFontRef font = CTFontCreateWithName((CFStringRef)self.font, self.fontSize, NULL);
         
         NSDictionary *d = [[NSDictionary alloc] initWithObjectsAndKeys:(__bridge id)font, kCTFontAttributeName,
@@ -74,7 +58,7 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
                            (id)self.strokeColor.CGColor, kCTStrokeColorAttributeName,
                            (id)[NSNumber numberWithFloat:self.strokeWidth], kCTStrokeWidthAttributeName,nil];
         
-        [mAttr appendAttributedString:[[NSAttributedString alloc] initWithString:[matches2 objectAtIndex:0] attributes:d]];
+        [_mAttr appendAttributedString:[[NSAttributedString alloc] initWithString:[matches2 objectAtIndex:0] attributes:d]];
         
         if ([matches2 count] > 1) {
             NSString *tag = (NSString *)[matches2 objectAtIndex:1];
@@ -109,7 +93,7 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
             }else if ([tag hasPrefix:@"img"]) {
                 __block NSNumber* width = [NSNumber numberWithInt:0];
                 __block NSNumber* height = [NSNumber numberWithInt:0];
-                __block NSString* fileName = @"";
+                __block NSString* imageName = @"";
                 
                 //width
                 NSRegularExpression* widthRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=width=)\\d+" options:0 error:NULL];
@@ -126,18 +110,8 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
                 //image name
                 NSRegularExpression* srcRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=src=)[^\\s]+" options:0 error:NULL];
                 [srcRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
-                    fileName = [tag substringWithRange: match.range];
+                    imageName = [tag substringWithRange: match.range];
                 }];
-                
-                // add imagename, width height location info
-                [self.images addObject:
-                 [NSDictionary dictionaryWithObjectsAndKeys:
-                  width, @"width",
-                  height, @"height",
-                  fileName, @"fileName",
-                  [NSNumber numberWithInt: [mAttr length]], @"location",
-                  nil]
-                 ];
 
                 //render space when drawing text
                 CTRunDelegateCallbacks callbacks;
@@ -147,33 +121,153 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
                 callbacks.getWidth = widthCallback;
                 callbacks.dealloc = deallocCallback;
                 
-                NSDictionary* imgAttr = [NSDictionary dictionaryWithObjectsAndKeys:width, @"width", height, @"height", nil];
+                NSDictionary* imgdict = [NSDictionary dictionaryWithObjectsAndKeys: width, @"width", height, @"height", nil];
                 
-                CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (__bridge void *)(imgAttr)); //3
-                NSDictionary *attrDictionaryDelegate = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                        (__bridge id)delegate, (NSString*)kCTRunDelegateAttributeName,
-                                                        nil];
-                
-                //add a space to the text so that it can call the delegate
-                [mAttr appendAttributedString:[[NSAttributedString alloc] initWithString:@" " attributes:attrDictionaryDelegate]];
+                CTRunDelegateRef runDelegate = CTRunDelegateCreate(&callbacks, (__bridge void *)(imgdict));
+                NSMutableAttributedString *imageAttributedString = [[NSMutableAttributedString alloc] initWithString:@" "];
+                [imageAttributedString addAttribute:(NSString *)kCTRunDelegateAttributeName value:(__bridge id)runDelegate range:NSMakeRange(0, 1)];
+                [imageAttributedString addAttribute:@"imageName" value:imageName range:NSMakeRange(0, 1)];
+                [imageAttributedString addAttribute:@"width" value:width range:NSMakeRange(0, 1)];
+                [imageAttributedString addAttribute:@"height" value:height range:NSMakeRange(0, 1)];
+                [_mAttr appendAttributedString:imageAttributedString];
 
             }else if ([tag hasPrefix:@"a "]) {
-                //href=1000
-                __block NSString *val = @"";
+                __block NSString *val;
                 NSRegularExpression* regx = [[NSRegularExpression alloc] initWithPattern:@"(?<=href=)[^>|^\\s]+" options:0 error:NULL];
                 [regx enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
                     val = [tag substringWithRange: match.range];
                 }];
-                [self.as addObject:[NSDictionary dictionaryWithObjectsAndKeys:val, @"href", [NSNumber numberWithInt:[mAttr length]], @"location", nil]];
-            }else if ([tag hasPrefix:@"/a"]) {
-                [self.ends addObject:[NSNumber numberWithInt:[mAttr length]]];
+                
+                [self.linkValue addObject:val];
+                
+                i++;
+                NSTextCheckingResult *result = [matches objectAtIndex:i];
+                NSArray *matches2 = [[_originString substringWithRange:result.range] componentsSeparatedByString:@"<"];
+                NSString *content = [matches2 objectAtIndex:0];
+                NSMutableAttributedString *linkAttr = [[NSMutableAttributedString alloc] initWithString:content];
+                CTFontRef font = CTFontCreateWithName((CFStringRef)self.font, self.fontSize, NULL);
+                NSDictionary *d2 = [[NSDictionary alloc] initWithObjectsAndKeys:(__bridge id)font, kCTFontAttributeName,
+                                   (id)self.color.CGColor , kCTForegroundColorAttributeName,
+                                   (id)self.strokeColor.CGColor, kCTStrokeColorAttributeName,
+                                   (id)[NSNumber numberWithFloat:self.strokeWidth], kCTStrokeWidthAttributeName, nil];
+                [linkAttr addAttribute:@"link" value:val range:NSMakeRange(0, [content length])];
+                [linkAttr addAttributes:d2 range:NSMakeRange(0, [content length])];
+                [_mAttr appendAttributedString:linkAttr];
+                CFRelease(font);
+            }
+        }
+    }
+}
+
+- (void)drawRect:(CGRect)rect {
+    //设置NSMutableAttributedString的所有属性
+    [self buildAttribute];
+    NSLog(@"rect:%@",NSStringFromCGRect(rect));
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    //设置context的ctm，用于适应core text的坐标体系
+    CGContextSaveGState(context);
+    CGContextSetTextMatrix(context, CGAffineTransformIdentity);
+    CGContextTranslateCTM(context, 0, rect.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    //设置CTFramesetter
+    CTFramesetterRef framesetter =  CTFramesetterCreateWithAttributedString((CFAttributedStringRef)_mAttr);
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathAddRect(path, NULL, CGRectMake(0, 0, rect.size.width, rect.size.height));
+    //创建CTFrame
+    CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, _mAttr.length), path, NULL);
+    //把文字内容绘制出来
+    CTFrameDraw(frame, context);
+    //获取画出来的内容的行数
+    CFArrayRef lines = CTFrameGetLines(frame);
+    //获取每行的原点坐标
+    CGPoint lineOrigins[CFArrayGetCount(lines)];
+    CTFrameGetLineOrigins(frame, CFRangeMake(0, 0), lineOrigins);
+    NSLog(@"line count = %ld",CFArrayGetCount(lines));
+    for (int i = 0; i < CFArrayGetCount(lines); i++) {
+        CTLineRef line = CFArrayGetValueAtIndex(lines, i);
+        CGFloat lineAscent;
+        CGFloat lineDescent;
+        CGFloat lineLeading;
+        //获取每行的宽度和高度
+        CTLineGetTypographicBounds(line, &lineAscent, &lineDescent, &lineLeading);
+        NSLog(@"ascent = %f,descent = %f,leading = %f",lineAscent,lineDescent,lineLeading);
+        //获取每个CTRun
+        CFArrayRef runs = CTLineGetGlyphRuns(line);
+        NSLog(@"run count = %ld",CFArrayGetCount(runs));
+        for (int j = 0; j < CFArrayGetCount(runs); j++) {
+            CGFloat runAscent;
+            CGFloat runDescent;
+            CGPoint lineOrigin = lineOrigins[i];
+            //获取每个CTRun
+            CTRunRef run = CFArrayGetValueAtIndex(runs, j);
+            NSDictionary* attributes = (NSDictionary*)CTRunGetAttributes(run);
+            CGRect runRect;
+            //调整CTRun的rect
+            runRect.size.width = CTRunGetTypographicBounds(run, CFRangeMake(0,0), &runAscent, &runDescent, NULL);
+            NSLog(@"width = %f",runRect.size.width);
+            
+            runRect = CGRectMake(lineOrigin.x + CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, NULL), lineOrigin.y - runDescent, runRect.size.width, runAscent + runDescent);
+            
+            NSString *imageName = [attributes objectForKey:@"imageName"];
+            NSString *link = [attributes objectForKey:@"link"];
+            //图片渲染逻辑，把需要被图片替换的字符位置画上图片
+            if (imageName) {
+                UIImage *image = [UIImage imageNamed:imageName];
+                if (image) {
+                    CGRect imageDrawRect;
+                    CGFloat w = ((NSString *)[attributes objectForKey:@"width"]).floatValue;
+                    CGFloat h = ((NSString *)[attributes objectForKey:@"height"]).floatValue;
+                    imageDrawRect.size = CGSizeMake(w, h);
+                    imageDrawRect.origin.x = runRect.origin.x + lineOrigin.x;
+//                    imageDrawRect.origin.y = [UIScreen mainScreen].bounds.size.height - lineOrigin.y;
+                    imageDrawRect.origin.y = lineOrigin.y;
+                    CGContextDrawImage(context, imageDrawRect, image.CGImage);
+                    imageDrawRect.origin.y = [UIScreen mainScreen].bounds.size.height - 14 - lineOrigin.y;
+                    NSValue *value = [NSValue valueWithBytes:&imageDrawRect objCType:@encode(CGRect)];
+                    
+                    [self.imageRects addObject:value];
+                }
+            }else if (link){
+                CGRect linkRect;
+                linkRect.size = runRect.size;
+                linkRect.origin.x = runRect.origin.x + lineOrigin.x;
+                linkRect.origin.y = [UIScreen mainScreen].bounds.size.height - 14 - lineOrigin.y;
+//                linkRect.origin.y = lineOrigin.y;
+                NSValue *value = [NSValue valueWithBytes:&linkRect objCType:@encode(CGRect)];
+                [self.linkRects addObject:value];
             }
         }
     }
     
+    CGContextRestoreGState(context);
 }
 
-
+//接受触摸事件
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    
+    UITouch *touch = [touches anyObject];
+    CGPoint point = [touch locationInView:self];
+    
+    for (NSValue *value in self.imageRects) {
+        CGRect rect;
+        [value getValue:&rect];
+        if (point.x >= rect.origin.x && point.x <= rect.origin.x + rect.size.width && point.y >= rect.origin.y && point.y <= rect.origin.y + rect.size.height ) {
+            
+            NSLog(@"img");
+            return;
+        }
+    }
+    
+    for (NSValue *value in self.linkRects) {
+        CGRect rect;
+        [value getValue:&rect];
+        if (point.x >= rect.origin.x && point.x <= rect.origin.x + rect.size.width && point.y >= rect.origin.y && point.y <= rect.origin.y + rect.size.height ) {
+            
+            NSLog(@"ttttt");
+            return;
+        }
+    }
+}
 
 #pragma mark nscoding
 
