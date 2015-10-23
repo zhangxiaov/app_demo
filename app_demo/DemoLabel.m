@@ -12,7 +12,7 @@
 /* Callbacks */
 
 static void deallocCallback( void* ref ){
-//    [(__bridge id)ref release];
+    //    [(__bridge id)ref release];
 }
 static CGFloat ascentCallback( void *ref ){
     return [(NSString*)[(__bridge NSDictionary*)ref objectForKey:@"height"] floatValue];
@@ -57,7 +57,7 @@ static CGFloat widthCallback( void* ref ){
                            (id)self.color.CGColor , kCTForegroundColorAttributeName,
                            (id)self.strokeColor.CGColor, kCTStrokeColorAttributeName,
                            (id)[NSNumber numberWithFloat:self.strokeWidth], kCTStrokeWidthAttributeName,nil];
-        
+        CFRelease(font);
         [_mAttr appendAttributedString:[[NSAttributedString alloc] initWithString:[matches2 objectAtIndex:0] attributes:d]];
         
         if ([matches2 count] > 1) {
@@ -78,13 +78,13 @@ static CGFloat widthCallback( void* ref ){
                 [rgex_fontsize enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
                     self.fontSize = [tag substringWithRange:result.range].floatValue;
                 }];
-
+                
                 NSRegularExpression *rgex_strokeColor = [[NSRegularExpression alloc] initWithPattern:@"(?<=strokeColor=)\\w+" options:0 error:nil];
                 [rgex_strokeColor enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
                     SEL colorSel = NSSelectorFromString([NSString stringWithFormat:@"%@Color", [tag substringWithRange:result.range]]);
                     self.strokeColor = [UIColor performSelector:colorSel];
                 }];
-
+                
                 NSRegularExpression *rgex_strokeWidth = [[NSRegularExpression alloc] initWithPattern:@"(?<=strokeWidth=)\\w+" options:0 error:nil];
                 [rgex_strokeWidth enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
                     self.strokeWidth = [tag substringWithRange:result.range].floatValue;
@@ -112,7 +112,7 @@ static CGFloat widthCallback( void* ref ){
                 [srcRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
                     imageName = [tag substringWithRange: match.range];
                 }];
-
+                
                 //render space when drawing text
                 CTRunDelegateCallbacks callbacks;
                 callbacks.version = kCTRunDelegateVersion1;
@@ -130,7 +130,7 @@ static CGFloat widthCallback( void* ref ){
                 [imageAttributedString addAttribute:@"width" value:width range:NSMakeRange(0, 1)];
                 [imageAttributedString addAttribute:@"height" value:height range:NSMakeRange(0, 1)];
                 [_mAttr appendAttributedString:imageAttributedString];
-
+                
             }else if ([tag hasPrefix:@"a "]) {
                 __block NSString *val;
                 NSRegularExpression* regx = [[NSRegularExpression alloc] initWithPattern:@"(?<=href=)[^>|^\\s]+" options:0 error:NULL];
@@ -147,9 +147,9 @@ static CGFloat widthCallback( void* ref ){
                 NSMutableAttributedString *linkAttr = [[NSMutableAttributedString alloc] initWithString:content];
                 CTFontRef font = CTFontCreateWithName((CFStringRef)self.font, self.fontSize, NULL);
                 NSDictionary *d2 = [[NSDictionary alloc] initWithObjectsAndKeys:(__bridge id)font, kCTFontAttributeName,
-                                   (id)self.color.CGColor , kCTForegroundColorAttributeName,
-                                   (id)self.strokeColor.CGColor, kCTStrokeColorAttributeName,
-                                   (id)[NSNumber numberWithFloat:self.strokeWidth], kCTStrokeWidthAttributeName, nil];
+                                    (id)self.color.CGColor , kCTForegroundColorAttributeName,
+                                    (id)self.strokeColor.CGColor, kCTStrokeColorAttributeName,
+                                    (id)[NSNumber numberWithFloat:self.strokeWidth], kCTStrokeWidthAttributeName, nil];
                 [linkAttr addAttribute:@"link" value:val range:NSMakeRange(0, [content length])];
                 [linkAttr addAttributes:d2 range:NSMakeRange(0, [content length])];
                 [_mAttr appendAttributedString:linkAttr];
@@ -210,6 +210,12 @@ static CGFloat widthCallback( void* ref ){
             
             NSString *imageName = [attributes objectForKey:@"imageName"];
             NSString *link = [attributes objectForKey:@"link"];
+            
+            //坐标转换，把每行的原点坐标转换为uiview的坐标体系 rect frame大小
+            CGPathRef path = CTFrameGetPath(frame);
+            //获取整个CTFrame的大小
+            CGRect rect = CGPathGetBoundingBox(path);
+            NSLog(@"rect:%@",NSStringFromCGRect(rect));
             //图片渲染逻辑，把需要被图片替换的字符位置画上图片
             if (imageName) {
                 UIImage *image = [UIImage imageNamed:imageName];
@@ -219,10 +225,10 @@ static CGFloat widthCallback( void* ref ){
                     CGFloat h = ((NSString *)[attributes objectForKey:@"height"]).floatValue;
                     imageDrawRect.size = CGSizeMake(w, h);
                     imageDrawRect.origin.x = runRect.origin.x + lineOrigin.x;
-//                    imageDrawRect.origin.y = [UIScreen mainScreen].bounds.size.height - lineOrigin.y;
                     imageDrawRect.origin.y = lineOrigin.y;
                     CGContextDrawImage(context, imageDrawRect, image.CGImage);
-                    imageDrawRect.origin.y = [UIScreen mainScreen].bounds.size.height - 14 - lineOrigin.y;
+                    //坐标系 转换
+                    imageDrawRect.origin.y = rect.origin.y + rect.size.height - lineOrigin.y - imageDrawRect.size.height;
                     NSValue *value = [NSValue valueWithBytes:&imageDrawRect objCType:@encode(CGRect)];
                     
                     [self.imageRects addObject:value];
@@ -231,14 +237,17 @@ static CGFloat widthCallback( void* ref ){
                 CGRect linkRect;
                 linkRect.size = runRect.size;
                 linkRect.origin.x = runRect.origin.x + lineOrigin.x;
-                linkRect.origin.y = [UIScreen mainScreen].bounds.size.height - 14 - lineOrigin.y;
-//                linkRect.origin.y = lineOrigin.y;
+                linkRect.origin.y = rect.origin.y + rect.size.height - lineOrigin.y - runRect.size.height;
                 NSValue *value = [NSValue valueWithBytes:&linkRect objCType:@encode(CGRect)];
                 [self.linkRects addObject:value];
             }
         }
     }
     
+    
+    CFRelease(framesetter);
+    CFRelease(path);
+    CFRelease(frame);
     CGContextRestoreGState(context);
 }
 
