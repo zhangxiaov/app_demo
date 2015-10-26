@@ -177,6 +177,9 @@ static CGFloat widthCallback( void* ref ){
     CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, _mAttr.length), path, NULL);
     //把文字内容绘制出来
     CTFrameDraw(frame, context);
+    CFRange range = CTFrameGetVisibleStringRange(frame);
+    
+    
     //获取画出来的内容的行数
     CFArrayRef lines = CTFrameGetLines(frame);
     //获取每行的原点坐标
