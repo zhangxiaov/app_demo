@@ -13,6 +13,7 @@
 #import "UITouchScrollView.h"
 #import "SqlOP.h"
 #import "ReadDataByBlock.h"
+#import "DemoLabel.h"
 
 @interface AppContentViewController () <UIScrollViewDelegate>{
     int totalPages;
@@ -52,16 +53,23 @@
   
     if (totalPages == 1) {
         [self labels:1];
-        ((AppLabel *)self.labels[0]).label.text = [_readData strForPage:0 isReverse:NO];
+//        ((AppLabel *)self.labels[0]).label.originString = [_readData strForPage:0 isReverse:NO];
+//        ((DemoLabel *)self.labels[0]).originString = [_readData strForPage:0 isReverse:NO];
+         ((AppLabel *)self.labels[0]).label.originString = [_readData strForPage:0 isReverse:NO];
         self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, CONTENT_HEIGHT);
     }else {
         [self labels:totalPages];
         
         NSString *s = [_readData strForPage:0 isReverse:NO];
-        ((AppLabel *)self.labels[0]).label.text = s;
+//        ((AppLabel *)self.labels[0]).label.originString = s;
+//        ((DemoLabel *)self.labels[0]).originString = s;
+        ((AppLabel *)self.labels[0]).label.originString = s;
         
         NSString *s2 = [_readData strForPage:1 isReverse:NO];
-        ((AppLabel *)self.labels[1]).label.text = s2;
+//        ((AppLabel *)self.labels[1]).label.originString = s2;
+//        ((DemoLabel *)self.labels[1]).originString = s2;
+        ((AppLabel *)self.labels[1]).label.originString = s2;
+
 
         self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * totalPages, CONTENT_HEIGHT);
     }
@@ -95,9 +103,11 @@
         return;
     }
     
-    ((AppLabel *)self.labels[theLabel]).label.text = s;
+    ((AppLabel *)self.labels[theLabel]).label.originString = s;
+//    ((DemoLabel *)self.labels[theLabel]).originString = s;
     CGRect rect = CGRectMake((thePage)*SCREEN_WIDTH, 0, SCREEN_WIDTH, CONTENT_HEIGHT);
     ((AppLabel *)self.labels[theLabel]).frame = rect;
+//    ((DemoLabel *)self.labels[theLabel]).frame = rect;
 }
 
 - (void)updateFooter {
@@ -130,6 +140,8 @@
         
         for (int i = 0; i < n; i++) {
             AppLabel *label = [[AppLabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH*i, 0, SCREEN_WIDTH, CONTENT_HEIGHT)];
+//            DemoLabel *label = [[DemoLabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH*i, 0, SCREEN_WIDTH, CONTENT_HEIGHT)];
+            label.label.originString= [NSString stringWithFormat:@"t%d", i];
             [a addObject:label];
             
 //            if (i == 0) {
@@ -155,7 +167,7 @@
     if (_headerView == nil) {
         _headerView = [[UIView alloc] init];
         _headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 20);
-        _headerView.backgroundColor = [UIColor grayColor];
+        _headerView.backgroundColor = [UIColor whiteColor];
     }
     
     return _headerView;
@@ -164,9 +176,9 @@
 - (UIView *)footerView {
     if (_footerView == nil) {
         _footerView = [[UILabel alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 20, SCREEN_WIDTH, 20)];
-        _footerView.backgroundColor = [UIColor grayColor];
+        _footerView.backgroundColor = [UIColor whiteColor];
         _footerView.text = [NSString stringWithFormat:@"%d/%d",  pageDragging, totalPages];
-        _footerView.textColor = [UIColor whiteColor];
+        _footerView.textColor = [UIColor grayColor];
         
     }
     

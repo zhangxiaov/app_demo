@@ -34,13 +34,24 @@ static CGFloat widthCallback( void* ref ){
         _strokeColor = [UIColor redColor];
         _strokeWidth = .0;
         _fontSize = 15.0;
+        _line = 0.0;
+        _paragraph = 10.0;
         _imageRects = [[NSMutableArray alloc] init];
         _linkRects = [[NSMutableArray alloc] init];
         _linkValue = [[NSMutableArray alloc] init];
         NSLog(@"%f", [UIScreen mainScreen].bounds.size.width);
+        
+        self.backgroundColor = [UIColor whiteColor];
     }
     
     return self;
+}
+
+- (void)setOriginString:(NSString *)originString {
+    if (originString != nil) {
+        _originString = originString;
+        [self setNeedsDisplay];
+    }
 }
 
 - (void)buildAttribute {
@@ -51,12 +62,36 @@ static CGFloat widthCallback( void* ref ){
     for (int i = 0; i < matches.count; i ++) {
         NSTextCheckingResult *result = [matches objectAtIndex:i];
         NSArray *matches2 = [[_originString substringWithRange:result.range] componentsSeparatedByString:@"<"];
+        
+        
+        //创建文本,    行间距
+        CGFloat lineSpace = self.line;//间距数据
+        CTParagraphStyleSetting lineSpaceStyle;
+        lineSpaceStyle.spec=kCTParagraphStyleSpecifierLineSpacing;
+        lineSpaceStyle.valueSize=sizeof(lineSpace);
+        lineSpaceStyle.value=&lineSpace;
+        
+        
+        //设置  段落间距
+        CGFloat paragraph = self.paragraph;
+        CTParagraphStyleSetting paragraphStyle;
+        paragraphStyle.spec = kCTParagraphStyleSpecifierParagraphSpacing;
+        paragraphStyle.valueSize = sizeof(CGFloat);
+        paragraphStyle.value = &paragraph;
+        //创建样式数组
+        CTParagraphStyleSetting settings[]={
+            lineSpaceStyle,paragraphStyle
+        };
+        
+        //设置样式
+        CTParagraphStyleRef paragraphStyle1 = CTParagraphStyleCreate(settings, sizeof(settings));
         CTFontRef font = CTFontCreateWithName((CFStringRef)self.font, self.fontSize, NULL);
         
         NSDictionary *d = [[NSDictionary alloc] initWithObjectsAndKeys:(__bridge id)font, kCTFontAttributeName,
                            (id)self.color.CGColor , kCTForegroundColorAttributeName,
                            (id)self.strokeColor.CGColor, kCTStrokeColorAttributeName,
-                           (id)[NSNumber numberWithFloat:self.strokeWidth], kCTStrokeWidthAttributeName,nil];
+                           (id)[NSNumber numberWithFloat:self.strokeWidth], kCTStrokeWidthAttributeName,
+                           (__bridge id)paragraphStyle1, kCTParagraphStyleAttributeName, nil];
         CFRelease(font);
         [_mAttr appendAttributedString:[[NSAttributedString alloc] initWithString:[matches2 objectAtIndex:0] attributes:d]];
         
@@ -252,31 +287,31 @@ static CGFloat widthCallback( void* ref ){
 }
 
 //接受触摸事件
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    
-    UITouch *touch = [touches anyObject];
-    CGPoint point = [touch locationInView:self];
-    
-    for (NSValue *value in self.imageRects) {
-        CGRect rect;
-        [value getValue:&rect];
-        if (point.x >= rect.origin.x && point.x <= rect.origin.x + rect.size.width && point.y >= rect.origin.y && point.y <= rect.origin.y + rect.size.height ) {
-            
-            NSLog(@"img");
-            return;
-        }
-    }
-    
-    for (NSValue *value in self.linkRects) {
-        CGRect rect;
-        [value getValue:&rect];
-        if (point.x >= rect.origin.x && point.x <= rect.origin.x + rect.size.width && point.y >= rect.origin.y && point.y <= rect.origin.y + rect.size.height ) {
-            
-            NSLog(@"ttttt");
-            return;
-        }
-    }
-}
+//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+//    
+//    UITouch *touch = [touches anyObject];
+//    CGPoint point = [touch locationInView:self];
+//    
+//    for (NSValue *value in self.imageRects) {
+//        CGRect rect;
+//        [value getValue:&rect];
+//        if (point.x >= rect.origin.x && point.x <= rect.origin.x + rect.size.width && point.y >= rect.origin.y && point.y <= rect.origin.y + rect.size.height ) {
+//            
+//            NSLog(@"img");
+//            return;
+//        }
+//    }
+//    
+//    for (NSValue *value in self.linkRects) {
+//        CGRect rect;
+//        [value getValue:&rect];
+//        if (point.x >= rect.origin.x && point.x <= rect.origin.x + rect.size.width && point.y >= rect.origin.y && point.y <= rect.origin.y + rect.size.height ) {
+//            
+//            NSLog(@"ttttt");
+//            return;
+//        }
+//    }
+//}
 
 #pragma mark nscoding
 

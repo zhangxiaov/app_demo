@@ -12,8 +12,9 @@
 #import <CoreText/CoreText.h>
 
 @interface ReadDataByBlock ()
-@property (nonatomic, strong) NSDictionary *dict;
 @property (nonatomic, strong) NSMutableArray *array;
+@property(nonatomic,assign)CGFloat line; //行间距
+@property(nonatomic,assign)CGFloat paragraph;//段落间距
 @end
 
 @implementation ReadDataByBlock
@@ -81,19 +82,19 @@
     return self;
 }
 
-- (NSDictionary *)dict {
-    if (_dict == nil) {
-        CTFontRef fontRef = CTFontCreateWithName((CFStringRef)@"STHeitiSC-Light",FONT_SIZE_CONTENT, NULL);
-        _dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                 (id)[UIColor blackColor].CGColor, kCTForegroundColorAttributeName,
-                 (id)CFBridgingRelease(fontRef), kCTFontAttributeName,
-                 (id) [UIColor whiteColor].CGColor, (NSString *) kCTStrokeColorAttributeName,
-                 (id)[NSNumber numberWithFloat: 0.0f], (NSString *)kCTStrokeWidthAttributeName,
-                 nil];
-    }
-    
-    return _dict;
-}
+//- (NSDictionary *)dict {
+//    if (_dict == nil) {
+//        CTFontRef fontRef = CTFontCreateWithName((CFStringRef)@"ArialMT",FONT_SIZE_CONTENT, NULL);
+//        _dict = [NSDictionary dictionaryWithObjectsAndKeys:
+//                 (id)[UIColor blackColor].CGColor, kCTForegroundColorAttributeName,
+//                 (id)CFBridgingRelease(fontRef), kCTFontAttributeName,
+//                 (id) [UIColor whiteColor].CGColor, (NSString *) kCTStrokeColorAttributeName,
+//                 (id)[NSNumber numberWithFloat: 0.0f], (NSString *)kCTStrokeWidthAttributeName,
+//                 nil];
+//    }
+//    
+//    return _dict;
+//}
 
 - (NSString *)strForPage:(int)page isReverse:(BOOL)isReverse {
     if (_posArray.count > page + 1 && _posArray.count != 1) {
@@ -117,11 +118,42 @@
         
         NSData *d2 = [handle readDataOfLength:_oneLabelBytes];
         NSString *content = [self strByDataForUTF8:d2];
-        NSAttributedString *attStr = [[NSAttributedString alloc] initWithString:content attributes:self.dict];
+        
+        
+        //创建文本,    行间距
+        CGFloat lineSpace=0.0;//间距数据
+        CTParagraphStyleSetting lineSpaceStyle;
+        lineSpaceStyle.spec=kCTParagraphStyleSpecifierLineSpacing;
+        lineSpaceStyle.valueSize=sizeof(lineSpace);
+        lineSpaceStyle.value=&lineSpace;
+        
+        
+        //设置  段落间距
+        CGFloat paragraph = 10.0;
+        CTParagraphStyleSetting paragraphStyle;
+        paragraphStyle.spec = kCTParagraphStyleSpecifierParagraphSpacing;
+        paragraphStyle.valueSize = sizeof(CGFloat);
+        paragraphStyle.value = &paragraph;
+        //创建样式数组
+        CTParagraphStyleSetting settings[]={
+            lineSpaceStyle,paragraphStyle
+        };
+        
+        //设置样式
+        CTParagraphStyleRef paragraphStyle1 = CTParagraphStyleCreate(settings, sizeof(settings));
+        CTFontRef fontRef = CTFontCreateWithName((CFStringRef)@"ArialMT",FONT_SIZE_CONTENT, NULL);
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                 (id)[UIColor blackColor].CGColor, kCTForegroundColorAttributeName,
+                 (__bridge id)fontRef, kCTFontAttributeName,
+                 (id) [UIColor whiteColor].CGColor, (NSString *) kCTStrokeColorAttributeName,
+                 (id)[NSNumber numberWithFloat: 0.0f], (NSString *)kCTStrokeWidthAttributeName,
+                 (__bridge id)paragraphStyle1, (NSString *)kCTParagraphStyleAttributeName,
+                 nil];
+        NSAttributedString *attStr = [[NSAttributedString alloc] initWithString:content attributes:dict];
         
         CGMutablePathRef path = CGPathCreateMutable();
         CGRect rect = CGRectMake(NORMAL_PADDING, 20, CONTENT_WIDTH, CONTENT_HEIGHT);
-        CGRect textFrame = CGRectInset(rect, NORMAL_PADDING, 20);
+        CGRect textFrame = CGRectInset(rect, 0, 0);
         CGPathAddRect(path, NULL, textFrame);
         CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attStr);
         CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
@@ -137,19 +169,18 @@
             NSLog(@"fsfs");
         }
         
-//        if (_dataPosition >= _dataLen - 1) {
-//            _dataPosition = _dataLen;
-//        }
-        
         NSLog(@"pos = %lld", _dataPosition);
         
-        CFRelease(framesetter);
-        CFRelease(frame);
-        CFRelease(path);
+
         
         NSNumber *n = [[NSNumber alloc] initWithLong:_dataPosition];
         [_posArray addObject:n];
         
+        
+        CFRelease(fontRef);
+        CFRelease(framesetter);
+        CFRelease(frame);
+        CFRelease(path);
         return [content substringToIndex:range.length];
     }
     
