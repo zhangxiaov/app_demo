@@ -16,6 +16,7 @@
 		ED5AFC5B1BD0B76E00612E3C /* MISAskAddFile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED5AFB791BD0B76D00612E3C /* MISAskAddFile@2x.png */; };
 		ED602A3F1BC4CD4600DB1A3B /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED602A3E1BC4CD4600DB1A3B /* libsqlite3.0.dylib */; };
 		ED602A431BC4CDCF00DB1A3B /* SqlOP.m in Sources */ = {isa = PBXBuildFile; fileRef = ED602A421BC4CDCF00DB1A3B /* SqlOP.m */; };
+		ED7042C71BD9E65200FED349 /* test.txt in Resources */ = {isa = PBXBuildFile; fileRef = ED7042C61BD9E65200FED349 /* test.txt */; };
 		EDB293D21BC1062700290C56 /* UTF8FileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB293D11BC1062700290C56 /* UTF8FileParser.m */; };
 		EDBA42221BB39162004B9A62 /* AppBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42211BB39162004B9A62 /* AppBookView.m */; };
 		EDBA42371BB3EDDD004B9A62 /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42361BB3EDDD004B9A62 /* AppUtils.m */; };
@@ -32,6 +33,7 @@
 		EDFCA7441BB1734F00AF49EA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA7431BB1734F00AF49EA /* AppDelegate.m */; };
 		EDFCA7471BB1734F00AF49EA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA7461BB1734F00AF49EA /* ViewController.m */; };
 		EDFCA75B1BB1734F00AF49EA /* app_demoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA75A1BB1734F00AF49EA /* app_demoTests.m */; };
+		EDFFE2BC1BDE0EF200944745 /* TextBuff.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFFE2BB1BDE0EF200944745 /* TextBuff.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,7 @@
 		ED602A3E1BC4CD4600DB1A3B /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		ED602A411BC4CDCF00DB1A3B /* SqlOP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqlOP.h; sourceTree = "<group>"; };
 		ED602A421BC4CDCF00DB1A3B /* SqlOP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqlOP.m; sourceTree = "<group>"; };
+		ED7042C61BD9E65200FED349 /* test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.txt; sourceTree = "<group>"; };
 		EDB293D01BC1062700290C56 /* UTF8FileParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UTF8FileParser.h; sourceTree = "<group>"; };
 		EDB293D11BC1062700290C56 /* UTF8FileParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UTF8FileParser.m; sourceTree = "<group>"; };
 		EDBA42201BB39162004B9A62 /* AppBookView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppBookView.h; sourceTree = "<group>"; };
@@ -95,6 +98,8 @@
 		EDFCA7541BB1734F00AF49EA /* app_demoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = app_demoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFCA7591BB1734F00AF49EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDFCA75A1BB1734F00AF49EA /* app_demoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = app_demoTests.m; sourceTree = "<group>"; };
+		EDFFE2BA1BDE0EF200944745 /* TextBuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextBuff.h; sourceTree = "<group>"; };
+		EDFFE2BB1BDE0EF200944745 /* TextBuff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextBuff.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +124,7 @@
 		ED5AFB781BD0B76D00612E3C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				ED7042C61BD9E65200FED349 /* test.txt */,
 				ED5AFB791BD0B76D00612E3C /* MISAskAddFile@2x.png */,
 			);
 			path = Resources;
@@ -176,6 +182,8 @@
 				EDB293D11BC1062700290C56 /* UTF8FileParser.m */,
 				EDD343A31BC6A74C00204C80 /* ReadDataByBlock.h */,
 				EDD343A41BC6A74C00204C80 /* ReadDataByBlock.m */,
+				EDFFE2BA1BDE0EF200944745 /* TextBuff.h */,
+				EDFFE2BB1BDE0EF200944745 /* TextBuff.m */,
 				EDD38DF11BB7F75E001878DC /* AppContentViewController.h */,
 				EDD38DF21BB7F75E001878DC /* AppContentViewController.m */,
 				EDD363E41BC0FB43008CD9AC /* UITouchScrollView.h */,
@@ -317,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED5AFC5B1BD0B76E00612E3C /* MISAskAddFile@2x.png in Resources */,
+				ED7042C71BD9E65200FED349 /* test.txt in Resources */,
 				EDD343A71BC6C1D300204C80 /* test.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,6 +352,7 @@
 				ED5AF7EE1BCFA61600612E3C /* DemoLabel.m in Sources */,
 				EDFCA7471BB1734F00AF49EA /* ViewController.m in Sources */,
 				EDD38DF01BB7BA41001878DC /* AppLabel.m in Sources */,
+				EDFFE2BC1BDE0EF200944745 /* TextBuff.m in Sources */,
 				EDFCA7441BB1734F00AF49EA /* AppDelegate.m in Sources */,
 				EDB293D21BC1062700290C56 /* UTF8FileParser.m in Sources */,
 				EDFCA7411BB1734F00AF49EA /* main.m in Sources */,

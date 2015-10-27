@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class DemoLabel;
 @interface AppLabel : UIView
-@property (nonatomic, strong) UILabel *label;
+@property (nonatomic, strong) DemoLabel *label;
 @end
