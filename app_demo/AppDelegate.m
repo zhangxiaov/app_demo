@@ -25,15 +25,15 @@
     
     
     
-//    ViewController *controller = [[ViewController alloc] init];
-//    navc = [[UINavigationController alloc] initWithRootViewController:controller];
-//    self.window.rootViewController = navc;
-//    navc.navigationBarHidden = YES;
+    ViewController *controller = [[ViewController alloc] init];
+    navc = [[UINavigationController alloc] initWithRootViewController:controller];
+    self.window.rootViewController = navc;
+    navc.navigationBarHidden = YES;
     
     // ====================
     
-    AppMainViewController *main = [[AppMainViewController alloc] init];
-    self.window.rootViewController = main;
+//    AppMainViewController *main = [[AppMainViewController alloc] init];
+//    self.window.rootViewController = main;
 
     
     [self.window makeKeyAndVisible];

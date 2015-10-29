@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED2BECB11BE0A73F005D6CA6 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2BECB01BE0A73F005D6CA6 /* libsqlite3.0.tbd */; };
 		ED571E3B1BD735DC007D5B66 /* Regx.m in Sources */ = {isa = PBXBuildFile; fileRef = ED571E3A1BD735DC007D5B66 /* Regx.m */; };
 		ED5AF7E21BCE461300612E3C /* AppMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5AF7E11BCE461300612E3C /* AppMainViewController.m */; };
 		ED5AF7E51BCE466800612E3C /* AppHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5AF7E41BCE466800612E3C /* AppHomeViewController.m */; };
@@ -14,12 +15,12 @@
 		ED5AF7EB1BCF5E9600612E3C /* AppTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5AF7EA1BCF5E9600612E3C /* AppTableViewCell.m */; };
 		ED5AF7EE1BCFA61600612E3C /* DemoLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5AF7ED1BCFA61600612E3C /* DemoLabel.m */; };
 		ED5AFC5B1BD0B76E00612E3C /* MISAskAddFile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED5AFB791BD0B76D00612E3C /* MISAskAddFile@2x.png */; };
-		ED602A3F1BC4CD4600DB1A3B /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED602A3E1BC4CD4600DB1A3B /* libsqlite3.0.dylib */; };
 		ED602A431BC4CDCF00DB1A3B /* SqlOP.m in Sources */ = {isa = PBXBuildFile; fileRef = ED602A421BC4CDCF00DB1A3B /* SqlOP.m */; };
 		ED7042C71BD9E65200FED349 /* test.txt in Resources */ = {isa = PBXBuildFile; fileRef = ED7042C61BD9E65200FED349 /* test.txt */; };
 		EDB293D21BC1062700290C56 /* UTF8FileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB293D11BC1062700290C56 /* UTF8FileParser.m */; };
 		EDBA42221BB39162004B9A62 /* AppBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42211BB39162004B9A62 /* AppBookView.m */; };
 		EDBA42371BB3EDDD004B9A62 /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42361BB3EDDD004B9A62 /* AppUtils.m */; };
+		EDC6AC6A1BE1BE6A00693B94 /* CheckboxWithTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = EDC6AC691BE1BE6A00693B94 /* CheckboxWithTitle.m */; };
 		EDD21A6B1BDE505300A611A5 /* Buff.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD21A6A1BDE505300A611A5 /* Buff.m */; };
 		EDD343A21BC6879D00204C80 /* ClientServer.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD343A11BC6879D00204C80 /* ClientServer.m */; };
 		EDD343A51BC6A74C00204C80 /* ReadDataByBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD343A41BC6A74C00204C80 /* ReadDataByBlock.m */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ED2BECB01BE0A73F005D6CA6 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		ED571E391BD735DC007D5B66 /* Regx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Regx.h; sourceTree = "<group>"; };
 		ED571E3A1BD735DC007D5B66 /* Regx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Regx.m; sourceTree = "<group>"; };
 		ED5AF7E01BCE461300612E3C /* AppMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppMainViewController.h; sourceTree = "<group>"; };
@@ -60,7 +62,6 @@
 		ED5AF7EC1BCFA61600612E3C /* DemoLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoLabel.h; sourceTree = "<group>"; };
 		ED5AF7ED1BCFA61600612E3C /* DemoLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoLabel.m; sourceTree = "<group>"; };
 		ED5AFB791BD0B76D00612E3C /* MISAskAddFile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MISAskAddFile@2x.png"; sourceTree = "<group>"; };
-		ED602A3E1BC4CD4600DB1A3B /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		ED602A411BC4CDCF00DB1A3B /* SqlOP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqlOP.h; sourceTree = "<group>"; };
 		ED602A421BC4CDCF00DB1A3B /* SqlOP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqlOP.m; sourceTree = "<group>"; };
 		ED7042C61BD9E65200FED349 /* test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.txt; sourceTree = "<group>"; };
@@ -71,6 +72,8 @@
 		EDBA422B1BB3A257004B9A62 /* AppConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
 		EDBA42351BB3EDDD004B9A62 /* AppUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUtils.h; sourceTree = "<group>"; };
 		EDBA42361BB3EDDD004B9A62 /* AppUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUtils.m; sourceTree = "<group>"; };
+		EDC6AC681BE1BE6A00693B94 /* CheckboxWithTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckboxWithTitle.h; sourceTree = "<group>"; };
+		EDC6AC691BE1BE6A00693B94 /* CheckboxWithTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckboxWithTitle.m; sourceTree = "<group>"; };
 		EDD21A691BDE505300A611A5 /* Buff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Buff.h; sourceTree = "<group>"; };
 		EDD21A6A1BDE505300A611A5 /* Buff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Buff.m; sourceTree = "<group>"; };
 		EDD343A01BC6879D00204C80 /* ClientServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientServer.h; sourceTree = "<group>"; };
@@ -107,7 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED602A3F1BC4CD4600DB1A3B /* libsqlite3.0.dylib in Frameworks */,
+				ED2BECB11BE0A73F005D6CA6 /* libsqlite3.0.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,11 +154,11 @@
 		EDFCA7321BB1734F00AF49EA = {
 			isa = PBXGroup;
 			children = (
+				ED2BECB01BE0A73F005D6CA6 /* libsqlite3.0.tbd */,
 				ED5AFB781BD0B76D00612E3C /* Resources */,
 				EDD343A61BC6C1D300204C80 /* test.txt */,
 				ED571E391BD735DC007D5B66 /* Regx.h */,
 				ED571E3A1BD735DC007D5B66 /* Regx.m */,
-				ED602A3E1BC4CD4600DB1A3B /* libsqlite3.0.dylib */,
 				EDFCA73D1BB1734F00AF49EA /* app_demo */,
 				EDFCA7571BB1734F00AF49EA /* app_demoTests */,
 				EDFCA73C1BB1734F00AF49EA /* Products */,
@@ -214,6 +217,8 @@
 				ED5AF7E71BCE47A800612E3C /* AppFindBookViewController.m */,
 				EDD38DF71BB80FEF001878DC /* UILabel+VerticalAlign.h */,
 				EDD38DF81BB80FEF001878DC /* UILabel+VerticalAlign.m */,
+				EDC6AC681BE1BE6A00693B94 /* CheckboxWithTitle.h */,
+				EDC6AC691BE1BE6A00693B94 /* CheckboxWithTitle.m */,
 			);
 			path = app_demo;
 			sourceTree = "<group>";
@@ -355,6 +360,7 @@
 				EDFFE2BC1BDE0EF200944745 /* TextBuff.m in Sources */,
 				EDFCA7441BB1734F00AF49EA /* AppDelegate.m in Sources */,
 				EDB293D21BC1062700290C56 /* UTF8FileParser.m in Sources */,
+				EDC6AC6A1BE1BE6A00693B94 /* CheckboxWithTitle.m in Sources */,
 				EDFCA7411BB1734F00AF49EA /* main.m in Sources */,
 				ED5AF7EB1BCF5E9600612E3C /* AppTableViewCell.m in Sources */,
 				EDD38DF91BB80FEF001878DC /* UILabel+VerticalAlign.m in Sources */,
