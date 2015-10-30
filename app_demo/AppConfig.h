@@ -21,4 +21,17 @@
 #define CONTENT_HEIGHT (SCREEN_HEIGHT - 40)
 #define CONTENT_WIDTH (SCREEN_WIDTH - 20)
 
+#define NFONT9 9
+#define NFONT10 10
+#define NFONT11 11
+#define NFONT12 12
+#define NFONT13 13
+#define NFONT14 14
+#define NFONT15 15
+#define NFONT16 16
+#define NFONT17 17
+#define NFONT18 18
+#define NFONT19 19
+#define NFONT20 20
+
 #endif

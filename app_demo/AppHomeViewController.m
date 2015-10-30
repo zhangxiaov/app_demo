@@ -7,10 +7,11 @@
 //
 
 #import "AppHomeViewController.h"
-#import "AppContentViewController.h"
+//#import "AppContentViewController.h"
 #import "AppConfig.h"
 #import "UIImage+UIColor.h"
 #import "AppTableViewCell.h"
+#import "ContentViewController.h"
 
 @interface AppHomeViewController () <UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -141,9 +142,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    AppContentViewController *controller = [[AppContentViewController alloc] init];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    ContentViewController *controller = [[ContentViewController alloc] init];
     controller.title = [self.data[indexPath.row] stringByDeletingPathExtension];
-    controller.navigationController.navigationBarHidden = YES;
+//    controller.navigationController.navigationBarHidden = YES;
     
     self.hidesBottomBarWhenPushed = YES;
     

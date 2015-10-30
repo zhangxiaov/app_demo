@@ -21,6 +21,7 @@
 		EDBA42221BB39162004B9A62 /* AppBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42211BB39162004B9A62 /* AppBookView.m */; };
 		EDBA42371BB3EDDD004B9A62 /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42361BB3EDDD004B9A62 /* AppUtils.m */; };
 		EDC6AC6A1BE1BE6A00693B94 /* CheckboxWithTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = EDC6AC691BE1BE6A00693B94 /* CheckboxWithTitle.m */; };
+		EDC6ACE81BE3144900693B94 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDC6ACE71BE3144900693B94 /* ContentViewController.m */; };
 		EDD21A6B1BDE505300A611A5 /* Buff.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD21A6A1BDE505300A611A5 /* Buff.m */; };
 		EDD343A21BC6879D00204C80 /* ClientServer.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD343A11BC6879D00204C80 /* ClientServer.m */; };
 		EDD343A51BC6A74C00204C80 /* ReadDataByBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD343A41BC6A74C00204C80 /* ReadDataByBlock.m */; };
@@ -34,7 +35,7 @@
 		EDFCA7441BB1734F00AF49EA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA7431BB1734F00AF49EA /* AppDelegate.m */; };
 		EDFCA7471BB1734F00AF49EA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA7461BB1734F00AF49EA /* ViewController.m */; };
 		EDFCA75B1BB1734F00AF49EA /* app_demoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA75A1BB1734F00AF49EA /* app_demoTests.m */; };
-		EDFFE2BC1BDE0EF200944745 /* TextBuff.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFFE2BB1BDE0EF200944745 /* TextBuff.m */; };
+		EDFFE2BC1BDE0EF200944745 /* Pagination.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFFE2BB1BDE0EF200944745 /* Pagination.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,8 @@
 		EDBA42361BB3EDDD004B9A62 /* AppUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUtils.m; sourceTree = "<group>"; };
 		EDC6AC681BE1BE6A00693B94 /* CheckboxWithTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckboxWithTitle.h; sourceTree = "<group>"; };
 		EDC6AC691BE1BE6A00693B94 /* CheckboxWithTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckboxWithTitle.m; sourceTree = "<group>"; };
+		EDC6ACE61BE3144900693B94 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
+		EDC6ACE71BE3144900693B94 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
 		EDD21A691BDE505300A611A5 /* Buff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Buff.h; sourceTree = "<group>"; };
 		EDD21A6A1BDE505300A611A5 /* Buff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Buff.m; sourceTree = "<group>"; };
 		EDD343A01BC6879D00204C80 /* ClientServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientServer.h; sourceTree = "<group>"; };
@@ -101,8 +104,8 @@
 		EDFCA7541BB1734F00AF49EA /* app_demoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = app_demoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFCA7591BB1734F00AF49EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDFCA75A1BB1734F00AF49EA /* app_demoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = app_demoTests.m; sourceTree = "<group>"; };
-		EDFFE2BA1BDE0EF200944745 /* TextBuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextBuff.h; sourceTree = "<group>"; };
-		EDFFE2BB1BDE0EF200944745 /* TextBuff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextBuff.m; sourceTree = "<group>"; };
+		EDFFE2BA1BDE0EF200944745 /* Pagination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pagination.h; sourceTree = "<group>"; };
+		EDFFE2BB1BDE0EF200944745 /* Pagination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pagination.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,8 +188,8 @@
 				EDB293D11BC1062700290C56 /* UTF8FileParser.m */,
 				EDD343A31BC6A74C00204C80 /* ReadDataByBlock.h */,
 				EDD343A41BC6A74C00204C80 /* ReadDataByBlock.m */,
-				EDFFE2BA1BDE0EF200944745 /* TextBuff.h */,
-				EDFFE2BB1BDE0EF200944745 /* TextBuff.m */,
+				EDFFE2BA1BDE0EF200944745 /* Pagination.h */,
+				EDFFE2BB1BDE0EF200944745 /* Pagination.m */,
 				EDD38DF11BB7F75E001878DC /* AppContentViewController.h */,
 				EDD38DF21BB7F75E001878DC /* AppContentViewController.m */,
 				EDD363E41BC0FB43008CD9AC /* UITouchScrollView.h */,
@@ -219,6 +222,8 @@
 				EDD38DF81BB80FEF001878DC /* UILabel+VerticalAlign.m */,
 				EDC6AC681BE1BE6A00693B94 /* CheckboxWithTitle.h */,
 				EDC6AC691BE1BE6A00693B94 /* CheckboxWithTitle.m */,
+				EDC6ACE61BE3144900693B94 /* ContentViewController.h */,
+				EDC6ACE71BE3144900693B94 /* ContentViewController.m */,
 			);
 			path = app_demo;
 			sourceTree = "<group>";
@@ -357,7 +362,7 @@
 				ED5AF7EE1BCFA61600612E3C /* DemoLabel.m in Sources */,
 				EDFCA7471BB1734F00AF49EA /* ViewController.m in Sources */,
 				EDD38DF01BB7BA41001878DC /* AppLabel.m in Sources */,
-				EDFFE2BC1BDE0EF200944745 /* TextBuff.m in Sources */,
+				EDFFE2BC1BDE0EF200944745 /* Pagination.m in Sources */,
 				EDFCA7441BB1734F00AF49EA /* AppDelegate.m in Sources */,
 				EDB293D21BC1062700290C56 /* UTF8FileParser.m in Sources */,
 				EDC6AC6A1BE1BE6A00693B94 /* CheckboxWithTitle.m in Sources */,
@@ -369,6 +374,7 @@
 				ED602A431BC4CDCF00DB1A3B /* SqlOP.m in Sources */,
 				ED571E3B1BD735DC007D5B66 /* Regx.m in Sources */,
 				ED5AF7E21BCE461300612E3C /* AppMainViewController.m in Sources */,
+				EDC6ACE81BE3144900693B94 /* ContentViewController.m in Sources */,
 				ED5AF7E81BCE47A800612E3C /* AppFindBookViewController.m in Sources */,
 				EDBA42371BB3EDDD004B9A62 /* AppUtils.m in Sources */,
 				EDD363E61BC0FB43008CD9AC /* UITouchScrollView.m in Sources */,

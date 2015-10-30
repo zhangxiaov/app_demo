@@ -10,7 +10,7 @@
 #import "DemoLabel.h"
 #import "AppConfig.h"
 #import "Regx.h"
-#import "TextBuff.h"
+#import "Pagination.h"
 #import "CheckboxWithTitle.h"
 
 @interface ViewController ()

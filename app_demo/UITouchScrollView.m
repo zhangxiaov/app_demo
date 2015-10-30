@@ -7,6 +7,7 @@
 //
 
 #import "UITouchScrollView.h"
+#import "ContentViewController.h"
 
 @interface UITouchScrollView ()
 @property (nonatomic, strong) UIViewController *vc;
@@ -45,6 +46,17 @@
     if (tapCount == 1 && self.touchTimer <= 3) {
         BOOL ishidden = [self viewController].navigationController.navigationBarHidden;
         [[self viewController].navigationController setNavigationBarHidden:!ishidden animated:YES];
+        
+        [UIView beginAnimations:@"flipping view" context:nil];
+        [UIView setAnimationDuration:1];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:((ContentViewController *)[self viewController]).toolView cache:YES];
+        //你的动作，比如删除某个东西
+        ((ContentViewController *)[self viewController]).toolView.hidden = !ishidden;
+        [UIView commitAnimations];
+        
+        //                ((ContentViewController *)[self viewController]).toolView.hidden = !ishidden;
+//        [UIView animateWithDuration:0.5 animations:<#^(void)animations#> completion:<#^(BOOL finished)completion#>
     }
     
 }

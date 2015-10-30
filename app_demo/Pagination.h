@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TextBuff : NSObject
+@interface Pagination : NSObject
 @property (nonatomic, strong) NSMutableArray *array;
+@property (nonatomic, assign) NSInteger len;
+@property (nonatomic, copy) NSString *title;
+
+- (instancetype)initWithTitle:(NSString *)title;
+- (NSString *)strAtPos:(NSInteger)pos;
 @end
