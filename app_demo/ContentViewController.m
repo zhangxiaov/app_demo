@@ -12,6 +12,7 @@
 #import "AppLabel.h"
 #import "AppConfig.h"
 #import "DemoLabel.h"
+#import "CommentViewController.h"
 
 @interface ContentViewController () <UIScrollViewDelegate> {
     NSInteger totalPages;
@@ -36,9 +37,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     _toolView.hidden = YES;
-    [[UIApplication sharedApplication].keyWindow resignFirstResponder];
     [[UIApplication sharedApplication].keyWindow resignKeyWindow];
-    [[UIApplication sharedApplication].keyWindow removeFromSuperview];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -53,8 +52,8 @@
     if (_clearView == nil) {
         _clearView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 0, 100, SCREEN_HEIGHT)];
         _clearView.hidden = YES;
-        _clearView.backgroundColor = [UIColor blueColor];
-        UIPanGestureRecognizer *g = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(hidetoolview)];
+        _clearView.backgroundColor = [UIColor clearColor];
+        UITapGestureRecognizer *g = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidetoolview)];
         [_clearView addGestureRecognizer:g];
         
         [[UIApplication sharedApplication].keyWindow addSubview:_clearView];
@@ -77,9 +76,9 @@
 
 - (UIView *)toolView {
     if (_toolView == nil) {
-        _toolView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50)];
+        _toolView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 50)];
         _toolView.backgroundColor = [UIColor grayColor];
-        _toolView.hidden = YES;
+//        _toolView.hidden = YES;
         
         CGFloat w = 60;
         CGFloat h = 30;
@@ -91,7 +90,7 @@
         [b1 addTarget:self action:@selector(look1) forControlEvents:UIControlEventTouchUpInside];
         
         UIButton *b2 = [[UIButton alloc] initWithFrame:CGRectMake(left*2+w, 10, w, h)];
-        [b2 setTitle:@"字寸" forState:UIControlStateNormal];
+        [b2 setTitle:@"字长" forState:UIControlStateNormal];
         b2.titleLabel.font = [UIFont systemFontOfSize:14];
         [b2 addTarget:self action:@selector(look2) forControlEvents:UIControlEventTouchUpInside];
         
@@ -203,9 +202,11 @@
 #pragma mark action
 
 - (void)hidetoolview {
-    self.toolView.hidden = YES;
-    self.leftView.hidden = YES;
-    self.clearView.hidden = YES;
+//    self.toolView.hidden = YES;
+//    self.leftView.hidden = YES;
+//    self.clearView.hidden = YES;
+    
+    [self.toolView.window resignKeyWindow];
 }
 
 - (void)look1 {
@@ -223,7 +224,8 @@
 }
 
 - (void)look4 {
-    
+    CommentViewController *controller = [[CommentViewController alloc] initWithBook:0];
+    [self.navigationController pushViewController:controller animated:NO];
 }
 
 #pragma property
@@ -322,7 +324,7 @@
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    dragging = NO;
+//    dragging = NO;
 }
 
 @end

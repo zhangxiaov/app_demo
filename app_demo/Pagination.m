@@ -27,33 +27,13 @@
         _bytecount = 100000;
         _filePath = [[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:title] stringByAppendingPathExtension:@"txt"];
         
-//        NSString *tmpstr = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-//        bool ishaven = [tmpstr containsString:@"\r"];
-//        tmpstr = [tmpstr stringByReplacingOccurrencesOfString:@"\r" withString:@""];
-//        [tmpstr writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+        NSString *tmpstr = [NSString stringWithContentsOfFile:_filePath encoding:NSUTF8StringEncoding error:nil];
+        bool ishaven = [tmpstr containsString:@"\r"];
+        NSLog(@"%d", ishaven);
+        tmpstr = [tmpstr stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+        [tmpstr writeToFile:_filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
         
         [self fillArray:NFONT14];
-        
-//        _array = [[NSMutableArray alloc] init];
-//        [self fillArray:NFONT19];
-//        
-//        _array = [[NSMutableArray alloc] init];
-//        [self fillArray:NFONT18];
-//        
-//        _array = [[NSMutableArray alloc] init];
-//        [self fillArray:NFONT17];
-//        
-//        _array = [[NSMutableArray alloc] init];
-//        [self fillArray:NFONT16];
-//        
-//        _array = [[NSMutableArray alloc] init];
-//        [self fillArray:NFONT15];
-//        
-//        _array = [[NSMutableArray alloc] init];
-//        [self fillArray:NFONT14];
-//        
-//        _array = [[NSMutableArray alloc] init];
-//        [self fillArray:NFONT13];
 
     }
     return self;
