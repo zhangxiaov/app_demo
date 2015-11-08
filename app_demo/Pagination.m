@@ -10,6 +10,8 @@
 #import <CoreText/CoreText.h>
 #import <UIKit/UIKit.h>
 #import "AppConfig.h"
+#import "Dao.h"
+#import "Book.h"
 
 @interface Pagination ()
 @property (nonatomic, assign) NSInteger bytecount;
@@ -23,7 +25,8 @@
     self = [super init];
     if (self) {
         _array = [[NSMutableArray alloc] init];
-        _title = title;
+//        _title = title;
+
         _bytecount = 100000;
         _filePath = [[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:title] stringByAppendingPathExtension:@"txt"];
         
@@ -33,9 +36,22 @@
         tmpstr = [tmpstr stringByReplacingOccurrencesOfString:@"\r" withString:@""];
         [tmpstr writeToFile:_filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
         
-        [self fillArray:NFONT14];
-
+        Dao *dao = [[Dao alloc] init];
+        _book = [dao selectBook:title bookId:0];
+        if (_book.bookid == 0) {
+            _book = [[Book alloc]initWithName:title author:@"test" profile:@"test"];
+            [dao insertBook:_book];
+        }
+        
+        NSArray *a = [dao selectPages:_book.bookid fontSize:15];
+        if (a && a.count > 0) {
+            _array = [[NSMutableArray alloc] initWithArray:a];
+        }else {
+            [self fillArray:NFONT15];
+            [dao insertPages:_book.bookid fontSize:15 a:_array];
+        }
     }
+    
     return self;
 }
 
@@ -184,7 +200,7 @@
         len = ((NSNumber *)_array[pos+1]).integerValue - loc;
     }
     
-    NSString *filePath = [[[NSBundle mainBundle].resourcePath stringByAppendingPathComponent:_title] stringByAppendingPathExtension:@"txt"];
+    NSString *filePath = [[[NSBundle mainBundle].resourcePath stringByAppendingPathComponent:_book.bookname] stringByAppendingPathExtension:@"txt"];
     NSFileHandle *fh = [NSFileHandle fileHandleForReadingAtPath:filePath];
     [fh seekToFileOffset:loc];
     NSData *d = [fh readDataOfLength:len];

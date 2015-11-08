@@ -56,10 +56,10 @@
 }
 
 - (void)setChecked:(BOOL)checked {
-    if (_checked) {
-        _v2.image = [UIImage imageWithColor:[UIColor whiteColor]];
+    if (checked) {
+        _v2.hidden = true;
     }else {
-        _v2.image = [UIImage imageWithColor:[UIColor blueColor]];
+        _v2.hidden = NO;
     }
     
     _checked = checked;
