@@ -33,7 +33,7 @@ static CGFloat widthCallback( void* ref ){
         _color = [UIColor blackColor];
         _strokeColor = [UIColor redColor];
         _strokeWidth = 0.0;
-        _fontSize = 14.0;
+        _fontSize = 15.0;
         _line = 0.0;
         _paragraph = 10.0;
         _imageRects = [[NSMutableArray alloc] init];

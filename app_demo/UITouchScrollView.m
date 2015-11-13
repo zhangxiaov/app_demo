@@ -8,6 +8,7 @@
 
 #import "UITouchScrollView.h"
 #import "ContentViewController.h"
+#import "AppConfig.h"
 
 @interface UITouchScrollView ()
 @property (nonatomic, strong) UIViewController *vc;
@@ -48,15 +49,18 @@
         [[self viewController].navigationController setNavigationBarHidden:!ishidden animated:YES];
         
         [UIView beginAnimations:@"flipping view" context:nil];
-        [UIView setAnimationDuration:1];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:((ContentViewController *)[self viewController]).toolView cache:YES];
+        [UIView setAnimationDuration:0.3];
         //你的动作，比如删除某个东西
-        ((ContentViewController *)[self viewController]).toolView.hidden = !ishidden;
-        [UIView commitAnimations];
+        if (ishidden) {
+            CGRect rect = CGRectMake(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50);
+            ((ContentViewController *)[self viewController]).toolView.frame = rect;
+        }else {
+            CGRect rect = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
+            ((ContentViewController *)[self viewController]).toolView.frame = rect;
+        }
         
-        //                ((ContentViewController *)[self viewController]).toolView.hidden = !ishidden;
-//        [UIView animateWithDuration:0.5 animations:<#^(void)animations#> completion:<#^(BOOL finished)completion#>
+        [UIView commitAnimations];
+
     }
     
 }

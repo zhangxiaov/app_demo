@@ -10,6 +10,7 @@
 #import "ViewController.h"
 #import "AppMainViewController.h"
 #import "AppConfig.h"
+#import "TWFXToolBarViewController.h"
 
 @interface AppDelegate ()
 
@@ -34,6 +35,9 @@
     
     AppMainViewController *main = [[AppMainViewController alloc] init];
     self.window.rootViewController = main;
+    
+//    TWFXToolBarViewController *c = [[TWFXToolBarViewController alloc] init];
+//    self.window.rootViewController = c;
 
     
     [self.window makeKeyAndVisible];
