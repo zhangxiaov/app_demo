@@ -143,12 +143,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    ContentViewController *controller = [[ContentViewController alloc] init];
-    controller.title = [self.data[indexPath.row] stringByDeletingPathExtension];
-//    controller.navigationController.navigationBarHidden = YES;
+    ContentViewController *controller = [[ContentViewController alloc]
+                                         initWithTitle:[self.data[indexPath.row] stringByDeletingPathExtension]];
     
     self.hidesBottomBarWhenPushed = YES;
-    
     [self.navigationController pushViewController:controller animated:YES];
 }
 

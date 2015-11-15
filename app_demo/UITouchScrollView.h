@@ -8,15 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-//@protocol UIScrollViewTouchesDelegate
-//-(void)scrollViewTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event whichView:(id)scrollView;
-//@end
-
 
 @interface UITouchScrollView : UIScrollView
-//
-//@property(nonatomic,assign) id<UIScrollViewTouchesDelegate> touchesdelegate;
-
 
 @property(nonatomic, retain) UIImageView *imageView;
 @property(nonatomic, assign) NSTimeInterval touchTimer;

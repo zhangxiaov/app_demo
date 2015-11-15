@@ -13,4 +13,8 @@
     int textPos;
 }
 @property (nonatomic, strong) UIView *toolView;
+@property (nonatomic, copy) NSString *bookTitle;
+
+- (id)initWithTitle:(NSString *)bookTitle;
+
 @end

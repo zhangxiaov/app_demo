@@ -19,14 +19,6 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     self.touchTimer = [touch timestamp];
-    
-    NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:1296035591];
-    NSLog(@"1296035591  = %@",confromTimesp);
-    
-    NSDate *date = [NSDate date];
-    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[date timeIntervalSince1970]];
-    NSLog(@"timeSp:%@",timeSp); //时间戳的值
-
 }
 
 - (void) touchesEnded: (NSSet *) touches withEvent: (UIEvent *) event {
@@ -35,23 +27,20 @@
     self.touchTimer = [touch timestamp] - self.touchTimer;
     
     NSUInteger tapCount = [touch tapCount];
-//    CGPoint touchPoint = [touch locationInView:self];
     
-//    //判断单击事件，touch时间和touch的区域
-//    if (tapCount == 1 && self.touchTimer <= 3 && CGRectContainsPoint(self.imageView.frame, touchPoint)) {
-//        //进行单击的跳转等事件
-////        [UINavigationController setNavigationBarHidden:isTap animated:YES];
-//        [UIApplication sharedApplication].statusBarHidden = [UIApplication sharedApplication].statusBarHidden;;
-//    }
+    NSInteger n = [self viewController].navigationController.viewControllers.count;
+    NSLog(@"%p, %p", [self viewController], [self viewController].navigationController.viewControllers[n-1]);
     
     if (tapCount == 1 && self.touchTimer <= 3) {
+        
         BOOL ishidden = [self viewController].navigationController.navigationBarHidden;
         [[self viewController].navigationController setNavigationBarHidden:!ishidden animated:YES];
         
         [UIView beginAnimations:@"flipping view" context:nil];
         [UIView setAnimationDuration:0.3];
-        //你的动作，比如删除某个东西
+
         if (ishidden) {
+            
             CGRect rect = CGRectMake(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50);
             ((ContentViewController *)[self viewController]).toolView.frame = rect;
         }else {
