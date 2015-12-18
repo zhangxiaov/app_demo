@@ -11,6 +11,9 @@
 #import "AppMainViewController.h"
 #import "AppConfig.h"
 #import "TWFXToolBarViewController.h"
+#import "AdViewController.h"
+#import "EmojiViewController.h"
+#import "AlertViewController.h"
 
 @interface AppDelegate ()
 
@@ -23,9 +26,16 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     self.window.backgroundColor = [UIColor whiteColor];
+
+//    EmojiViewController *controller = [[EmojiViewController alloc] init];
+//    self.window.rootViewController = controller;
     
+    //===
+//    AdViewController *controller = [[AdViewController alloc] init];
+//    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:controller];
+//    self.window.rootViewController = navc;
     
-    
+    //=====
 //    ViewController *controller = [[ViewController alloc] init];
 //    navc = [[UINavigationController alloc] initWithRootViewController:controller];
 //    self.window.rootViewController = navc;
@@ -33,12 +43,18 @@
     
     // ====================
     
-    AppMainViewController *main = [[AppMainViewController alloc] init];
-    self.window.rootViewController = main;
+//    AppMainViewController *main = [[AppMainViewController alloc] init];
+//    self.window.rootViewController = main;
     
+    //===
 //    TWFXToolBarViewController *c = [[TWFXToolBarViewController alloc] init];
 //    self.window.rootViewController = c;
 
+    
+    //===
+    AlertViewController* controller = [[AlertViewController alloc] init];
+    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:controller];
+    self.window.rootViewController = navc;
     
     [self.window makeKeyAndVisible];
     

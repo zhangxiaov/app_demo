@@ -63,36 +63,48 @@ static CGFloat widthCallback( void* ref ){
         NSTextCheckingResult *result = [matches objectAtIndex:i];
         NSArray *matches2 = [[_originString substringWithRange:result.range] componentsSeparatedByString:@"<"];
         
+//        
+//        //创建文本,    行间距
+//        CGFloat lineSpace = self.line;//间距数据
+//        CTParagraphStyleSetting lineSpaceStyle;
+//        lineSpaceStyle.spec=kCTParagraphStyleSpecifierLineSpacing;
+//        lineSpaceStyle.valueSize=sizeof(lineSpace);
+//        lineSpaceStyle.value=&lineSpace;
+//        
+//        
+//        //设置  段落间距
+//        CGFloat paragraph = self.paragraph;
+//        CTParagraphStyleSetting paragraphStyle;
+//        paragraphStyle.spec = kCTParagraphStyleSpecifierParagraphSpacing;
+//        paragraphStyle.valueSize = sizeof(CGFloat);
+//        paragraphStyle.value = &paragraph;
+//        //创建样式数组
+//        CTParagraphStyleSetting settings[]={
+//            lineSpaceStyle,paragraphStyle
+//        };
+//        
+//        //设置样式
+//        CTParagraphStyleRef paragraphStyle1 = CTParagraphStyleCreate(settings, sizeof(settings));
+//        CTFontRef font = CTFontCreateWithName((CFStringRef)self.font, self.fontSize, NULL);
+//
         
-        //创建文本,    行间距
-        CGFloat lineSpace = self.line;//间距数据
-        CTParagraphStyleSetting lineSpaceStyle;
-        lineSpaceStyle.spec=kCTParagraphStyleSpecifierLineSpacing;
-        lineSpaceStyle.valueSize=sizeof(lineSpace);
-        lineSpaceStyle.value=&lineSpace;
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        paragraphStyle.lineSpacing = 5.0;
+        paragraphStyle.paragraphSpacing = 10.0;
         
+//        NSDictionary *d = [[NSDictionary alloc] initWithObjectsAndKeys:[UIFont systemFontOfSize:15], NSFontAttributeName,
+//                           (id)self.color.CGColor , kCTForegroundColorAttributeName,
+//                           (id)self.strokeColor.CGColor, kCTStrokeColorAttributeName,
+//                           (id)[NSNumber numberWithFloat:self.strokeWidth], kCTStrokeWidthAttributeName,
+//                           paragraphStyle, NSParagraphStyleAttributeName, nil];
+//        CFRelease(font);
         
-        //设置  段落间距
-        CGFloat paragraph = self.paragraph;
-        CTParagraphStyleSetting paragraphStyle;
-        paragraphStyle.spec = kCTParagraphStyleSpecifierParagraphSpacing;
-        paragraphStyle.valueSize = sizeof(CGFloat);
-        paragraphStyle.value = &paragraph;
-        //创建样式数组
-        CTParagraphStyleSetting settings[]={
-            lineSpaceStyle,paragraphStyle
-        };
+
+//        
+        NSDictionary *d = @{NSFontAttributeName: [UIFont systemFontOfSize:15], NSParagraphStyleAttributeName:paragraphStyle,
+                               NSForegroundColorAttributeName:[UIColor blackColor],
+                            NSStrokeWidthAttributeName:[NSNumber numberWithFloat:self.strokeWidth]};
         
-        //设置样式
-        CTParagraphStyleRef paragraphStyle1 = CTParagraphStyleCreate(settings, sizeof(settings));
-        CTFontRef font = CTFontCreateWithName((CFStringRef)self.font, self.fontSize, NULL);
-        
-        NSDictionary *d = [[NSDictionary alloc] initWithObjectsAndKeys:(__bridge id)font, kCTFontAttributeName,
-                           (id)self.color.CGColor , kCTForegroundColorAttributeName,
-                           (id)self.strokeColor.CGColor, kCTStrokeColorAttributeName,
-                           (id)[NSNumber numberWithFloat:self.strokeWidth], kCTStrokeWidthAttributeName,
-                           (__bridge id)paragraphStyle1, kCTParagraphStyleAttributeName, nil];
-        CFRelease(font);
         [_mAttr appendAttributedString:[[NSAttributedString alloc] initWithString:[matches2 objectAtIndex:0] attributes:d]];
         
         if ([matches2 count] > 1) {

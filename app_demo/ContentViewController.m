@@ -151,23 +151,24 @@
 
 - (void)look4 {
 
-    [UIView beginAnimations:@"flipping view" context:nil];
-    [UIView setAnimationDuration:0.3];
+//    [UIView beginAnimations:@"flipping view" context:nil];
+//    [UIView setAnimationDuration:0.3];
     CGRect rect = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
     self.toolView.frame = rect;
-    [UIView commitAnimations];
+//    [UIView commitAnimations];
     
-    CommentViewController *controller = [[CommentViewController alloc] initWithBook:0];
+   
     
-    CATransition *transition = [CATransition animation];
-    transition.duration = 0.7f;
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-//    transition.type = @"cube";
-    transition.type = kCATransitionPush;
-    transition.subtype = kCATransitionFromRight;
-    transition.delegate = self;
-    [self.navigationController.view.layer addAnimation:transition forKey:nil];
+//    CATransition *transition = [CATransition animation];
+//    transition.duration = 0.7f;
+//    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+////    transition.type = @"cube";
+//    transition.type = kCATransitionPush;
+//    transition.subtype = kCATransitionFromRight;
+//    transition.delegate = self;
+//    [self.navigationController.view.layer addAnimation:transition forKey:nil];
     
+     CommentViewController *controller = [[CommentViewController alloc] initWithBook:0];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -296,7 +297,13 @@
 - (UIView *)toolView {
     if (_toolView == nil) {
         _toolView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 50)];
-        _toolView.backgroundColor = [UIColor grayColor];
+        _toolView.backgroundColor = UIColorFromHex(0xF3F3F3);
+        
+        CALayer *layer = [CALayer layer];
+        layer.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 1);
+        layer.backgroundColor = UIColorFromHex(0xD3D3D3).CGColor;
+        
+        [_toolView.layer addSublayer:layer];
         
         CGFloat w = 60;
         CGFloat h = 30;
@@ -305,22 +312,26 @@
         UIButton *b1 = [[UIButton alloc] initWithFrame:CGRectMake(left, 10, w, h)];
         [b1 setTitle:@"书目" forState:UIControlStateNormal];
         b1.titleLabel.font = [UIFont systemFontOfSize:14];
+        [b1 setTitleColor:UIColorFromHex(0x333) forState:UIControlStateNormal];
         [b1 addTarget:self action:@selector(look1) forControlEvents:UIControlEventTouchUpInside];
         
         UIButton *b2 = [[UIButton alloc] initWithFrame:CGRectMake(left*2+w, 10, w, h)];
         [b2 setTitle:@"字长" forState:UIControlStateNormal];
         b2.titleLabel.font = [UIFont systemFontOfSize:14];
+        [b2 setTitleColor:UIColorFromHex(0x333) forState:UIControlStateNormal];
         [b2 addTarget:self action:@selector(look2) forControlEvents:UIControlEventTouchUpInside];
         
         UIButton *b3 = [[UIButton alloc] initWithFrame:CGRectMake(left*3+2*w, 10, w, h)];
         [b3 setTitle:@"换颜" forState:UIControlStateNormal];
         b3.titleLabel.font = [UIFont systemFontOfSize:14];
+        [b3 setTitleColor:UIColorFromHex(0x333) forState:UIControlStateNormal];
         [b3 addTarget:self action:@selector(look3) forControlEvents:UIControlEventTouchUpInside];
         
         
         UIButton *b4 = [[UIButton alloc] initWithFrame:CGRectMake(left*4+3*w, 10, w, h)];
         [b4 setTitle:@"评书" forState:UIControlStateNormal];
         b4.titleLabel.font = [UIFont systemFontOfSize:14];
+        [b4 setTitleColor:UIColorFromHex(0x333) forState:UIControlStateNormal];
         [b4 addTarget:self action:@selector(look4) forControlEvents:UIControlEventTouchUpInside];
         
         

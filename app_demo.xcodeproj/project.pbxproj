@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED0078FD1C0BEE3D00B87D99 /* CommentTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0078FC1C0BEE3D00B87D99 /* CommentTextView.m */; };
+		ED0079001C0D4EFE00B87D99 /* AdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0078FF1C0D4EFE00B87D99 /* AdViewController.m */; };
+		ED00794E1C0E907300B87D99 /* SkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED00794D1C0E907300B87D99 /* SkViewController.m */; };
+		ED0079511C0EAA4700B87D99 /* SimpleClientSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0079501C0EAA4700B87D99 /* SimpleClientSocket.m */; };
+		ED0079541C0ED8AE00B87D99 /* SimpleServerSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0079531C0ED8AE00B87D99 /* SimpleServerSocket.m */; };
+		ED00797A1C113A0400B87D99 /* EmojiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0079791C113A0400B87D99 /* EmojiViewController.m */; };
+		ED007A611C1FAE1900B87D99 /* ZAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED007A601C1FAE1900B87D99 /* ZAlertView.m */; };
+		ED007A641C1FAF6300B87D99 /* AlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED007A631C1FAF6300B87D99 /* AlertViewController.m */; };
 		ED53BE111BE382F50033A666 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED53BE101BE382F50033A666 /* libsqlite3.0.dylib */; };
 		ED53BE141BE452EC0033A666 /* Animationdemo.m in Sources */ = {isa = PBXBuildFile; fileRef = ED53BE131BE452EC0033A666 /* Animationdemo.m */; };
 		ED53BE171BE459E10033A666 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED53BE161BE459E10033A666 /* CommentViewController.m */; };
@@ -22,6 +30,8 @@
 		ED5AFC5B1BD0B76E00612E3C /* MISAskAddFile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED5AFB791BD0B76D00612E3C /* MISAskAddFile@2x.png */; };
 		ED602A431BC4CDCF00DB1A3B /* Dao.m in Sources */ = {isa = PBXBuildFile; fileRef = ED602A421BC4CDCF00DB1A3B /* Dao.m */; };
 		ED7042C71BD9E65200FED349 /* test.txt in Resources */ = {isa = PBXBuildFile; fileRef = ED7042C61BD9E65200FED349 /* test.txt */; };
+		ED8C294F1C02AE6D00778A08 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C294E1C02AE6D00778A08 /* Comment.m */; };
+		ED8C29521C02EDCE00778A08 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C29511C02EDCD00778A08 /* CommentCell.m */; };
 		EDB293D21BC1062700290C56 /* UTF8FileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB293D11BC1062700290C56 /* UTF8FileParser.m */; };
 		EDBA42221BB39162004B9A62 /* AppBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42211BB39162004B9A62 /* AppBookView.m */; };
 		EDBA42371BB3EDDD004B9A62 /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42361BB3EDDD004B9A62 /* AppUtils.m */; };
@@ -53,6 +63,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ED0078FB1C0BEE3D00B87D99 /* CommentTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTextView.h; sourceTree = "<group>"; };
+		ED0078FC1C0BEE3D00B87D99 /* CommentTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTextView.m; sourceTree = "<group>"; };
+		ED0078FE1C0D4EFE00B87D99 /* AdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdViewController.h; sourceTree = "<group>"; };
+		ED0078FF1C0D4EFE00B87D99 /* AdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdViewController.m; sourceTree = "<group>"; };
+		ED00794C1C0E907300B87D99 /* SkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkViewController.h; sourceTree = "<group>"; };
+		ED00794D1C0E907300B87D99 /* SkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkViewController.m; sourceTree = "<group>"; };
+		ED00794F1C0EAA4700B87D99 /* SimpleClientSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleClientSocket.h; sourceTree = "<group>"; };
+		ED0079501C0EAA4700B87D99 /* SimpleClientSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleClientSocket.m; sourceTree = "<group>"; };
+		ED0079521C0ED8AE00B87D99 /* SimpleServerSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleServerSocket.h; sourceTree = "<group>"; };
+		ED0079531C0ED8AE00B87D99 /* SimpleServerSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleServerSocket.m; sourceTree = "<group>"; };
+		ED0079781C113A0400B87D99 /* EmojiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiViewController.h; sourceTree = "<group>"; };
+		ED0079791C113A0400B87D99 /* EmojiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiViewController.m; sourceTree = "<group>"; };
+		ED007A5F1C1FAE1900B87D99 /* ZAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAlertView.h; sourceTree = "<group>"; };
+		ED007A601C1FAE1900B87D99 /* ZAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAlertView.m; sourceTree = "<group>"; };
+		ED007A621C1FAF6300B87D99 /* AlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertViewController.h; sourceTree = "<group>"; };
+		ED007A631C1FAF6300B87D99 /* AlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertViewController.m; sourceTree = "<group>"; };
 		ED53BE101BE382F50033A666 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		ED53BE121BE452EC0033A666 /* Animationdemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animationdemo.h; sourceTree = "<group>"; };
 		ED53BE131BE452EC0033A666 /* Animationdemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animationdemo.m; sourceTree = "<group>"; };
@@ -80,6 +106,10 @@
 		ED602A411BC4CDCF00DB1A3B /* Dao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dao.h; sourceTree = "<group>"; };
 		ED602A421BC4CDCF00DB1A3B /* Dao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dao.m; sourceTree = "<group>"; };
 		ED7042C61BD9E65200FED349 /* test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.txt; sourceTree = "<group>"; };
+		ED8C294D1C02AE6D00778A08 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		ED8C294E1C02AE6D00778A08 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		ED8C29501C02EDCD00778A08 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
+		ED8C29511C02EDCD00778A08 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
 		EDB293D01BC1062700290C56 /* UTF8FileParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UTF8FileParser.h; sourceTree = "<group>"; };
 		EDB293D11BC1062700290C56 /* UTF8FileParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UTF8FileParser.m; sourceTree = "<group>"; };
 		EDBA42201BB39162004B9A62 /* AppBookView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppBookView.h; sourceTree = "<group>"; };
@@ -192,6 +222,20 @@
 		EDFCA73D1BB1734F00AF49EA /* app_demo */ = {
 			isa = PBXGroup;
 			children = (
+				ED00794C1C0E907300B87D99 /* SkViewController.h */,
+				ED00794D1C0E907300B87D99 /* SkViewController.m */,
+				ED00794F1C0EAA4700B87D99 /* SimpleClientSocket.h */,
+				ED0079501C0EAA4700B87D99 /* SimpleClientSocket.m */,
+				ED0079521C0ED8AE00B87D99 /* SimpleServerSocket.h */,
+				ED0079531C0ED8AE00B87D99 /* SimpleServerSocket.m */,
+				ED0078FB1C0BEE3D00B87D99 /* CommentTextView.h */,
+				ED0078FC1C0BEE3D00B87D99 /* CommentTextView.m */,
+				ED0078FE1C0D4EFE00B87D99 /* AdViewController.h */,
+				ED0078FF1C0D4EFE00B87D99 /* AdViewController.m */,
+				ED8C29501C02EDCD00778A08 /* CommentCell.h */,
+				ED8C29511C02EDCD00778A08 /* CommentCell.m */,
+				ED8C294D1C02AE6D00778A08 /* Comment.h */,
+				ED8C294E1C02AE6D00778A08 /* Comment.m */,
 				EDD21A691BDE505300A611A5 /* Buff.h */,
 				EDD21A6A1BDE505300A611A5 /* Buff.m */,
 				EDD3439F1BC6879D00204C80 /* net */,
@@ -244,6 +288,12 @@
 				ED53BE1C1BE4CB040033A666 /* TWFXToolBarViewController.m */,
 				EDD04CE21BEDAC3100058BB6 /* BookMark.h */,
 				EDD04CE31BEDAC3100058BB6 /* BookMark.m */,
+				ED0079781C113A0400B87D99 /* EmojiViewController.h */,
+				ED0079791C113A0400B87D99 /* EmojiViewController.m */,
+				ED007A5F1C1FAE1900B87D99 /* ZAlertView.h */,
+				ED007A601C1FAE1900B87D99 /* ZAlertView.m */,
+				ED007A621C1FAF6300B87D99 /* AlertViewController.h */,
+				ED007A631C1FAF6300B87D99 /* AlertViewController.m */,
 			);
 			path = app_demo;
 			sourceTree = "<group>";
@@ -374,28 +424,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED00794E1C0E907300B87D99 /* SkViewController.m in Sources */,
 				ED53BE1A1BE45AF00033A666 /* Book.m in Sources */,
 				ED53BE141BE452EC0033A666 /* Animationdemo.m in Sources */,
 				EDD21A6B1BDE505300A611A5 /* Buff.m in Sources */,
 				ED53BE1D1BE4CB040033A666 /* TWFXToolBarViewController.m in Sources */,
+				ED007A641C1FAF6300B87D99 /* AlertViewController.m in Sources */,
 				EDBA42221BB39162004B9A62 /* AppBookView.m in Sources */,
 				EDD38DF61BB7F75E001878DC /* UIImage+UIColor.m in Sources */,
+				ED0078FD1C0BEE3D00B87D99 /* CommentTextView.m in Sources */,
 				ED5AF7EE1BCFA61600612E3C /* DemoLabel.m in Sources */,
 				EDFCA7471BB1734F00AF49EA /* ViewController.m in Sources */,
 				EDD38DF01BB7BA41001878DC /* AppLabel.m in Sources */,
 				EDFFE2BC1BDE0EF200944745 /* Pagination.m in Sources */,
+				ED8C294F1C02AE6D00778A08 /* Comment.m in Sources */,
 				EDFCA7441BB1734F00AF49EA /* AppDelegate.m in Sources */,
 				EDB293D21BC1062700290C56 /* UTF8FileParser.m in Sources */,
+				ED00797A1C113A0400B87D99 /* EmojiViewController.m in Sources */,
+				ED007A611C1FAE1900B87D99 /* ZAlertView.m in Sources */,
+				ED8C29521C02EDCE00778A08 /* CommentCell.m in Sources */,
 				EDC6AC6A1BE1BE6A00693B94 /* CheckboxWithTitle.m in Sources */,
 				EDFCA7411BB1734F00AF49EA /* main.m in Sources */,
+				ED0079001C0D4EFE00B87D99 /* AdViewController.m in Sources */,
 				ED53BE171BE459E10033A666 /* CommentViewController.m in Sources */,
 				ED5AF7EB1BCF5E9600612E3C /* AppTableViewCell.m in Sources */,
 				EDD38DF91BB80FEF001878DC /* UILabel+VerticalAlign.m in Sources */,
 				EDD343A21BC6879D00204C80 /* ClientServer.m in Sources */,
+				ED0079541C0ED8AE00B87D99 /* SimpleServerSocket.m in Sources */,
 				ED5AF7E51BCE466800612E3C /* AppHomeViewController.m in Sources */,
 				ED602A431BC4CDCF00DB1A3B /* Dao.m in Sources */,
 				ED571E3B1BD735DC007D5B66 /* Regx.m in Sources */,
 				ED5AF7E21BCE461300612E3C /* AppMainViewController.m in Sources */,
+				ED0079511C0EAA4700B87D99 /* SimpleClientSocket.m in Sources */,
 				EDC6ACE81BE3144900693B94 /* ContentViewController.m in Sources */,
 				EDD04CE41BEDAC3100058BB6 /* BookMark.m in Sources */,
 				ED5589171BECDEC2004A1A9F /* DB.m in Sources */,
