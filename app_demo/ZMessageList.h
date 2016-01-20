@@ -30,10 +30,10 @@
                        delegate:(id<ZMessageListDelegate>)delegate;
 
 //取以前的消息
-- (void)fetchFormerMessages;
+- (BOOL)fetchFormerMessages;
 
 //取最新消息
-- (void)fetchLatestMessages;
+- (BOOL)fetchLatestMessages;
 
 //发消息
 - (void)sendMessage:(ZMessageModel *)message;

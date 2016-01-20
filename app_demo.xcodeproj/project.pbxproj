@@ -64,6 +64,7 @@
 		EDD38DF01BB7BA41001878DC /* AppLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD38DEF1BB7BA41001878DC /* AppLabel.m */; };
 		EDD38DF61BB7F75E001878DC /* UIImage+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD38DF41BB7F75E001878DC /* UIImage+UIColor.m */; };
 		EDD38DF91BB80FEF001878DC /* UILabel+VerticalAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD38DF81BB80FEF001878DC /* UILabel+VerticalAlign.m */; };
+		EDE465E91C4FE4BF00C58727 /* ZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE465E81C4FE4BF00C58727 /* ZTextView.m */; };
 		EDFCA7411BB1734F00AF49EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA7401BB1734F00AF49EA /* main.m */; };
 		EDFCA7441BB1734F00AF49EA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA7431BB1734F00AF49EA /* AppDelegate.m */; };
 		EDFCA7471BB1734F00AF49EA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA7461BB1734F00AF49EA /* ViewController.m */; };
@@ -190,6 +191,8 @@
 		EDD38DF41BB7F75E001878DC /* UIImage+UIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIColor.m"; sourceTree = "<group>"; };
 		EDD38DF71BB80FEF001878DC /* UILabel+VerticalAlign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+VerticalAlign.h"; sourceTree = "<group>"; };
 		EDD38DF81BB80FEF001878DC /* UILabel+VerticalAlign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+VerticalAlign.m"; sourceTree = "<group>"; };
+		EDE465E71C4FE4BF00C58727 /* ZTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZTextView.h; sourceTree = "<group>"; };
+		EDE465E81C4FE4BF00C58727 /* ZTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZTextView.m; sourceTree = "<group>"; };
 		EDFCA73B1BB1734F00AF49EA /* app_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFCA73F1BB1734F00AF49EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDFCA7401BB1734F00AF49EA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -385,6 +388,8 @@
 				ED5A77A81C4F5191009038E2 /* ZMessageDataSource.m */,
 				ED5A77AA1C4F6901009038E2 /* ZMessageCell.h */,
 				ED5A77AB1C4F6901009038E2 /* ZMessageCell.m */,
+				EDE465E71C4FE4BF00C58727 /* ZTextView.h */,
+				EDE465E81C4FE4BF00C58727 /* ZTextView.m */,
 			);
 			path = app_demo;
 			sourceTree = "<group>";
@@ -521,6 +526,7 @@
 				ED58E7DC1C3110E900247997 /* ZSelectImageView.m in Sources */,
 				ED53BE1A1BE45AF00033A666 /* Book.m in Sources */,
 				ED53BE141BE452EC0033A666 /* Animationdemo.m in Sources */,
+				EDE465E91C4FE4BF00C58727 /* ZTextView.m in Sources */,
 				EDD21A6B1BDE505300A611A5 /* Buff.m in Sources */,
 				ED5A77A91C4F5191009038E2 /* ZMessageDataSource.m in Sources */,
 				ED53BE1D1BE4CB040033A666 /* TWFXToolBarViewController.m in Sources */,

@@ -11,6 +11,7 @@
 #import "AppConfig.h"
 #import <Masonry/Masonry.h>
 #import "UIView+ZFrame.h"
+#import "ZTextView.h"
 
 /**
  *  水平方向的PADDING
@@ -38,7 +39,7 @@ static const CGFloat DURATION_FOR_VIEW = 0.25f;
 
 
 
-@interface ZMessageInputView () <ZGrowingTextViewDelegate>
+@interface ZMessageInputView () <ZGrowingTextViewDelegate, UITextViewDelegate>
 @property (nonatomic) CGFloat keyboardHeight;
 @property (nonatomic) UIView* grayView;
 @end
@@ -52,7 +53,7 @@ static const CGFloat DURATION_FOR_VIEW = 0.25f;
     if (self) {
         [self loadViewWithViewType:type];
         if (placeHolder != nil) {
-            self.placeholder = placeHolder;
+            self.textView.placeHolder = placeHolder;
         }
         self.backgroundColor = UIColorFromHex(0xF8F9FA);
     }
@@ -73,10 +74,9 @@ static const CGFloat DURATION_FOR_VIEW = 0.25f;
         make.width.equalTo(@(SIZE_FOR_BTN));
         make.height.equalTo(@(SIZE_FOR_BTN));
         make.left.equalTo(self).offset(GAP_BTWN_BTNS + PADDING_FOR_VIEW_H + SIZE_FOR_BTN);
-        make.right.equalTo(self.inputTextView.mas_left).offset(-GAP_BTWN_BTNS);
     }];
     
-    [self.inputTextView mas_makeConstraints:^(MASConstraintMaker* make) {
+    [self.textView mas_makeConstraints:^(MASConstraintMaker* make) {
         make.left.equalTo(self.otherButton.mas_right).offset(5);
         make.right.equalTo(self.mas_right).offset(-10);
         make.top.equalTo(self).offset(PADDING_FOR_VIEW_V);
@@ -84,10 +84,10 @@ static const CGFloat DURATION_FOR_VIEW = 0.25f;
     }];
 }
 
-- (void)prepareViewForChat {
+- (void)prepareViewsForChat {
     [self addSubview:self.voiceButton];
     [self addSubview:self.otherButton];
-    [self addSubview:self.inputTextView];
+    [self addSubview:self.textView];
     
     [self placeViewsForChat];
 }
@@ -126,8 +126,8 @@ static const CGFloat DURATION_FOR_VIEW = 0.25f;
     if (!self.superview) {
         return;
     }
-    if ([self.inputTextView isFirstResponder]) {
-        [self.inputTextView resignFirstResponder];
+    if ([self.textView isFirstResponder]) {
+        [self.textView resignFirstResponder];
     }
     
     __weak ZMessageInputView* weakSelf = self;
@@ -149,11 +149,11 @@ static const CGFloat DURATION_FOR_VIEW = 0.25f;
 
 - (void)loadViewWithViewType:(ZMessageInputViewType)type {
     switch (type) {
-        case ZMessageInputViewTypeChat: {
+        case ZMessageInputViewTypeChat:
             //聊天输入框
-            [self prepareViewForChat];
+            ;
+            [self prepareViewsForChat];
             break;
-        }
         case ZMessageInputViewTypeComment: {
             //评论输入框
             break;
@@ -210,7 +210,7 @@ static const CGFloat DURATION_FOR_VIEW = 0.25f;
 #pragma mark event
 
 - (void)hideKeyBorardPad {
-    self.inputTextView.isEditing = NO;
+//    self.inputTextView.isEditing = NO;
     _keyboardHeight = 0;
     _keyboardType = ZMessageInputViewKeyboradTypeNone;
     [self chageInputViewFrame];
@@ -263,8 +263,8 @@ static const CGFloat DURATION_FOR_VIEW = 0.25f;
 
 - (void)resetInputView {
     
-    [self.inputTextView.innerTextView resignFirstResponder];
-    self.inputTextView.innerTextView.text = @"";
+    [self.textView resignFirstResponder];
+    self.textView.text = @"";
     self.grayView.hidden = YES;
     _keyboardHeight = 0;
     
@@ -301,35 +301,35 @@ static const CGFloat DURATION_FOR_VIEW = 0.25f;
 
 #pragma mark ZGrowingTextViewDelegate
 
-- (void)growingTextViewWillChangeWithKeyboard:(ZGrowingTextView *)growingTextView {
-    [self changeGrayViewFrame];
-
-    CGRect frame = self.frame;
-//    frame.size.height = MIN_HEIGHT_FOR_INPUT_VIEW + PADDING_FOR_VIEW_V*2;
-//    frame.origin.y = SCREEN_HEIGHT - (MIN_HEIGHT_FOR_INPUT_VIEW + _keyboardHeight + PADDING_FOR_VIEW_V*2);
-    frame.origin.y = SCREEN_HEIGHT - frame.size.height - _keyboardHeight;
-    
-    [UIView animateWithDuration:DURATION_FOR_VIEW animations:^{
-        self.frame = frame;
-    } completion:nil];
-    
-}
-
-- (void)growingTextView:(ZGrowingTextView *)growingTextView willChangeWithTextView:(float)height {
-    [self changeGrayViewFrame];
-    
-    CGRect frame = self.frame;
-    frame.size.height = height + PADDING_FOR_VIEW_V*2;
-//    frame.origin.y = SCREEN_HEIGHT - (height + _keyboardHeight + PADDING_FOR_VIEW_V*2);
-    frame.origin.y = SCREEN_HEIGHT - frame.size.height - _keyboardHeight;
-    
-    self.frame = frame;
-    [self needsUpdateConstraints];
-}
-
-- (void)growingTextViewSend:(ZMessageInputView *)growingTextView {
-    [self sendText:self.inputTextView.text];
-}
+//- (void)growingTextViewWillChangeWithKeyboard:(ZGrowingTextView *)growingTextView {
+//    [self changeGrayViewFrame];
+//
+//    CGRect frame = self.frame;
+////    frame.size.height = MIN_HEIGHT_FOR_INPUT_VIEW + PADDING_FOR_VIEW_V*2;
+////    frame.origin.y = SCREEN_HEIGHT - (MIN_HEIGHT_FOR_INPUT_VIEW + _keyboardHeight + PADDING_FOR_VIEW_V*2);
+//    frame.origin.y = SCREEN_HEIGHT - frame.size.height - _keyboardHeight;
+//    
+//    [UIView animateWithDuration:DURATION_FOR_VIEW animations:^{
+//        self.frame = frame;
+//    } completion:nil];
+//
+//}
+//
+//- (void)growingTextView:(ZGrowingTextView *)growingTextView willChangeWithTextView:(float)height {
+//    [self changeGrayViewFrame];
+//    
+//    CGRect frame = self.frame;
+//    frame.size.height = height + PADDING_FOR_VIEW_V*2;
+////    frame.origin.y = SCREEN_HEIGHT - (height + _keyboardHeight + PADDING_FOR_VIEW_V*2);
+//    frame.origin.y = SCREEN_HEIGHT - frame.size.height - _keyboardHeight;
+//    
+//    self.frame = frame;
+//    [self needsUpdateConstraints];
+//}
+//
+//- (void)growingTextViewSend:(ZMessageInputView *)growingTextView {
+//    [self sendText:self.inputTextView.text];
+//}
 
 #pragma mark setter getter
 
@@ -357,20 +357,16 @@ static const CGFloat DURATION_FOR_VIEW = 0.25f;
     return _otherButton;
 }
 
-- (ZGrowingTextView *)inputTextView {
-    if (!_inputTextView) {
-        _inputTextView = [[ZGrowingTextView alloc] init];
-        _inputTextView.translatesAutoresizingMaskIntoConstraints = NO;
-        _inputTextView.font = [UIFont systemFontOfSize:16];
-        _inputTextView.placeholder = @"说两句";
-        _inputTextView.delegate = self;
+- (UITextView *)textView {
+    if (!_textView) {
+        _textView = [[ZTextView alloc] init];
+        _textView.translatesAutoresizingMaskIntoConstraints = NO;
+        _textView.font = [UIFont systemFontOfSize:16];
+        _textView.delegate = self;
+        _textView.placeHolder = @"xxxx";
     }
     
-    return _inputTextView;
-}
-
-- (void)setPlaceholder:(NSString*)placeholder {
-    self.inputTextView.placeholder = placeholder;
+    return _textView;
 }
 
 - (UIView *)grayView {

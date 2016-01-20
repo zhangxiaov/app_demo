@@ -93,16 +93,22 @@ const CGFloat kGroupMinInputBarHeight             = 46.0f;
     [self.inputBarView disappear];
 }
 
-- (void)setTableFrameWhenSendMessage {
-    
-}
-
 #pragma mark private
 
 - (void)refreshLastMessage {
+    if (![self.messageList fetchLatestMessages]) {
+        return;
+    }
+    
+    [self.tableView reloadData];
+    
     switch (_lastMessagePostion) {
         case ZMessageLastPositionAtBottom:
             ;
+            CGFloat top = statusBarHeight + self.navigationController.navigationBar.frame.size.height;
+            CGFloat padHeight = SCREEN_HEIGHT - self.inputBarView.frame.origin.y;
+            CGFloat offset = self.tableView.bounds.origin.y + (top + self.tableView.contentSize.height - SCREEN_HEIGHT) + padHeight + MIN_HEIGHT_FOR_INPUT_VIEW + PADDING_FOR_VIEW_V*2;
+            [self.tableView setContentOffset:CGPointMake(0.0, offset) animated:NO];
             break;
         case ZMessageLastPositionAtTop:
             ;
@@ -112,9 +118,19 @@ const CGFloat kGroupMinInputBarHeight             = 46.0f;
 }
 
 - (void)refreshOldMessage {
+    if (![self.messageList fetchFormerMessages]) {
+        return;
+    }
+    
+    [self.tableView reloadData];
+    
     switch (_lastMessagePostion) {
         case ZMessageLastPositionAtBottom:
             ;
+            CGFloat top = statusBarHeight + self.navigationController.navigationBar.frame.size.height;
+            CGFloat padHeight = SCREEN_HEIGHT - self.inputBarView.frame.origin.y;
+            CGFloat offset = self.tableView.bounds.origin.y + (top + self.tableView.contentSize.height - SCREEN_HEIGHT) + padHeight + MIN_HEIGHT_FOR_INPUT_VIEW + PADDING_FOR_VIEW_V*2;
+            [self.tableView setContentOffset:CGPointMake(0.0, offset) animated:NO];
             break;
         case ZMessageLastPositionAtTop:
             ;

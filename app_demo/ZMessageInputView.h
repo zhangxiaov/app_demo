@@ -52,12 +52,13 @@ typedef NS_ENUM(NSInteger, ZMessageInputViewKeyboradType) {
 @end
 
 @class ZGrowingTextView;
+@class ZTextView;
 @interface ZMessageInputView : UIView
 
 @property (nonatomic, weak) id<ZMessageInputViewDelegate> delegate;
 @property (nonatomic, strong) UIButton* voiceButton;
 @property (nonatomic, strong) UIButton* otherButton;
-@property (nonatomic, strong) ZGrowingTextView* inputTextView;
+@property (nonatomic) ZTextView* textView;
 @property (nonatomic) BOOL useGrayView;
 
 @property (nonatomic, copy) NSString* placeholder;

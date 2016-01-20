@@ -31,7 +31,11 @@
     return self;
 }
 
-- (void)fetchLatestMessages {
+- (BOOL)fetchFormerMessages {
+    return YES;
+}
+
+- (BOOL)fetchLatestMessages {
     NSArray* array = [[ZMessageService share] queryMessagesWithSeesionId:self.session.sessionID date:nil limit:10];
     
     if (array.count > 0) {
@@ -39,13 +43,17 @@
         NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:
                                NSMakeRange(0, array.count)];
         [self.messages insertObjects:array atIndexes:indexes];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if ([self.delegate respondsToSelector:@selector(list:didRequestLatestMessages:)]) {
+                [self.delegate list:self didRequestLatestMessages:array];
+            }
+        });
+        
+        return YES;
     }
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        if ([self.delegate respondsToSelector:@selector(list:didRequestLatestMessages:)]) {
-            [self.delegate list:self didRequestLatestMessages:array];
-        }
-    });
+    return NO;
 }
 
 - (void)sendMessage:(ZMessageModel *)message {
