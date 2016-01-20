@@ -9,6 +9,7 @@
 #import "Dao.h"
 #import "Book.h"
 #import "bookMark.h"
+#import "Comment.h"
 
 #define DBNAME    @"bookinfo.sqlite"
 
@@ -89,6 +90,30 @@
     [self execSql:smarks];
     
     sqlite3_close(_db);
+}
+
+- (NSArray *)selectComments:(NSInteger *)commentId {
+    NSString *s = [NSString stringWithFormat:@"select * from table_comments where commentid > %ld", commentId];
+    NSMutableArray *a = [@[] mutableCopy];
+    
+    [self open];
+    sqlite3_stmt *stmt;
+    int state = sqlite3_prepare_v2(_db, [s UTF8String], -1, &stmt, nil);
+    if (state == SQLITE_OK) {
+        while (sqlite3_step(stmt) == SQLITE_ROW) {
+            Comment *comment = [[Comment alloc] init];
+            comment.commentId = sqlite3_column_int64(stmt, 0);
+            comment.commentContent = [NSString stringWithUTF8String:sqlite3_column_text(stmt, 1)];
+            comment.date = [NSString stringWithUTF8String:sqlite3_column_text(stmt, 2)];
+            comment.author = [NSString stringWithUTF8String:sqlite3_column_text(stmt, 3)];
+            comment.bookId = sqlite3_column_int64(stmt, 4);
+            
+            [a addObject:comment];
+        }
+    }
+    
+    [self close];
+    return a;
 }
 
 - (void)insertBook:(Book *)book {

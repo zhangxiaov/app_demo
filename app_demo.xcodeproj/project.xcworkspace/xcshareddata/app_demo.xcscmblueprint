@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "68FCDED802751FCB0980B50BA160DE7F7119CDB3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "93DB38024AE65D5793708B5C6F81CA0517D69DC4" : 0,
+    "68FCDED802751FCB0980B50BA160DE7F7119CDB3" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "658CBD68-2B86-49C5-BCAC-C746E2BC3A72",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "93DB38024AE65D5793708B5C6F81CA0517D69DC4" : "cqjxt\/",
+    "68FCDED802751FCB0980B50BA160DE7F7119CDB3" : "app_demo"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "app_demo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "app_demo.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:zhangxiaov\/app_demo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "68FCDED802751FCB0980B50BA160DE7F7119CDB3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/a.10657061.com:7999\/ioseduapp\/cqjxt.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "93DB38024AE65D5793708B5C6F81CA0517D69DC4"
+    }
+  ]
+}

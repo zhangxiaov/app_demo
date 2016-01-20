@@ -36,6 +36,18 @@
         tmpstr = [tmpstr stringByReplacingOccurrencesOfString:@"\r" withString:@""];
         [tmpstr writeToFile:_filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
         
+//        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+//        paragraphStyle.lineSpacing = 5.0;
+//        paragraphStyle.paragraphSpacing = 10.0;
+//        
+//        NSDictionary *dict = @{NSFontAttributeName: [UIFont systemFontOfSize:15], NSParagraphStyleAttributeName:paragraphStyle,
+//                            NSForegroundColorAttributeName:[UIColor blackColor],
+//                               NSStrokeWidthAttributeName:[NSNumber numberWithFloat:0.0f]};
+//        
+//        CGRect s = [tmpstr boundingRectWithSize:CGSizeMake(CONTENT_WIDTH, 0) options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:dict context:nil];
+        
+//        NSLog(@"pages :%f", s.size.height / CONTENT_HEIGHT);
+        
         Dao *dao = [[Dao alloc] init];
         _book = [dao selectBook:title bookId:0];
         if (_book.bookid == 0) {
@@ -129,34 +141,44 @@
                 [_array addObject:[NSNumber numberWithInteger:byteOffset]];
             }
             
-            //创建文本,    行间距
-            CGFloat lineSpace=0.0;//间距数据
-            CTParagraphStyleSetting lineSpaceStyle;
-            lineSpaceStyle.spec=kCTParagraphStyleSpecifierLineSpacing;
-            lineSpaceStyle.valueSize=sizeof(lineSpace);
-            lineSpaceStyle.value=&lineSpace;
+//            //创建文本,    行间距
+//            CGFloat lineSpace=0.0;//间距数据
+//            CTParagraphStyleSetting lineSpaceStyle;
+//            lineSpaceStyle.spec=kCTParagraphStyleSpecifierLineSpacing;
+//            lineSpaceStyle.valueSize=sizeof(lineSpace);
+//            lineSpaceStyle.value=&lineSpace;
+//            
+//            //设置  段落间距
+//            CGFloat paragraph = 10.0;
+//            CTParagraphStyleSetting paragraphStyle;
+//            paragraphStyle.spec = kCTParagraphStyleSpecifierParagraphSpacing;
+//            paragraphStyle.valueSize = sizeof(CGFloat);
+//            paragraphStyle.value = &paragraph;
+//            //创建样式数组
+//            CTParagraphStyleSetting settings[]={
+//                lineSpaceStyle,paragraphStyle
+//            };
+//            
+//            //设置样式
+//            CTParagraphStyleRef paragraphStyle1 = CTParagraphStyleCreate(settings, sizeof(settings));
+//            CTFontRef fontRef = CTFontCreateWithName((CFStringRef)@"ArialMT",nfont, NULL);
+//            NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                  (id)[UIColor blackColor].CGColor, kCTForegroundColorAttributeName,
+//                                  (__bridge id)fontRef, kCTFontAttributeName,
+//                                  (id) [UIColor whiteColor].CGColor, (NSString *) kCTStrokeColorAttributeName,
+//                                  (id)[NSNumber numberWithFloat: 0.0f], (NSString *)kCTStrokeWidthAttributeName,
+//                                  (__bridge id)paragraphStyle1, (NSString *)kCTParagraphStyleAttributeName,
+//                                  nil];
             
-            //设置  段落间距
-            CGFloat paragraph = 10.0;
-            CTParagraphStyleSetting paragraphStyle;
-            paragraphStyle.spec = kCTParagraphStyleSpecifierParagraphSpacing;
-            paragraphStyle.valueSize = sizeof(CGFloat);
-            paragraphStyle.value = &paragraph;
-            //创建样式数组
-            CTParagraphStyleSetting settings[]={
-                lineSpaceStyle,paragraphStyle
-            };
+            NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+            paragraphStyle.lineSpacing = 5.0;
+            paragraphStyle.paragraphSpacing = 10.0;
             
-            //设置样式
-            CTParagraphStyleRef paragraphStyle1 = CTParagraphStyleCreate(settings, sizeof(settings));
-            CTFontRef fontRef = CTFontCreateWithName((CFStringRef)@"ArialMT",nfont, NULL);
-            NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  (id)[UIColor blackColor].CGColor, kCTForegroundColorAttributeName,
-                                  (__bridge id)fontRef, kCTFontAttributeName,
-                                  (id) [UIColor whiteColor].CGColor, (NSString *) kCTStrokeColorAttributeName,
-                                  (id)[NSNumber numberWithFloat: 0.0f], (NSString *)kCTStrokeWidthAttributeName,
-                                  (__bridge id)paragraphStyle1, (NSString *)kCTParagraphStyleAttributeName,
-                                  nil];
+            NSDictionary *dict = @{NSFontAttributeName: [UIFont systemFontOfSize:15], NSParagraphStyleAttributeName:paragraphStyle,
+                                   NSForegroundColorAttributeName:[UIColor blackColor],
+                                   NSStrokeWidthAttributeName:[NSNumber numberWithFloat:0.0f]};
+            
+            
             NSInteger len = 1500;
             if (textOffset + len >= text.length) {
                 len = text.length - textOffset;
@@ -179,7 +201,7 @@
             NSInteger bytecount = [[s substringWithRange:rangetmp] dataUsingEncoding:NSUTF8StringEncoding].length;
             byteOffset += bytecount;
             
-            CFRelease(fontRef);
+//            CFRelease(fontRef);
             CFRelease(path);
             CFRelease(frame);
             CFRelease(framesetter);

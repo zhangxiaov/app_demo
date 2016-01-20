@@ -34,4 +34,28 @@
 #define NFONT19 19
 #define NFONT20 20
 
+#define	MAX(a,b) (((a)>(b))?(a):(b))
+
+
+//消息类型
+typedef NS_ENUM(NSInteger, ZMessageType) {
+    ZMessageTypeText = 1,
+    ZMessageTypeImage,
+    ZMessageTypeVoice,
+};
+
+//最新数据的位置
+typedef NS_ENUM(NSInteger, ZMessageLastPosition) {
+    ZMessageLastPositionAtTop = 1,
+    ZMessageLastPositionAtBottom,
+};
+
+//键盘弹出后，table滚动其上
+typedef NS_ENUM(NSInteger, ZMessageTableScroll) {
+    ZMessageTableScrollYes = 1,
+    ZMessageTableScrollNo,
+};
+
+#define statusBarHeight  [[UIApplication sharedApplication] statusBarFrame].size.height
+
 #endif
