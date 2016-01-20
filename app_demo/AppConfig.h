@@ -34,4 +34,14 @@
 #define NFONT19 19
 #define NFONT20 20
 
+#define	MAX(a,b) (((a)>(b))?(a):(b))
+
+typedef NS_ENUM(NSInteger, ZMessageType) {
+    ZMessageTypeText = 1,
+    ZMessageTypeImage,
+    ZMessageTypeVoice,
+};
+
+#define statusBarHeight  [[UIApplication sharedApplication] statusBarFrame].size.height
+
 #endif

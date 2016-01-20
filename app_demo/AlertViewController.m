@@ -36,35 +36,25 @@
         [self.view addSubview:button2];
         [self.view addSubview:autoButton];
         
-//        self.navigationController
     }
     return self;
 }
 
 - (void)show {
-    ZAlertView* alertView = [[ZAlertView alloc] initWithTitle:@"text" bodyMsg:nil bottomMsg:@"关闭"];
-//    [alertView showThenHideUntill:5];
-    [alertView showWithBlock:^(NSInteger i) {
-        NSLog(@"xxxxxxx");
+//    ZAlertView* alertView = [[ZAlertView alloc] initWithTitle:@"提示" bodyMsg:@"tetete" button0:@"升级" button1:@"取消"];
+//    [alertView showWithBlock:^(NSInteger i) {
+//        if (i == 0) {
+//            NSLog(@"xxx0000");
+//        }else if (i == 1) {
+//            NSLog(@"xxx1111");
+//        }
+//    }];
+    
+    
+    ZAlertView* alertView = [[ZAlertView alloc] initWithTitle:nil bodyMsg:@"tetetefafafasfadsf站 Gaga 所带来的感觉啊的；个" button0:nil button1:nil];
+    [alertView showUntill:3 withBlock:^(NSInteger i) {
+        
     }];
-    
-    UIButton *tmpBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 100, 100, 10)];
-    tmpBtn.backgroundColor = [UIColor purpleColor];
-    [tmpBtn addTarget:self action:@selector(ttt) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:tmpBtn];
-}
 
-- (void)ttt
-{
-    NSLog(@"&&&&&");
 }
-
-- (void)hide {
-    NSLog(@"tetete");
-}
-
-- (void)auto {
-    
-}
-
 @end

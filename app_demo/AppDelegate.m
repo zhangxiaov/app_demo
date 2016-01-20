@@ -14,6 +14,9 @@
 #import "AdViewController.h"
 #import "EmojiViewController.h"
 #import "AlertViewController.h"
+#import "ZImagePickerController.h"
+#import "ZMessageViewController.h"
+#import "testvc.h"
 
 @interface AppDelegate ()
 
@@ -52,7 +55,16 @@
 
     
     //===
-    AlertViewController* controller = [[AlertViewController alloc] init];
+//    AlertViewController* controller = [[AlertViewController alloc] init];
+//    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:controller];
+//    self.window.rootViewController = navc;
+    
+    //====
+//    ZImagePickerController* controller = [[ZImagePickerController alloc] init];
+//    self.window.rootViewController = controller;
+    
+    //
+    testvc* controller = [[testvc alloc] init];
     UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:controller];
     self.window.rootViewController = navc;
     

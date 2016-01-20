@@ -7,7 +7,8 @@
 //
 
 #import "ZAlertView.h"
-#import "AppConfig.h"
+#define UIColorFromHex(hexvalue) [UIColor colorWithRed:((float)((hexvalue & 0xFF0000) >> 16))/255.0 green:((float)((hexvalue & 0xFF00) >> 8))/255.0 blue:((float)(hexvalue & 0xFF))/255.0 alpha:1.0]
+
 
 typedef void (^AlerViewtBlock)(NSInteger);
 
@@ -20,18 +21,20 @@ typedef void (^AlerViewtBlock)(NSInteger);
 
 @implementation ZAlertView
 
-- (instancetype)initWithTitle:(NSString *)title bodyMsg:(NSString *)bodyMsg bottomMsg:(NSString *)bottomMsg
+- (instancetype)initWithTitle:(NSString *)title bodyMsg:(NSString *)bodyMsg button0:(NSString *)buttonTitle0 button1:(NSString *)buttonTitle1
 {
-    self = [super init];
+    CGFloat w = [UIScreen mainScreen].bounds.size.width;
+    CGFloat h = [UIScreen mainScreen].bounds.size.height;
+    
+    self = [super initWithFrame:CGRectMake(0, 0, w, h)];
     if (self) {
-        CGFloat w = [UIScreen mainScreen].bounds.size.width;
-        CGFloat h = [UIScreen mainScreen].bounds.size.height;
+        
         
         CGFloat iw = 280;
         CGFloat ih = 100;
         
         _grayView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, w, h)];
-        _grayView.backgroundColor = [UIColor blackColor];
+        _grayView.backgroundColor = [UIColor grayColor];
         _grayView.alpha = 0.3;
         
         _innerView = [[UIView alloc] initWithFrame:CGRectMake(w/2-iw/2, h/2-ih/2, iw, ih)];
@@ -47,10 +50,6 @@ typedef void (^AlerViewtBlock)(NSInteger);
             label.userInteractionEnabled = YES;
             
             [_innerView addSubview:label];
-            
-            UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(test)];
-            gesture.numberOfTapsRequired = 1;
-            [label addGestureRecognizer:gesture];
             
             innerHeight += 30;
         }
@@ -82,24 +81,46 @@ typedef void (^AlerViewtBlock)(NSInteger);
             innerHeight += msgH;
             innerHeight += 10;
         }
-
-        if (bottomMsg) {
+        
+        if (buttonTitle0 && buttonTitle1) {
+            CALayer *layer = [CALayer layer];
+            layer.frame = CGRectMake(0, innerHeight, iw, 1);
+            layer.backgroundColor = UIColorFromHex(0xD3D3D3).CGColor;
+            [_innerView.layer addSublayer:layer];
+            
+            UIButton* left = [[UIButton alloc] initWithFrame:CGRectMake(0, innerHeight, iw/2, 30)];
+            [left setTitle:buttonTitle0 forState:UIControlStateNormal];
+            [left setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [left addTarget:self action:@selector(do0) forControlEvents:UIControlEventTouchUpInside];
+            [_innerView addSubview:left];
+            
+            CALayer *layer2 = [CALayer layer];
+            layer2.frame = CGRectMake(iw/2, innerHeight, 1, 30);
+            layer2.backgroundColor = UIColorFromHex(0xD3D3D3).CGColor;
+            [_innerView.layer addSublayer:layer2];
+            
+            UIButton* right = [[UIButton alloc] initWithFrame:CGRectMake(iw/2, innerHeight, iw/2, 30)];
+            [right setTitle:buttonTitle1 forState:UIControlStateNormal];
+            [right setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [right addTarget:self action:@selector(do1) forControlEvents:UIControlEventTouchUpInside];
+            [_innerView addSubview:right];
+            
+            innerHeight += 30;
+        }else if (buttonTitle0 || buttonTitle1){
             CALayer *layer = [CALayer layer];
             layer.frame = CGRectMake(0, innerHeight, iw, 1);
             layer.backgroundColor = UIColorFromHex(0xD3D3D3).CGColor;
             [_innerView.layer addSublayer:layer];
             
             UIButton* left = [[UIButton alloc] initWithFrame:CGRectMake(0, innerHeight, iw, 30)];
-            [left setTitle:bottomMsg forState:UIControlStateNormal];
+            if (buttonTitle0) {
+                [left setTitle:buttonTitle0 forState:UIControlStateNormal];
+            }else {
+                [left setTitle:buttonTitle1 forState:UIControlStateNormal];
+            }
             [left setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [left addTarget:self action:@selector(doClose) forControlEvents:UIControlEventTouchUpInside];
-            
-            
-            NSLog(@"xx %d", left.userInteractionEnabled);
-            left.backgroundColor = [UIColor orangeColor];
+            [left addTarget:self action:@selector(do0) forControlEvents:UIControlEventTouchUpInside];
             [_innerView addSubview:left];
-//            left.backgroundColor = [UIColor orangeColor];
-//            [self addSubview:left];
             
             innerHeight += 30;
         }
@@ -113,23 +134,7 @@ typedef void (^AlerViewtBlock)(NSInteger);
     return self;
 }
 
-- (void)test {
-    NSLog(@"xxx");
-}
-
-- (instancetype)initWithTitle:(NSString *)title bodyMsg:(NSString *)bodyMsg bottomMsg:(NSString *)bottomMsg bottomMsg2:(NSString *)bottomMsg2
-{
-    self = [super init];
-    if (self) {
-
-    }
-    return self;
-}
-
-- (void)doClose {
-    
-    NSLog(@"xxxx");
-    
+- (void)do0 {
     if (_alertViewBlock) {
         _alertViewBlock(0);
     }
@@ -137,67 +142,35 @@ typedef void (^AlerViewtBlock)(NSInteger);
     [self removeFromSuperview];
 }
 
-- (void)hide {
-    
+- (void)do1 {
+    if (_alertViewBlock) {
+        _alertViewBlock(1);
+    }
+    [self removeFromSuperview];
 }
 
 - (void)showWithBlock:(void (^)(NSInteger))block {
     UIWindow* window = [UIApplication sharedApplication].keyWindow;
     
-    NSLog(@"%d k", window.userInteractionEnabled);
-    
     [window addSubview:self];
     _alertViewBlock = block;
 }
 
-- (void)showThenHideUntill:(int)interval {
-    
-    
+- (void)showUntill:(int)interval withBlock:(void (^)(NSInteger))block {
     UIWindow* window = [UIApplication sharedApplication].keyWindow;
+    
     [window addSubview:self];
+    _alertViewBlock = block;
     
-    for (UIView* v in [window subviews]) {
-        if ([v isKindOfClass:[ZAlertView class]]) {
-            NSLog(@"1");
-        }
-        
-        NSLog(@"0");
-    }
-    
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.5];
-    self.innerView.alpha = 0.5;
-    [UIView commitAnimations];
-    
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.5];
-    self.innerView.alpha = 1.0;
-    [UIView commitAnimations];
-    
-//    [NSTimer scheduledTimerWithTimeInterval:interval
-//                                     target:self
-//                                   selector:@selector(timerFireMethod:)
-//                                   userInfo:self
-//                                    repeats:YES];
-    
-//    [self performSelector:@selector(timerFireMethod:) withObject:self afterDelay:interval];
+    [self performSelector:@selector(timerFireMethod:) withObject:self afterDelay:interval];
 }
 
-//- (void)timerFireMethod:(NSTimer*)theTimer {
 - (void)timerFireMethod:(ZAlertView*)promptAlert {
-//    ZAlertView *promptAlert = (ZAlertView*)[theTimer userInfo];
-    
-    [promptAlert removeFromSuperview];
-    
-    UIWindow* window = [UIApplication sharedApplication].keyWindow;
-    for (UIView* v in [window subviews]) {
-        if ([v isKindOfClass:[ZAlertView class]]) {
-            NSLog(@"2 1");
-        }
-        
-        NSLog(@"2 0");
+    if (_alertViewBlock) {
+        _alertViewBlock(0);
     }
     
+    [promptAlert removeFromSuperview];
     promptAlert = NULL;
 }
 

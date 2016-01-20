@@ -10,13 +10,9 @@
 
 @interface ZAlertView : UIView
 
-@property (nonatomic, strong) UIView* bodyView;
+- (instancetype)initWithTitle:(NSString *)title bodyMsg:(NSString *)bodyMsg button0:(NSString *)buttonTitle0 button1:(NSString *)buttonTitle1;
 
-- (instancetype)initWithTitle:(NSString*)title bodyMsg:(NSString*)bodyMsg bottomMsg:(NSString*)bottomMsg;
+- (void)showWithBlock:(void (^)(NSInteger i))block;
 
-- (instancetype)initWithTitle:(NSString*)title bodyMsg:(NSString*)bodyMsg bottomMsg:(NSString*)bottomMsg bottomMsg2:(NSString*)bottomMsg2;
-
-- (void)showThenHideUntill:(int)interval;
-
-- (void)showWithBlock:(void (^)(NSInteger))block;
+- (void)showUntill:(int)interval withBlock:(void (^)(NSInteger i))block;
 @end

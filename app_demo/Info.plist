@@ -8,7 +8,7 @@
 		<true/>
 	</dict>
 	<key>CFBundleDisplayName</key>
-	<string></string>
+	<string>app_demo</string>
 	<key>NSAllowsArbitraryLoads</key>
 	<true/>
 	<key>LSApplicationCategoryType</key>
