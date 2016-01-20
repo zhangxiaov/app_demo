@@ -59,6 +59,7 @@ const CGFloat kGroupMinInputBarHeight             = 46.0f;
 @property (nonatomic, strong) ZMessageList* messageList;
 @property (nonatomic, strong) ZMessageSession* messageSession;
 @property (nonatomic, strong) ZMessageDataSource* dataSource;
+@property (nonatomic) ZMessageLastPosition lastMessagePostion;
 
 @end
 
@@ -69,6 +70,7 @@ const CGFloat kGroupMinInputBarHeight             = 46.0f;
     [super viewDidLoad];
     
     self.title = @"聊";
+    _lastMessagePostion = ZMessageLastPositionAtBottom;
     [self.view addSubview:self.tableView];
     [self.messageList fetchLatestMessages];
 }

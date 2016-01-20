@@ -42,6 +42,11 @@ typedef NS_ENUM(NSInteger, ZMessageType) {
     ZMessageTypeVoice,
 };
 
+typedef NS_ENUM(NSInteger, ZMessageLastPosition) {
+    ZMessageLastPositionAtTop = 1,
+    ZMessageLastPositionAtBottom,
+};
+
 #define statusBarHeight  [[UIApplication sharedApplication] statusBarFrame].size.height
 
 #endif
