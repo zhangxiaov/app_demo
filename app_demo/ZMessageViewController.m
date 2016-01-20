@@ -59,8 +59,9 @@ const CGFloat kGroupMinInputBarHeight             = 46.0f;
 @property (nonatomic, strong) ZMessageList* messageList;
 @property (nonatomic, strong) ZMessageSession* messageSession;
 @property (nonatomic, strong) ZMessageDataSource* dataSource;
-@property (nonatomic) ZMessageLastPosition lastMessagePostion;
 
+@property (nonatomic) ZMessageLastPosition lastMessagePostion;
+@property (nonatomic) ZMessageTableScroll tableScrollWhenShowPad;
 @end
 
 @implementation ZMessageViewController
@@ -97,6 +98,30 @@ const CGFloat kGroupMinInputBarHeight             = 46.0f;
 }
 
 #pragma mark private
+
+- (void)refreshLastMessage {
+    switch (_lastMessagePostion) {
+        case ZMessageLastPositionAtBottom:
+            ;
+            break;
+        case ZMessageLastPositionAtTop:
+            ;
+        default:
+            break;
+    }
+}
+
+- (void)refreshOldMessage {
+    switch (_lastMessagePostion) {
+        case ZMessageLastPositionAtBottom:
+            ;
+            break;
+        case ZMessageLastPositionAtTop:
+            ;
+        default:
+            break;
+    }
+}
 
 - (void)needMoveTableWhenSendMessage {
     
