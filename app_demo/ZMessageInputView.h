@@ -63,6 +63,7 @@ typedef NS_ENUM(NSInteger, ZMessageInputViewKeyboradType) {
 
 @property (nonatomic, copy) NSString* placeholder;
 @property (nonatomic) ZMessageInputViewKeyboradType keyboardType;
+@property (nonatomic) CGFloat fontSize;
 
 - (void)prepareToShow:(BOOL)useGrayView;
 - (void)disappear;
