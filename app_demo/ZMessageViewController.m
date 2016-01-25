@@ -165,6 +165,7 @@ const CGFloat kGroupMinInputBarHeight             = 46.0f;
 - (void)sendMessage:(ZMessageModel*)message {
     [self.messageList.messages addObject:message];
     
+    
     [self.tableView reloadData];
     
     [self.messageList sendMessage:message];
