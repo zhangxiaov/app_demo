@@ -14,43 +14,13 @@
 #import "ZMessageModel.h"
 #import "ZMessageCell.h"
 
-/**
- *  默认的placeholder
- */
 static const NSString* DEFAULT_PLACE_HOLDER = @"我来说两句";
 
-/**
- *  水平方向的PADDING
- */
-static const CGFloat PADDING_FOR_VIEW_H = 10;
-
-/**
- *  垂直方向的PADDING
- */
 static const CGFloat PADDING_FOR_VIEW_V = 5;
 
-static const CGFloat GAP_BTWN_BTNS = 5;
-
-/**
- *  录音按钮的字体的大小
- */
-static const CGFloat FONT_SIZE_FOR_VOICEINPUT = 18;
-
-/**
- *  最小的，也是原始的输入框的高度
- */
 static const CGFloat MIN_HEIGHT_FOR_INPUT_VIEW = 36;
 
-/**
- *  文本字体大小
- */
-static const CGFloat FONT_SIZE_FOR_INPUT = 16.f;
-
-static const CGFloat WIDTH_FOR_COMMIT_BTN = 75;
-
-static const CGFloat SIZE_FOR_BTN = 36;
-
-const CGFloat kGroupMinInputBarHeight             = 46.0f;
+const CGFloat kGroupMinInputBarHeight = 46.0f;
 
 
 @interface ZMessageViewController () <ZMessageListDelegate, ZMessageInputViewDelegate, UITableViewDelegate, UITableViewDataSource>
@@ -163,11 +133,15 @@ const CGFloat kGroupMinInputBarHeight             = 46.0f;
 }
 
 - (void)sendMessage:(ZMessageModel*)message {
+    
+
+    //本地展示
     [self.messageList.messages addObject:message];
-    
-    
+
     [self.tableView reloadData];
+    [self scrollToBottom:YES];
     
+    //送至服务器
     [self.messageList sendMessage:message];
 }
 
@@ -180,9 +154,7 @@ const CGFloat kGroupMinInputBarHeight             = 46.0f;
 }
 
 - (void)scrollToBottom:(BOOL)animated {
-    NSLog(@"%f, %f, %f, %f", self.tableView.frame.origin.y, self.view.frame.origin.y, statusBarHeight, self.navigationController.navigationBar.frame.size.height);
-    CGFloat top = statusBarHeight + self.navigationController.navigationBar.frame.size.height;
-    CGFloat offset = self.tableView.bounds.origin.y + (top + self.tableView.contentSize.height - SCREEN_HEIGHT) + MIN_HEIGHT_FOR_INPUT_VIEW + PADDING_FOR_VIEW_V*2;
+    CGFloat offset = MAX(self.tableView.contentSize.height - CGRectGetHeight(self.tableView.bounds), 0);
     [self.tableView setContentOffset:CGPointMake(0.0, offset) animated:animated];
 }
 
@@ -210,9 +182,10 @@ const CGFloat kGroupMinInputBarHeight             = 46.0f;
     ZMessageCell* cell = [tableView dequeueReusableCellWithIdentifier:[ZMessageCell reuseIdentifier]];
     if (cell == nil) {
         cell = [[ZMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[ZMessageCell reuseIdentifier]];
-        [cell updateWithMessage:self.messageList.messages[indexPath.row]];
     }
     
+    [cell updateWithMessage:self.messageList.messages[indexPath.row]];
+
     return cell;
 }
 
@@ -243,13 +216,7 @@ const CGFloat kGroupMinInputBarHeight             = 46.0f;
     message.text = text;
     message.messageType = ZMessageTypeText;
     
-//    self.dataSource
-    
-    NSLog(@"%f, %f, %f, %f", self.tableView.contentOffset.x, self.tableView.contentOffset.y, self.tableView.bounds.origin.x, self.tableView.bounds.origin.y);
-    
     [self sendMessage:message];
-    
-    
 }
 
 #pragma mark setter

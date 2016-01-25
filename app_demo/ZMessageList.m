@@ -57,7 +57,7 @@
 }
 
 - (void)sendMessage:(ZMessageModel *)message {
-    [self.messages addObject:message];
+//    [self.messages addObject:message];
 }
 
 #pragma mark event

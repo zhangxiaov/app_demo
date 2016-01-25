@@ -12,28 +12,16 @@
 #import "UIView+ZFrame.h"
 #import "ZTextView.h"
 
-/**
- *  水平方向的PADDING
- */
 static const CGFloat PADDING_FOR_VIEW_H = 10;
 
-/**
- *  垂直方向的PADDING
- */
 static const CGFloat PADDING_FOR_VIEW_V = 5;
 
 static const CGFloat GAP_BTWN_BTNS = 5;
 
-/**
- *  录音按钮的字体的大小
- */
-static const CGFloat FONT_SIZE_FOR_VOICEINPUT = 18;
-
-/**
- *  最小的，也是原始的输入框的高度
- */
 static const CGFloat MIN_HEIGHT_FOR_INPUT_VIEW = 36;
+
 static const CGFloat SIZE_FOR_BTN = 36;
+
 static CGFloat DURATION_FOR_VIEW = 0.25f;
 
 static const CGFloat addPadHeight = 50;
@@ -53,7 +41,7 @@ static const CGFloat addPadHeight = 50;
 
 - (instancetype)initWithType:(ZMessageInputViewType)type andWithPlaceHolder:(NSString *)placeHolder
 {
-     CGRect f = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, MIN_HEIGHT_FOR_INPUT_VIEW + PADDING_FOR_VIEW_V * 2);
+    CGRect f = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, MIN_HEIGHT_FOR_INPUT_VIEW + PADDING_FOR_VIEW_V * 2);
     self = [super initWithFrame:f];
     if (self) {
         [self loadViewWithViewType:type];
@@ -62,7 +50,6 @@ static const CGFloat addPadHeight = 50;
         }
         _fontSize = 15;
         self.backgroundColor = UIColorFromHex(0xF8F9FA);
-//        self.backgroundColor = [UIColor grayColor];
     }
     return self;
 }
@@ -150,12 +137,9 @@ static const CGFloat addPadHeight = 50;
                      }
                      completion:^(BOOL finished) {
                          [weakSelf removeFromSuperview];
+                         [weakSelf.addPadView removeFromSuperview];
+                         [weakSelf.grayView removeFromSuperview];
                      }];
-    
-}
-
-- (void)dealloc {
-    NSLog(@"xx");
 }
 
 - (void)loadViewWithViewType:(ZMessageInputViewType)type {
@@ -179,55 +163,9 @@ static const CGFloat addPadHeight = 50;
         default:
             break;
     }
-
 }
 
-- (void)changeGrayViewFrame {
-    if (_useGrayView) {
-        self.grayView.hidden = NO;
-        CGRect grayViewFrame = self.grayView.frame;
-        grayViewFrame.size.height = SCREEN_HEIGHT - (MIN_HEIGHT_FOR_INPUT_VIEW + _keyboardHeight + PADDING_FOR_VIEW_V*2);
-        self.grayView.frame = grayViewFrame;
-    }
-}
-
-- (void)changePadView:(BOOL)animation {
-    CGRect frame = self.frame;
-    switch (_keyboardType) {
-        case ZMessageInputViewKeyboradTypeNone:
-            ;
-            frame.size.height = MIN_HEIGHT_FOR_INPUT_VIEW + PADDING_FOR_VIEW_V*2;
-            frame.origin.y = SCREEN_HEIGHT - (MIN_HEIGHT_FOR_INPUT_VIEW + PADDING_FOR_VIEW_V*2);
-            break;
-        case ZMessageInputViewKeyboradTypeAddPad:
-            ;
-            frame.size.height = MIN_HEIGHT_FOR_INPUT_VIEW + PADDING_FOR_VIEW_V*2 + addPadHeight;
-            frame.origin.y = SCREEN_HEIGHT - (MIN_HEIGHT_FOR_INPUT_VIEW + PADDING_FOR_VIEW_V*2 + addPadHeight);
-            break;
-        case ZMessageInputViewKeyboradTypeKeyPad:
-            ;
-            frame.size.height = MIN_HEIGHT_FOR_INPUT_VIEW + PADDING_FOR_VIEW_V*2 + _keyboardHeight;
-            frame.origin.y = SCREEN_HEIGHT - (MIN_HEIGHT_FOR_INPUT_VIEW + PADDING_FOR_VIEW_V*2 + _keyboardHeight);
-            break;
-        case ZMessageInputViewKeyboradTypeVoicePad:
-            ;
-            frame.size.height = MIN_HEIGHT_FOR_INPUT_VIEW + PADDING_FOR_VIEW_V*2;
-            frame.origin.y = SCREEN_HEIGHT - (MIN_HEIGHT_FOR_INPUT_VIEW + PADDING_FOR_VIEW_V*2);
-            break;
-        default:
-            break;
-    }
-    if (animation) {
-        [UIView animateWithDuration:DURATION_FOR_VIEW animations:^{
-            self.frame= frame;
-        }];
-    }else{
-        self.frame= frame;
-    }
-
-}
-
-#pragma mark event
+#pragma mark Event
 
 - (void)grayViewTaped {
     self.grayView.hidden = YES;
@@ -274,11 +212,38 @@ static const CGFloat addPadHeight = 50;
     [self SetInputViewFrame:YES];
 }
 
+#pragma mark UITextViewDelegate
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        
+        if (textView.text.length > 0) {
+            [self sendText:textView.text];
+        }
+        return NO;
+    }
+    
+    if (textView.text.length > 0) {
+        [self SetInputViewFrame:NO];
+    }
+    
+    return YES;
+}
+
+#pragma mark private
+
 - (void)sendText:(NSString*)text {
     if (text && [text isKindOfClass:[NSString class]]) {
         if (text.length > 0) {
             if (self.delegate && [self.delegate respondsToSelector:@selector(inputView:didTextSendWithText:)]) {
                 [self.delegate inputView:self didTextSendWithText:text];
+                
+                //
+                _keyboardType = ZMessageInputViewKeyboradTypeNone;
+                self.textView.text = @"";
+                [self SetInputViewFrame:YES];
+
             }
         }
         else {
@@ -286,34 +251,13 @@ static const CGFloat addPadHeight = 50;
         }
         
         NSLog(@"send text%@", text);
-        
-        _keyboardType = ZMessageInputViewKeyboradTypeNone;
-        self.textView.text = @"";
-        [self SetInputViewFrame:YES];
     }
     else {
         NSLog(@"sendText -- 不是文字，不能发送");
     }
-    
-    
 }
 
-#pragma mark UITextViewDelegate
 
-- (void)textViewDidChange:(UITextView *)textView {
-    if (textView.text.length > 0) {
-        [self SetInputViewFrame:NO];
-    }
-}
-
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if (textView.text.length <= 0 && ![textView.text isEqualToString:@"\n"]) {
-        return NO;
-    }
-    
-    [self sendText:textView.text];
-    return YES;
-}
 
 #pragma mark setter getter
 

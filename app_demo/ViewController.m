@@ -30,6 +30,24 @@
 }
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    
+    //frame bounds
+    // http://www.tuicool.com/articles/eENVra
+    //frame变成了{{25, 25}, {250, 250}}了。25是如何得出的？bounds比frame长，宽各大了50像素，那么四条边平衡一下，各溢出“25”像素
+    //溢
+    UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(20, 20, 120, 120)];
+    [view1 setBounds:CGRectMake(10, 10, 150, 150)];
+    view1.backgroundColor = [UIColor redColor];
+    [self.view addSubview:view1];//添加到self.view
+    NSLog(@"view1 frame:%@========view1 bounds:%@",NSStringFromCGRect(view1.frame),NSStringFromCGRect(view1.bounds));
+    
+    UIView *view2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    view2.backgroundColor = [UIColor yellowColor];
+    [view1 addSubview:view2];//添加到view1上,[此时view1坐标系左上角起点为(-20,-20)]
+    NSLog(@"view2 frame:%@========view2 bounds:%@",NSStringFromCGRect(view2.frame),NSStringFromCGRect(view2.bounds));
+    
 //    self.view.backgroundColor = [UIColor whiteColor];
 //
 //    DemoLabel *label = [[DemoLabel alloc] initWithFrame:CGRectMake(10, 50, SCREEN_WIDTH - 20, SCREEN_HEIGHT - 50)];
@@ -51,8 +69,10 @@
 //    self.view.backgroundColor = [UIColor grayColor];
 //    [self.view addSubview:checkbox];
     
-    Animationdemo *a = [[Animationdemo alloc] initWithFrame:CGRectMake(0, 350, 100, 30)];
-    [self.view addSubview:a];
+//    Animationdemo *a = [[Animationdemo alloc] initWithFrame:CGRectMake(0, 350, 100, 30)];
+//    [self.view addSubview:a];
+    
+    
 }
 
 @end
