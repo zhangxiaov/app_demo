@@ -10,4 +10,7 @@
 
 @interface AppUtils : NSObject
 + (NSData *)data:(NSString *)path;
+
++ (float)heightForText:(NSString*)text;
+
 @end

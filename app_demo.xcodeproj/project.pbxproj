@@ -18,6 +18,14 @@
 		ED24C6A81C2B8276001103D8 /* MSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED24C6A71C2B8276001103D8 /* MSViewController.m */; };
 		ED24C6C41C2D3DD9001103D8 /* ZImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED24C6C31C2D3DD9001103D8 /* ZImagePickerController.m */; };
 		ED4A71A41C560DDE000094F1 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4A71A31C560DDE000094F1 /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		ED4A71A91C57089A000094F1 /* ZBookshelfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4A71A81C57089A000094F1 /* ZBookshelfViewController.m */; };
+		ED4A71AD1C570DA5000094F1 /* ZBookshelfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4A71AC1C570DA5000094F1 /* ZBookshelfCell.m */; };
+		ED4A71B11C571455000094F1 /* ZBookshelfSupplementaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4A71B01C571455000094F1 /* ZBookshelfSupplementaryView.m */; };
+		ED4A71B51C571894000094F1 /* ZBookInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4A71B41C571894000094F1 /* ZBookInfo.m */; };
+		ED4A71B91C57202D000094F1 /* ZBookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4A71B81C57202D000094F1 /* ZBookManager.m */; };
+		ED4A71BC1C57205B000094F1 /* ZModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4A71BB1C57205B000094F1 /* ZModel.m */; };
+		ED4A71C11C572375000094F1 /* FMDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED4A71C01C572375000094F1 /* FMDatabase.framework */; };
+		ED4A71C41C5723A1000094F1 /* ZDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4A71C31C5723A1000094F1 /* ZDBManager.m */; };
 		ED53BE111BE382F50033A666 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED53BE101BE382F50033A666 /* libsqlite3.0.dylib */; };
 		ED53BE141BE452EC0033A666 /* Animationdemo.m in Sources */ = {isa = PBXBuildFile; fileRef = ED53BE131BE452EC0033A666 /* Animationdemo.m */; };
 		ED53BE171BE459E10033A666 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED53BE161BE459E10033A666 /* CommentViewController.m */; };
@@ -49,6 +57,13 @@
 		ED5AFC5B1BD0B76E00612E3C /* MISAskAddFile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED5AFB791BD0B76D00612E3C /* MISAskAddFile@2x.png */; };
 		ED602A431BC4CDCF00DB1A3B /* Dao.m in Sources */ = {isa = PBXBuildFile; fileRef = ED602A421BC4CDCF00DB1A3B /* Dao.m */; };
 		ED7042C71BD9E65200FED349 /* test.txt in Resources */ = {isa = PBXBuildFile; fileRef = ED7042C61BD9E65200FED349 /* test.txt */; };
+		ED835AE61C5726DD00F0BCFD /* ZTCPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ED835AE51C5726DD00F0BCFD /* ZTCPManager.m */; };
+		ED835AE91C574EAC00F0BCFD /* ZBookInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED835AE81C574EAC00F0BCFD /* ZBookInfoViewController.m */; };
+		ED835AED1C575CF900F0BCFD /* ZUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = ED835AEC1C575CF900F0BCFD /* ZUtil.m */; };
+		ED835AF01C5760C900F0BCFD /* ZMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED835AEF1C5760C900F0BCFD /* ZMainViewController.m */; };
+		ED835AF31C57627E00F0BCFD /* ZBookLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED835AF21C57627E00F0BCFD /* ZBookLibraryViewController.m */; };
+		ED835AF61C57651800F0BCFD /* ZBookContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED835AF51C57651800F0BCFD /* ZBookContentViewController.m */; };
+		ED835AF91C576B8500F0BCFD /* ZSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = ED835AF81C576B8500F0BCFD /* ZSetting.m */; };
 		ED8C294F1C02AE6D00778A08 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C294E1C02AE6D00778A08 /* Comment.m */; };
 		ED8C29521C02EDCE00778A08 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C29511C02EDCD00778A08 /* CommentCell.m */; };
 		ED9779021C3152510078C174 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED9779011C3152500078C174 /* Photos.framework */; };
@@ -109,6 +124,22 @@
 		ED24C6C51C2D3EB9001103D8 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		ED4A71A21C560DDE000094F1 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
 		ED4A71A31C560DDE000094F1 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		ED4A71A71C57089A000094F1 /* ZBookshelfViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBookshelfViewController.h; sourceTree = "<group>"; };
+		ED4A71A81C57089A000094F1 /* ZBookshelfViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBookshelfViewController.m; sourceTree = "<group>"; };
+		ED4A71AB1C570DA5000094F1 /* ZBookshelfCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBookshelfCell.h; sourceTree = "<group>"; };
+		ED4A71AC1C570DA5000094F1 /* ZBookshelfCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBookshelfCell.m; sourceTree = "<group>"; };
+		ED4A71AF1C571455000094F1 /* ZBookshelfSupplementaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBookshelfSupplementaryView.h; sourceTree = "<group>"; };
+		ED4A71B01C571455000094F1 /* ZBookshelfSupplementaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBookshelfSupplementaryView.m; sourceTree = "<group>"; };
+		ED4A71B31C571894000094F1 /* ZBookInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBookInfo.h; sourceTree = "<group>"; };
+		ED4A71B41C571894000094F1 /* ZBookInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBookInfo.m; sourceTree = "<group>"; };
+		ED4A71B71C57202D000094F1 /* ZBookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBookManager.h; sourceTree = "<group>"; };
+		ED4A71B81C57202D000094F1 /* ZBookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBookManager.m; sourceTree = "<group>"; };
+		ED4A71BA1C57205B000094F1 /* ZModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZModel.h; sourceTree = "<group>"; };
+		ED4A71BB1C57205B000094F1 /* ZModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZModel.m; sourceTree = "<group>"; };
+		ED4A71BE1C572282000094F1 /* enum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = enum.h; sourceTree = "<group>"; };
+		ED4A71C01C572375000094F1 /* FMDatabase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FMDatabase.framework; sourceTree = "<group>"; };
+		ED4A71C21C5723A1000094F1 /* ZDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDBManager.h; sourceTree = "<group>"; };
+		ED4A71C31C5723A1000094F1 /* ZDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDBManager.m; sourceTree = "<group>"; };
 		ED53BE101BE382F50033A666 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		ED53BE121BE452EC0033A666 /* Animationdemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animationdemo.h; sourceTree = "<group>"; };
 		ED53BE131BE452EC0033A666 /* Animationdemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animationdemo.m; sourceTree = "<group>"; };
@@ -165,6 +196,20 @@
 		ED602A411BC4CDCF00DB1A3B /* Dao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dao.h; sourceTree = "<group>"; };
 		ED602A421BC4CDCF00DB1A3B /* Dao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dao.m; sourceTree = "<group>"; };
 		ED7042C61BD9E65200FED349 /* test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.txt; sourceTree = "<group>"; };
+		ED835AE41C5726DD00F0BCFD /* ZTCPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZTCPManager.h; sourceTree = "<group>"; };
+		ED835AE51C5726DD00F0BCFD /* ZTCPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZTCPManager.m; sourceTree = "<group>"; };
+		ED835AE71C574EAC00F0BCFD /* ZBookInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBookInfoViewController.h; sourceTree = "<group>"; };
+		ED835AE81C574EAC00F0BCFD /* ZBookInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBookInfoViewController.m; sourceTree = "<group>"; };
+		ED835AEB1C575CF900F0BCFD /* ZUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUtil.h; sourceTree = "<group>"; };
+		ED835AEC1C575CF900F0BCFD /* ZUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUtil.m; sourceTree = "<group>"; };
+		ED835AEE1C5760C900F0BCFD /* ZMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMainViewController.h; sourceTree = "<group>"; };
+		ED835AEF1C5760C900F0BCFD /* ZMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMainViewController.m; sourceTree = "<group>"; };
+		ED835AF11C57627E00F0BCFD /* ZBookLibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBookLibraryViewController.h; sourceTree = "<group>"; };
+		ED835AF21C57627E00F0BCFD /* ZBookLibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBookLibraryViewController.m; sourceTree = "<group>"; };
+		ED835AF41C57651800F0BCFD /* ZBookContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBookContentViewController.h; sourceTree = "<group>"; };
+		ED835AF51C57651800F0BCFD /* ZBookContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBookContentViewController.m; sourceTree = "<group>"; };
+		ED835AF71C576B8500F0BCFD /* ZSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSetting.h; sourceTree = "<group>"; };
+		ED835AF81C576B8500F0BCFD /* ZSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZSetting.m; sourceTree = "<group>"; };
 		ED8C294D1C02AE6D00778A08 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		ED8C294E1C02AE6D00778A08 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		ED8C29501C02EDCD00778A08 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
@@ -221,6 +266,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED4A71C11C572375000094F1 /* FMDatabase.framework in Frameworks */,
 				ED5A777A1C4CDC2E009038E2 /* Masonry.framework in Frameworks */,
 				ED9779021C3152510078C174 /* Photos.framework in Frameworks */,
 				ED53BE111BE382F50033A666 /* libsqlite3.0.dylib in Frameworks */,
@@ -255,6 +301,85 @@
 			name = CFNetwork;
 			sourceTree = "<group>";
 		};
+		ED4A71A61C570817000094F1 /* viewcontroller */ = {
+			isa = PBXGroup;
+			children = (
+				ED4A71A71C57089A000094F1 /* ZBookshelfViewController.h */,
+				ED4A71A81C57089A000094F1 /* ZBookshelfViewController.m */,
+				ED835AE71C574EAC00F0BCFD /* ZBookInfoViewController.h */,
+				ED835AE81C574EAC00F0BCFD /* ZBookInfoViewController.m */,
+				ED835AEE1C5760C900F0BCFD /* ZMainViewController.h */,
+				ED835AEF1C5760C900F0BCFD /* ZMainViewController.m */,
+				ED835AF11C57627E00F0BCFD /* ZBookLibraryViewController.h */,
+				ED835AF21C57627E00F0BCFD /* ZBookLibraryViewController.m */,
+				ED835AF41C57651800F0BCFD /* ZBookContentViewController.h */,
+				ED835AF51C57651800F0BCFD /* ZBookContentViewController.m */,
+			);
+			name = viewcontroller;
+			sourceTree = "<group>";
+		};
+		ED4A71AA1C570D88000094F1 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				ED4A71AB1C570DA5000094F1 /* ZBookshelfCell.h */,
+				ED4A71AC1C570DA5000094F1 /* ZBookshelfCell.m */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		ED4A71AE1C57142B000094F1 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				ED4A71AF1C571455000094F1 /* ZBookshelfSupplementaryView.h */,
+				ED4A71B01C571455000094F1 /* ZBookshelfSupplementaryView.m */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		ED4A71B21C571878000094F1 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				ED4A71B31C571894000094F1 /* ZBookInfo.h */,
+				ED4A71B41C571894000094F1 /* ZBookInfo.m */,
+				ED4A71BA1C57205B000094F1 /* ZModel.h */,
+				ED4A71BB1C57205B000094F1 /* ZModel.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		ED4A71B61C571FFF000094F1 /* manager */ = {
+			isa = PBXGroup;
+			children = (
+				ED4A71B71C57202D000094F1 /* ZBookManager.h */,
+				ED4A71B81C57202D000094F1 /* ZBookManager.m */,
+				ED4A71C21C5723A1000094F1 /* ZDBManager.h */,
+				ED4A71C31C5723A1000094F1 /* ZDBManager.m */,
+				ED835AE41C5726DD00F0BCFD /* ZTCPManager.h */,
+				ED835AE51C5726DD00F0BCFD /* ZTCPManager.m */,
+			);
+			name = manager;
+			sourceTree = "<group>";
+		};
+		ED4A71BD1C57225F000094F1 /* enum */ = {
+			isa = PBXGroup;
+			children = (
+				ED4A71BE1C572282000094F1 /* enum.h */,
+			);
+			name = enum;
+			sourceTree = "<group>";
+		};
+		ED4A71BF1C572343000094F1 /* framework */ = {
+			isa = PBXGroup;
+			children = (
+				ED4A71C01C572375000094F1 /* FMDatabase.framework */,
+				ED53BE101BE382F50033A666 /* libsqlite3.0.dylib */,
+				ED5A77791C4CDC2E009038E2 /* Masonry.framework */,
+				ED9779011C3152500078C174 /* Photos.framework */,
+				ED24C6C51C2D3EB9001103D8 /* AssetsLibrary.framework */,
+			);
+			name = framework;
+			sourceTree = "<group>";
+		};
 		ED5AFB781BD0B76D00612E3C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +398,17 @@
 				ED602A421BC4CDCF00DB1A3B /* Dao.m */,
 			);
 			path = sql;
+			sourceTree = "<group>";
+		};
+		ED835AEA1C575CE800F0BCFD /* util */ = {
+			isa = PBXGroup;
+			children = (
+				ED835AEB1C575CF900F0BCFD /* ZUtil.h */,
+				ED835AEC1C575CF900F0BCFD /* ZUtil.m */,
+				ED835AF71C576B8500F0BCFD /* ZSetting.h */,
+				ED835AF81C576B8500F0BCFD /* ZSetting.m */,
+			);
+			name = util;
 			sourceTree = "<group>";
 		};
 		EDB229751C51CB1800D4E50C /* message */ = {
@@ -333,10 +469,7 @@
 		EDFCA7321BB1734F00AF49EA = {
 			isa = PBXGroup;
 			children = (
-				ED5A77791C4CDC2E009038E2 /* Masonry.framework */,
-				ED9779011C3152500078C174 /* Photos.framework */,
-				ED24C6C51C2D3EB9001103D8 /* AssetsLibrary.framework */,
-				ED53BE101BE382F50033A666 /* libsqlite3.0.dylib */,
+				ED4A71BF1C572343000094F1 /* framework */,
 				ED5AFB781BD0B76D00612E3C /* Resources */,
 				EDD343A61BC6C1D300204C80 /* test.txt */,
 				ED571E391BD735DC007D5B66 /* Regx.h */,
@@ -359,6 +492,13 @@
 		EDFCA73D1BB1734F00AF49EA /* app_demo */ = {
 			isa = PBXGroup;
 			children = (
+				ED835AEA1C575CE800F0BCFD /* util */,
+				ED4A71BD1C57225F000094F1 /* enum */,
+				ED4A71B61C571FFF000094F1 /* manager */,
+				ED4A71B21C571878000094F1 /* model */,
+				ED4A71AE1C57142B000094F1 /* view */,
+				ED4A71AA1C570D88000094F1 /* cell */,
+				ED4A71A61C570817000094F1 /* viewcontroller */,
 				EDF09CFF1C5641CD00B11970 /* socket */,
 				ED4A71A51C56226D000094F1 /* CFNetwork */,
 				ED4A71A11C560DA2000094F1 /* gcdsocket */,
@@ -602,6 +742,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED00794E1C0E907300B87D99 /* SkViewController.m in Sources */,
+				ED4A71AD1C570DA5000094F1 /* ZBookshelfCell.m in Sources */,
+				ED835AE61C5726DD00F0BCFD /* ZTCPManager.m in Sources */,
+				ED4A71C41C5723A1000094F1 /* ZDBManager.m in Sources */,
 				ED58E7DC1C3110E900247997 /* ZSelectImageView.m in Sources */,
 				ED53BE1A1BE45AF00033A666 /* Book.m in Sources */,
 				ED53BE141BE452EC0033A666 /* Animationdemo.m in Sources */,
@@ -616,13 +759,18 @@
 				ED5A77751C4CD5E4009038E2 /* ZMessageViewController.m in Sources */,
 				ED0078FD1C0BEE3D00B87D99 /* CommentTextView.m in Sources */,
 				ED5A77781C4CD6EC009038E2 /* ZMessageInputView.m in Sources */,
+				ED835AF31C57627E00F0BCFD /* ZBookLibraryViewController.m in Sources */,
 				ED5A779A1C4F2420009038E2 /* backup.m in Sources */,
 				ED5AF7EE1BCFA61600612E3C /* DemoLabel.m in Sources */,
 				EDFCA7471BB1734F00AF49EA /* ViewController.m in Sources */,
 				EDD38DF01BB7BA41001878DC /* AppLabel.m in Sources */,
+				ED835AF91C576B8500F0BCFD /* ZSetting.m in Sources */,
 				EDFFE2BC1BDE0EF200944745 /* Pagination.m in Sources */,
+				ED835AF61C57651800F0BCFD /* ZBookContentViewController.m in Sources */,
+				ED4A71B91C57202D000094F1 /* ZBookManager.m in Sources */,
 				ED5A77811C4CE47F009038E2 /* ZGrowingTextView.m in Sources */,
 				ED5A77A61C4F33A6009038E2 /* ZMessageSession.m in Sources */,
+				ED4A71B11C571455000094F1 /* ZBookshelfSupplementaryView.m in Sources */,
 				ED8C294F1C02AE6D00778A08 /* Comment.m in Sources */,
 				EDFCA7441BB1734F00AF49EA /* AppDelegate.m in Sources */,
 				ED5A77871C4CF3F4009038E2 /* testvc.m in Sources */,
@@ -638,13 +786,19 @@
 				EDF09D021C5648B600B11970 /* cfnetworkVC.m in Sources */,
 				ED0079001C0D4EFE00B87D99 /* AdViewController.m in Sources */,
 				ED53BE171BE459E10033A666 /* CommentViewController.m in Sources */,
+				ED835AED1C575CF900F0BCFD /* ZUtil.m in Sources */,
 				ED5AF7EB1BCF5E9600612E3C /* AppTableViewCell.m in Sources */,
+				ED4A71B51C571894000094F1 /* ZBookInfo.m in Sources */,
 				EDD38DF91BB80FEF001878DC /* UILabel+VerticalAlign.m in Sources */,
+				ED835AF01C5760C900F0BCFD /* ZMainViewController.m in Sources */,
 				EDD343A21BC6879D00204C80 /* ClientServer.m in Sources */,
 				ED24C6C41C2D3DD9001103D8 /* ZImagePickerController.m in Sources */,
 				ED4A71A41C560DDE000094F1 /* GCDAsyncSocket.m in Sources */,
 				ED0079541C0ED8AE00B87D99 /* SimpleServerSocket.m in Sources */,
+				ED4A71A91C57089A000094F1 /* ZBookshelfViewController.m in Sources */,
 				ED5AF7E51BCE466800612E3C /* AppHomeViewController.m in Sources */,
+				ED4A71BC1C57205B000094F1 /* ZModel.m in Sources */,
+				ED835AE91C574EAC00F0BCFD /* ZBookInfoViewController.m in Sources */,
 				ED602A431BC4CDCF00DB1A3B /* Dao.m in Sources */,
 				ED571E3B1BD735DC007D5B66 /* Regx.m in Sources */,
 				ED5AF7E21BCE461300612E3C /* AppMainViewController.m in Sources */,
