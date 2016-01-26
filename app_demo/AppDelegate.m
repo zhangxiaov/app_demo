@@ -17,6 +17,7 @@
 #import "ZImagePickerController.h"
 #import "ZMessageViewController.h"
 #import "testvc.h"
+#import "cfnetworkVC.h"
 
 @interface AppDelegate ()
 
@@ -64,8 +65,14 @@
 //    self.window.rootViewController = controller;
     
     //
-    testvc* controller = [[testvc alloc] init];
-    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:controller];
+//    testvc* controller = [[testvc alloc] init];
+//    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:controller];
+//    self.window.rootViewController = navc;
+    
+    
+    //
+    cfnetworkVC* vc = [[cfnetworkVC alloc] init];
+    UINavigationController* navc = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = navc;
     
     [self.window makeKeyAndVisible];

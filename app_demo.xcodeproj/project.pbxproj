@@ -17,6 +17,7 @@
 		ED007A641C1FAF6300B87D99 /* AlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED007A631C1FAF6300B87D99 /* AlertViewController.m */; };
 		ED24C6A81C2B8276001103D8 /* MSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED24C6A71C2B8276001103D8 /* MSViewController.m */; };
 		ED24C6C41C2D3DD9001103D8 /* ZImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED24C6C31C2D3DD9001103D8 /* ZImagePickerController.m */; };
+		ED4A71A41C560DDE000094F1 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4A71A31C560DDE000094F1 /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		ED53BE111BE382F50033A666 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED53BE101BE382F50033A666 /* libsqlite3.0.dylib */; };
 		ED53BE141BE452EC0033A666 /* Animationdemo.m in Sources */ = {isa = PBXBuildFile; fileRef = ED53BE131BE452EC0033A666 /* Animationdemo.m */; };
 		ED53BE171BE459E10033A666 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED53BE161BE459E10033A666 /* CommentViewController.m */; };
@@ -51,6 +52,7 @@
 		ED8C294F1C02AE6D00778A08 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C294E1C02AE6D00778A08 /* Comment.m */; };
 		ED8C29521C02EDCE00778A08 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C29511C02EDCD00778A08 /* CommentCell.m */; };
 		ED9779021C3152510078C174 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED9779011C3152500078C174 /* Photos.framework */; };
+		EDB229781C51CB5E00D4E50C /* ZMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB229771C51CB5E00D4E50C /* ZMessageManager.m */; };
 		EDB293D21BC1062700290C56 /* UTF8FileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB293D11BC1062700290C56 /* UTF8FileParser.m */; };
 		EDBA42221BB39162004B9A62 /* AppBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42211BB39162004B9A62 /* AppBookView.m */; };
 		EDBA42371BB3EDDD004B9A62 /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBA42361BB3EDDD004B9A62 /* AppUtils.m */; };
@@ -65,6 +67,7 @@
 		EDD38DF61BB7F75E001878DC /* UIImage+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD38DF41BB7F75E001878DC /* UIImage+UIColor.m */; };
 		EDD38DF91BB80FEF001878DC /* UILabel+VerticalAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD38DF81BB80FEF001878DC /* UILabel+VerticalAlign.m */; };
 		EDE465E91C4FE4BF00C58727 /* ZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE465E81C4FE4BF00C58727 /* ZTextView.m */; };
+		EDF09D021C5648B600B11970 /* cfnetworkVC.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF09D011C5648B600B11970 /* cfnetworkVC.m */; };
 		EDFCA7411BB1734F00AF49EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA7401BB1734F00AF49EA /* main.m */; };
 		EDFCA7441BB1734F00AF49EA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA7431BB1734F00AF49EA /* AppDelegate.m */; };
 		EDFCA7471BB1734F00AF49EA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA7461BB1734F00AF49EA /* ViewController.m */; };
@@ -104,6 +107,8 @@
 		ED24C6C21C2D3DD9001103D8 /* ZImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZImagePickerController.h; sourceTree = "<group>"; };
 		ED24C6C31C2D3DD9001103D8 /* ZImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZImagePickerController.m; sourceTree = "<group>"; };
 		ED24C6C51C2D3EB9001103D8 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		ED4A71A21C560DDE000094F1 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		ED4A71A31C560DDE000094F1 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		ED53BE101BE382F50033A666 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		ED53BE121BE452EC0033A666 /* Animationdemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animationdemo.h; sourceTree = "<group>"; };
 		ED53BE131BE452EC0033A666 /* Animationdemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animationdemo.m; sourceTree = "<group>"; };
@@ -165,6 +170,8 @@
 		ED8C29501C02EDCD00778A08 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
 		ED8C29511C02EDCD00778A08 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
 		ED9779011C3152500078C174 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		EDB229761C51CB5E00D4E50C /* ZMessageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMessageManager.h; sourceTree = "<group>"; };
+		EDB229771C51CB5E00D4E50C /* ZMessageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMessageManager.m; sourceTree = "<group>"; };
 		EDB293D01BC1062700290C56 /* UTF8FileParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UTF8FileParser.h; sourceTree = "<group>"; };
 		EDB293D11BC1062700290C56 /* UTF8FileParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UTF8FileParser.m; sourceTree = "<group>"; };
 		EDBA42201BB39162004B9A62 /* AppBookView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppBookView.h; sourceTree = "<group>"; };
@@ -193,6 +200,8 @@
 		EDD38DF81BB80FEF001878DC /* UILabel+VerticalAlign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+VerticalAlign.m"; sourceTree = "<group>"; };
 		EDE465E71C4FE4BF00C58727 /* ZTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZTextView.h; sourceTree = "<group>"; };
 		EDE465E81C4FE4BF00C58727 /* ZTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZTextView.m; sourceTree = "<group>"; };
+		EDF09D001C5648B600B11970 /* cfnetworkVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cfnetworkVC.h; sourceTree = "<group>"; };
+		EDF09D011C5648B600B11970 /* cfnetworkVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cfnetworkVC.m; sourceTree = "<group>"; };
 		EDFCA73B1BB1734F00AF49EA /* app_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFCA73F1BB1734F00AF49EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDFCA7401BB1734F00AF49EA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -228,6 +237,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED4A71A11C560DA2000094F1 /* gcdsocket */ = {
+			isa = PBXGroup;
+			children = (
+				ED4A71A21C560DDE000094F1 /* GCDAsyncSocket.h */,
+				ED4A71A31C560DDE000094F1 /* GCDAsyncSocket.m */,
+			);
+			name = gcdsocket;
+			sourceTree = "<group>";
+		};
+		ED4A71A51C56226D000094F1 /* CFNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				EDF09D001C5648B600B11970 /* cfnetworkVC.h */,
+				EDF09D011C5648B600B11970 /* cfnetworkVC.m */,
+			);
+			name = CFNetwork;
+			sourceTree = "<group>";
+		};
 		ED5AFB781BD0B76D00612E3C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,6 +275,43 @@
 			path = sql;
 			sourceTree = "<group>";
 		};
+		EDB229751C51CB1800D4E50C /* message */ = {
+			isa = PBXGroup;
+			children = (
+				EDB229761C51CB5E00D4E50C /* ZMessageManager.h */,
+				EDB229771C51CB5E00D4E50C /* ZMessageManager.m */,
+			);
+			name = message;
+			sourceTree = "<group>";
+		};
+		EDB229791C51CFB300D4E50C /* db */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = db;
+			sourceTree = "<group>";
+		};
+		EDB2297A1C51CFBF00D4E50C /* mydb */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = mydb;
+			sourceTree = "<group>";
+		};
+		EDB2297B1C51CFCB00D4E50C /* tcp */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = tcp;
+			sourceTree = "<group>";
+		};
+		EDB2297C1C51CFD100D4E50C /* http */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = http;
+			sourceTree = "<group>";
+		};
 		EDD3439F1BC6879D00204C80 /* net */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +319,15 @@
 				EDD343A11BC6879D00204C80 /* ClientServer.m */,
 			);
 			path = net;
+			sourceTree = "<group>";
+		};
+		EDF09CFF1C5641CD00B11970 /* socket */ = {
+			isa = PBXGroup;
+			children = (
+				ED00794F1C0EAA4700B87D99 /* SimpleClientSocket.h */,
+				ED0079501C0EAA4700B87D99 /* SimpleClientSocket.m */,
+			);
+			name = socket;
 			sourceTree = "<group>";
 		};
 		EDFCA7321BB1734F00AF49EA = {
@@ -286,10 +359,16 @@
 		EDFCA73D1BB1734F00AF49EA /* app_demo */ = {
 			isa = PBXGroup;
 			children = (
+				EDF09CFF1C5641CD00B11970 /* socket */,
+				ED4A71A51C56226D000094F1 /* CFNetwork */,
+				ED4A71A11C560DA2000094F1 /* gcdsocket */,
+				EDB2297C1C51CFD100D4E50C /* http */,
+				EDB2297B1C51CFCB00D4E50C /* tcp */,
+				EDB2297A1C51CFBF00D4E50C /* mydb */,
+				EDB229791C51CFB300D4E50C /* db */,
+				EDB229751C51CB1800D4E50C /* message */,
 				ED00794C1C0E907300B87D99 /* SkViewController.h */,
 				ED00794D1C0E907300B87D99 /* SkViewController.m */,
-				ED00794F1C0EAA4700B87D99 /* SimpleClientSocket.h */,
-				ED0079501C0EAA4700B87D99 /* SimpleClientSocket.m */,
 				ED0079521C0ED8AE00B87D99 /* SimpleServerSocket.h */,
 				ED0079531C0ED8AE00B87D99 /* SimpleServerSocket.m */,
 				ED0078FB1C0BEE3D00B87D99 /* CommentTextView.h */,
@@ -551,16 +630,19 @@
 				ED00797A1C113A0400B87D99 /* EmojiViewController.m in Sources */,
 				ED5A77AC1C4F6901009038E2 /* ZMessageCell.m in Sources */,
 				ED007A611C1FAE1900B87D99 /* ZAlertView.m in Sources */,
+				EDB229781C51CB5E00D4E50C /* ZMessageManager.m in Sources */,
 				ED8C29521C02EDCE00778A08 /* CommentCell.m in Sources */,
 				EDC6AC6A1BE1BE6A00693B94 /* CheckboxWithTitle.m in Sources */,
 				EDFCA7411BB1734F00AF49EA /* main.m in Sources */,
 				ED5A779D1C4F2EE4009038E2 /* ZMessageService.m in Sources */,
+				EDF09D021C5648B600B11970 /* cfnetworkVC.m in Sources */,
 				ED0079001C0D4EFE00B87D99 /* AdViewController.m in Sources */,
 				ED53BE171BE459E10033A666 /* CommentViewController.m in Sources */,
 				ED5AF7EB1BCF5E9600612E3C /* AppTableViewCell.m in Sources */,
 				EDD38DF91BB80FEF001878DC /* UILabel+VerticalAlign.m in Sources */,
 				EDD343A21BC6879D00204C80 /* ClientServer.m in Sources */,
 				ED24C6C41C2D3DD9001103D8 /* ZImagePickerController.m in Sources */,
+				ED4A71A41C560DDE000094F1 /* GCDAsyncSocket.m in Sources */,
 				ED0079541C0ED8AE00B87D99 /* SimpleServerSocket.m in Sources */,
 				ED5AF7E51BCE466800612E3C /* AppHomeViewController.m in Sources */,
 				ED602A431BC4CDCF00DB1A3B /* Dao.m in Sources */,
