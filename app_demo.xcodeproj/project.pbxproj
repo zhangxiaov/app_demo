@@ -63,7 +63,6 @@
 		ED835AF01C5760C900F0BCFD /* ZMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED835AEF1C5760C900F0BCFD /* ZMainViewController.m */; };
 		ED835AF31C57627E00F0BCFD /* ZBookLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED835AF21C57627E00F0BCFD /* ZBookLibraryViewController.m */; };
 		ED835AF61C57651800F0BCFD /* ZBookContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED835AF51C57651800F0BCFD /* ZBookContentViewController.m */; };
-		ED835AF91C576B8500F0BCFD /* ZSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = ED835AF81C576B8500F0BCFD /* ZSetting.m */; };
 		ED8C294F1C02AE6D00778A08 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C294E1C02AE6D00778A08 /* Comment.m */; };
 		ED8C29521C02EDCE00778A08 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C29511C02EDCD00778A08 /* CommentCell.m */; };
 		ED9779021C3152510078C174 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED9779011C3152500078C174 /* Photos.framework */; };
@@ -196,6 +195,8 @@
 		ED602A411BC4CDCF00DB1A3B /* Dao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dao.h; sourceTree = "<group>"; };
 		ED602A421BC4CDCF00DB1A3B /* Dao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dao.m; sourceTree = "<group>"; };
 		ED7042C61BD9E65200FED349 /* test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.txt; sourceTree = "<group>"; };
+		ED7296D21C57B332006B9BAD /* prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = prefix.pch; sourceTree = "<group>"; };
+		ED7296D61C57BC80006B9BAD /* ZConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZConstant.h; sourceTree = "<group>"; };
 		ED835AE41C5726DD00F0BCFD /* ZTCPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZTCPManager.h; sourceTree = "<group>"; };
 		ED835AE51C5726DD00F0BCFD /* ZTCPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZTCPManager.m; sourceTree = "<group>"; };
 		ED835AE71C574EAC00F0BCFD /* ZBookInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBookInfoViewController.h; sourceTree = "<group>"; };
@@ -208,8 +209,6 @@
 		ED835AF21C57627E00F0BCFD /* ZBookLibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBookLibraryViewController.m; sourceTree = "<group>"; };
 		ED835AF41C57651800F0BCFD /* ZBookContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBookContentViewController.h; sourceTree = "<group>"; };
 		ED835AF51C57651800F0BCFD /* ZBookContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBookContentViewController.m; sourceTree = "<group>"; };
-		ED835AF71C576B8500F0BCFD /* ZSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSetting.h; sourceTree = "<group>"; };
-		ED835AF81C576B8500F0BCFD /* ZSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZSetting.m; sourceTree = "<group>"; };
 		ED8C294D1C02AE6D00778A08 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		ED8C294E1C02AE6D00778A08 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		ED8C29501C02EDCD00778A08 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
@@ -405,8 +404,8 @@
 			children = (
 				ED835AEB1C575CF900F0BCFD /* ZUtil.h */,
 				ED835AEC1C575CF900F0BCFD /* ZUtil.m */,
-				ED835AF71C576B8500F0BCFD /* ZSetting.h */,
-				ED835AF81C576B8500F0BCFD /* ZSetting.m */,
+				ED7296D21C57B332006B9BAD /* prefix.pch */,
+				ED7296D61C57BC80006B9BAD /* ZConstant.h */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -764,7 +763,6 @@
 				ED5AF7EE1BCFA61600612E3C /* DemoLabel.m in Sources */,
 				EDFCA7471BB1734F00AF49EA /* ViewController.m in Sources */,
 				EDD38DF01BB7BA41001878DC /* AppLabel.m in Sources */,
-				ED835AF91C576B8500F0BCFD /* ZSetting.m in Sources */,
 				EDFFE2BC1BDE0EF200944745 /* Pagination.m in Sources */,
 				ED835AF61C57651800F0BCFD /* ZBookContentViewController.m in Sources */,
 				ED4A71B91C57202D000094F1 /* ZBookManager.m in Sources */,
@@ -927,6 +925,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/prefix.pch";
 				INFOPLIST_FILE = app_demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -943,6 +942,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/prefix.pch";
 				INFOPLIST_FILE = app_demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

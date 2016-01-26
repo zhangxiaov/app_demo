@@ -6,8 +6,6 @@
 //  Copyright © 2016年 张新伟. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 @class ZBookInfo;
 @interface ZBookInfoViewController : UIViewController
 

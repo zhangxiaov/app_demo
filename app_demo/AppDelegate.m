@@ -47,8 +47,8 @@
     
     // ====================
     
-//    AppMainViewController *main = [[AppMainViewController alloc] init];
-//    self.window.rootViewController = main;
+    AppMainViewController *main = [[AppMainViewController alloc] init];
+    self.window.rootViewController = main;
     
     //===
 //    TWFXToolBarViewController *c = [[TWFXToolBarViewController alloc] init];
@@ -71,9 +71,9 @@
     
     
     //
-    cfnetworkVC* vc = [[cfnetworkVC alloc] init];
-    UINavigationController* navc = [[UINavigationController alloc] initWithRootViewController:vc];
-    self.window.rootViewController = navc;
+//    cfnetworkVC* vc = [[cfnetworkVC alloc] init];
+//    UINavigationController* navc = [[UINavigationController alloc] initWithRootViewController:vc];
+//    self.window.rootViewController = navc;
     
     [self.window makeKeyAndVisible];
     

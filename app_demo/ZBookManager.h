@@ -6,13 +6,16 @@
 //  Copyright © 2016年 张新伟. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @class ZBookInfo;
 @interface ZBookManager : NSObject
 
 + (ZBookManager*)manager;
 
+@property (nonatomic, copy) NSString* fontSize;
+@property (nonatomic, copy) NSString* lineSpace;
+@property (nonatomic, copy) NSString* paragraphSpace;
+@property (nonatomic, copy) NSString* wordSpace;
+@property (nonatomic, copy) NSString* fontFamily;
 
 //书架信息 from db
 - (NSArray*)getBookshelf;

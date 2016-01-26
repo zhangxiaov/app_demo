@@ -6,8 +6,6 @@
 //  Copyright © 2016年 张新伟. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface ZBookInfo : NSObject
 @property (nonatomic, copy) NSString* bookID;
 @property (nonatomic, copy) NSString* bookIcon;

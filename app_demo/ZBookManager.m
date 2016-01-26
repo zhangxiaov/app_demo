@@ -18,39 +18,18 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [[ZBookManager alloc] init];
+        
+        NSDictionary* d = [[ZDBManager manager] getFontInfo];
+        instance.fontSize = d[@"fontSize"];
+        instance.lineSpace = d[@"lineSpace"];
+        instance.paragraphSpace = d[@"paragraphSpace"];
+        instance.wordSpace = d[@"wordSpace"];
+        instance.fontFamily = d[@"fontFamily"];
     });
     
     return instance;
 }
 
-//书架信息 from db
-- (NSArray*)getBookshelf {
-    
-}
 
-//全文 db
-- (NSString*)getBookContent {
-    
-}
-
-//书库 若db无，取远程
-- (NSArray*)getBookLibrary {
-    
-}
-
-//书籍简介 db
-- (ZBookInfo*)getBookInfo:(NSString*)bookID {
-    
-}
-
-//短文 若db无 取远程
-- (NSArray*)getEssay {
-    
-}
-
-//短文 db
-- (ZBookInfo*)getEssayInfo:(NSString*)essayID {
-    
-}
 
 @end

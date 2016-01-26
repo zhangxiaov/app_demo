@@ -6,8 +6,6 @@
 //  Copyright © 2016年 张新伟. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 typedef void(^ZTCPBlock)(id responseObj, NSError* error);
 
 @class ZMessageModel;

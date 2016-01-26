@@ -6,13 +6,12 @@
 //  Copyright © 2016年 张新伟. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <FMDatabase/FMDatabase.h>
-
 @class ZBookInfo;
 @interface ZDBManager : NSObject
 
 + (ZDBManager*)manager;
+
+- (NSDictionary*)getFontInfo;
 
 //取书架
 - (NSArray*)getBookshelf;

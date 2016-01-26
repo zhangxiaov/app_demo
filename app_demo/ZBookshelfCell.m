@@ -7,7 +7,6 @@
 //
 
 #import "ZBookshelfCell.h"
-#import <Masonry/Masonry.h>
 #import "ZBookInfo.h"
 
 @implementation ZBookshelfCell

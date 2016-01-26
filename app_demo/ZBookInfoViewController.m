@@ -9,7 +9,6 @@
 #import "ZBookInfoViewController.h"
 #import "ZDBManager.h"
 #import "ZBookInfo.h"
-#import <Masonry/Masonry.h>
 #import "AppUtils.h"
 
 static CGFloat icon_h = 60;

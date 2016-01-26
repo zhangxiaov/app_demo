@@ -27,7 +27,7 @@
         _array = [[NSMutableArray alloc] init];
 //        _title = title;
 
-        _bytecount = 100000;
+        _bytecount = 100000000;
         _filePath = [[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:title] stringByAppendingPathExtension:@"txt"];
         
         NSString *tmpstr = [NSString stringWithContentsOfFile:_filePath encoding:NSUTF8StringEncoding error:nil];
@@ -75,6 +75,7 @@
     [fh seekToFileOffset:0];
     NSInteger byteOffset = 0;
     
+    NSTimeInterval t0 = [[NSDate date] timeIntervalSinceNow];
     while ([fh offsetInFile] < _len) {
         
         if (byteOffset > 0) {
@@ -209,7 +210,24 @@
         // 200k text end
     }
     
+    NSLog(@"test time %f", [[NSDate date] timeIntervalSinceNow] - t0);
+    NSLog(@"test array %@", [_array componentsJoinedByString:@","]);
     [fh closeFile];
+
+    //2
+//    NSTimeInterval s = [[NSDate date] timeIntervalSinceNow] ;
+//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+//    paragraphStyle.lineSpacing = 5.0;
+//    paragraphStyle.paragraphSpacing = 10.0;
+//    NSDictionary *dict = @{NSFontAttributeName: [UIFont systemFontOfSize:15], NSParagraphStyleAttributeName:paragraphStyle,
+//                           NSForegroundColorAttributeName:[UIColor blackColor],
+//                           NSStrokeWidthAttributeName:[NSNumber numberWithFloat:0.0f]};
+//    
+//    
+//    int count = 100;
+//    
+//    
+//    NSLog(@"test time %f", [[NSDate date] timeIntervalSinceNow] - s);
 
 }
 

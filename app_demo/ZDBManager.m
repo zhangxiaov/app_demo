@@ -27,6 +27,21 @@
     return instance;
 }
 
+- (NSDictionary*)getFontInfo {
+    NSDictionary* dict = @{@"fontSize":@"",@"lineSpace":@"",@"paragraphSpace":@"",@"wordSpace":@"",@"fontFamily":@""};
+    NSString* sql = @"select fontSize, lineSpace, paragraphSpace, wordSpace, fontFamily from t_fontInfo";
+    FMResultSet* rs = [[ZDBManager manager].db executeQuery:sql];
+    while ([rs next]) {
+        [dict setValue:[rs stringForColumn:@"fontSize"] forKey:@"fontSize"];
+        [dict setValue:[rs stringForColumn:@"lineSpace"] forKey:@"lineSpace"];
+        [dict setValue:[rs stringForColumn:@"paragraphSpace"] forKey:@"paragraphSpace"];
+        [dict setValue:[rs stringForColumn:@"wordSpace"] forKey:@"wordSpace"];
+        [dict setValue:[rs stringForColumn:@"fontFamily"] forKey:@"fontFamily"];
+    }
+    
+    return dict;
+}
+
 //取书架,并按阅日 排序
 - (NSArray*)getBookshelf {
     NSMutableArray* books = [@[] mutableCopy];
@@ -123,8 +138,13 @@
      book_pages text, \
      book_progress text, \
      book_lastDate integer, \
-     book_charCount text, \
-     book_content text)"];
+     book_byteIndexs_15 text, \
+     book_byteIndexs_16 text, \
+     book_byteIndexs_17 text, \
+     book_byteIndexs_18 text, \
+     book_byteIndexs_19 text, \
+     book_byteIndexs_20 text, \
+     book_charCount text)"];
     
     [[ZDBManager manager].db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_bookLibrary \
      (book_id INTEGER PRIMARY KEY, \
@@ -133,7 +153,12 @@
      book_icon text, \
      book_profile text"];
     
-    
+    [[ZDBManager manager].db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_fontInfo \
+     (fontSize text, \
+     lineSpace text, \
+     paragraphSpace text, \
+     wordSpace text, \
+     fontFamily text"];
 }
 
 //表在否
