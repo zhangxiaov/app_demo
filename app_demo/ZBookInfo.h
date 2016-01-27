@@ -5,8 +5,9 @@
 //  Created by zhangxinwei on 16/1/26.
 //  Copyright © 2016年 张新伟. All rights reserved.
 //
+#import "ZModel.h"
 
-@interface ZBookInfo : NSObject
+@interface ZBookInfo : ZModel
 @property (nonatomic, copy) NSString* bookID;
 @property (nonatomic, copy) NSString* bookIcon;
 @property (nonatomic, copy) NSString* bookAuthor;

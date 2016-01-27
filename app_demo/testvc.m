@@ -8,6 +8,7 @@
 
 #import "testvc.h"
 #import "ZMessageViewController.h"
+#import "ZBookInfo.h"
 
 @interface testvc ()
 @property (nonatomic, strong) UIButton* button;
@@ -18,6 +19,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSDictionary* dict = @{@"bookID":@"1111",@"bookName":@"english"};
+    ZBookInfo* b = [[ZBookInfo alloc] initWithDict:dict];
+    
+    NSLog(@"%@", b.description);
     
     [self.view addSubview:self.button];
 }

@@ -16,6 +16,7 @@
 #import <Foundation/Foundation.h>
 #import <FMDatabase/FMDatabase.h>
 #import <Masonry/Masonry.h>
+#import "AppConfig.h"
 #import "ZConstant.h"
 
 #endif /* prefix_pch */
