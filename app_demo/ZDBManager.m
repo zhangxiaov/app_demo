@@ -138,6 +138,8 @@
 
 - (NSString*)getDBPath {
     NSString* path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    
+    NSLog(@"db path %@", path);
     return [path stringByAppendingPathComponent:@"bookDB.sqlite"];
 }
 

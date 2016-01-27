@@ -60,7 +60,8 @@
 #pragma mark UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    ZBookContentViewController* controller = [ZBookContentViewController alloc] init;
+    ZBookContentViewController* controller = [[ZBookContentViewController alloc] initWith:self.bookArray[indexPath.item]];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark setter

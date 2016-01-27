@@ -172,6 +172,7 @@
 
 + (NSString*)pageContent:(NSString*)bookID offset:(NSString*)offset offset2:(NSString*)offset2 {
     NSString* document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    bookID = @"001.夏本纪第二";
     NSString* path = [[document stringByAppendingPathComponent:bookID] stringByAppendingPathExtension:@"txt"];
     
     NSFileHandle* fh = [NSFileHandle fileHandleForReadingAtPath:path];
