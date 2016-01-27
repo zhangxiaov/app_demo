@@ -63,6 +63,7 @@
 		ED835AF01C5760C900F0BCFD /* ZMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED835AEF1C5760C900F0BCFD /* ZMainViewController.m */; };
 		ED835AF31C57627E00F0BCFD /* ZBookLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED835AF21C57627E00F0BCFD /* ZBookLibraryViewController.m */; };
 		ED835AF61C57651800F0BCFD /* ZBookContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED835AF51C57651800F0BCFD /* ZBookContentViewController.m */; };
+		ED835AFC1C5861FE00F0BCFD /* ZPropertyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = ED835AFB1C5861FE00F0BCFD /* ZPropertyInfo.m */; };
 		ED8C294F1C02AE6D00778A08 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C294E1C02AE6D00778A08 /* Comment.m */; };
 		ED8C29521C02EDCE00778A08 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8C29511C02EDCD00778A08 /* CommentCell.m */; };
 		ED9779021C3152510078C174 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED9779011C3152500078C174 /* Photos.framework */; };
@@ -80,6 +81,8 @@
 		EDD38DF01BB7BA41001878DC /* AppLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD38DEF1BB7BA41001878DC /* AppLabel.m */; };
 		EDD38DF61BB7F75E001878DC /* UIImage+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD38DF41BB7F75E001878DC /* UIImage+UIColor.m */; };
 		EDD38DF91BB80FEF001878DC /* UILabel+VerticalAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD38DF81BB80FEF001878DC /* UILabel+VerticalAlign.m */; };
+		EDE4279D1C5904F100D7ACFF /* ZTouchScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE4279C1C5904F100D7ACFF /* ZTouchScrollView.m */; };
+		EDE427A01C5908EB00D7ACFF /* ZLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE4279F1C5908EB00D7ACFF /* ZLabel.m */; };
 		EDE465E91C4FE4BF00C58727 /* ZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE465E81C4FE4BF00C58727 /* ZTextView.m */; };
 		EDF09D021C5648B600B11970 /* cfnetworkVC.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF09D011C5648B600B11970 /* cfnetworkVC.m */; };
 		EDFCA7411BB1734F00AF49EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFCA7401BB1734F00AF49EA /* main.m */; };
@@ -209,6 +212,8 @@
 		ED835AF21C57627E00F0BCFD /* ZBookLibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBookLibraryViewController.m; sourceTree = "<group>"; };
 		ED835AF41C57651800F0BCFD /* ZBookContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBookContentViewController.h; sourceTree = "<group>"; };
 		ED835AF51C57651800F0BCFD /* ZBookContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBookContentViewController.m; sourceTree = "<group>"; };
+		ED835AFA1C5861FE00F0BCFD /* ZPropertyInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZPropertyInfo.h; sourceTree = "<group>"; };
+		ED835AFB1C5861FE00F0BCFD /* ZPropertyInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZPropertyInfo.m; sourceTree = "<group>"; };
 		ED8C294D1C02AE6D00778A08 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		ED8C294E1C02AE6D00778A08 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		ED8C29501C02EDCD00778A08 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
@@ -242,6 +247,10 @@
 		EDD38DF41BB7F75E001878DC /* UIImage+UIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIColor.m"; sourceTree = "<group>"; };
 		EDD38DF71BB80FEF001878DC /* UILabel+VerticalAlign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+VerticalAlign.h"; sourceTree = "<group>"; };
 		EDD38DF81BB80FEF001878DC /* UILabel+VerticalAlign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+VerticalAlign.m"; sourceTree = "<group>"; };
+		EDE4279B1C5904F100D7ACFF /* ZTouchScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZTouchScrollView.h; sourceTree = "<group>"; };
+		EDE4279C1C5904F100D7ACFF /* ZTouchScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZTouchScrollView.m; sourceTree = "<group>"; };
+		EDE4279E1C5908EB00D7ACFF /* ZLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLabel.h; sourceTree = "<group>"; };
+		EDE4279F1C5908EB00D7ACFF /* ZLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLabel.m; sourceTree = "<group>"; };
 		EDE465E71C4FE4BF00C58727 /* ZTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZTextView.h; sourceTree = "<group>"; };
 		EDE465E81C4FE4BF00C58727 /* ZTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZTextView.m; sourceTree = "<group>"; };
 		EDF09D001C5648B600B11970 /* cfnetworkVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cfnetworkVC.h; sourceTree = "<group>"; };
@@ -331,6 +340,10 @@
 			children = (
 				ED4A71AF1C571455000094F1 /* ZBookshelfSupplementaryView.h */,
 				ED4A71B01C571455000094F1 /* ZBookshelfSupplementaryView.m */,
+				EDE4279B1C5904F100D7ACFF /* ZTouchScrollView.h */,
+				EDE4279C1C5904F100D7ACFF /* ZTouchScrollView.m */,
+				EDE4279E1C5908EB00D7ACFF /* ZLabel.h */,
+				EDE4279F1C5908EB00D7ACFF /* ZLabel.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -342,6 +355,8 @@
 				ED4A71B41C571894000094F1 /* ZBookInfo.m */,
 				ED4A71BA1C57205B000094F1 /* ZModel.h */,
 				ED4A71BB1C57205B000094F1 /* ZModel.m */,
+				ED835AFA1C5861FE00F0BCFD /* ZPropertyInfo.h */,
+				ED835AFB1C5861FE00F0BCFD /* ZPropertyInfo.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -759,11 +774,13 @@
 				ED0078FD1C0BEE3D00B87D99 /* CommentTextView.m in Sources */,
 				ED5A77781C4CD6EC009038E2 /* ZMessageInputView.m in Sources */,
 				ED835AF31C57627E00F0BCFD /* ZBookLibraryViewController.m in Sources */,
+				ED835AFC1C5861FE00F0BCFD /* ZPropertyInfo.m in Sources */,
 				ED5A779A1C4F2420009038E2 /* backup.m in Sources */,
 				ED5AF7EE1BCFA61600612E3C /* DemoLabel.m in Sources */,
 				EDFCA7471BB1734F00AF49EA /* ViewController.m in Sources */,
 				EDD38DF01BB7BA41001878DC /* AppLabel.m in Sources */,
 				EDFFE2BC1BDE0EF200944745 /* Pagination.m in Sources */,
+				EDE427A01C5908EB00D7ACFF /* ZLabel.m in Sources */,
 				ED835AF61C57651800F0BCFD /* ZBookContentViewController.m in Sources */,
 				ED4A71B91C57202D000094F1 /* ZBookManager.m in Sources */,
 				ED5A77811C4CE47F009038E2 /* ZGrowingTextView.m in Sources */,
@@ -807,6 +824,7 @@
 				EDD04CE41BEDAC3100058BB6 /* BookMark.m in Sources */,
 				ED24C6A81C2B8276001103D8 /* MSViewController.m in Sources */,
 				ED5589171BECDEC2004A1A9F /* DB.m in Sources */,
+				EDE4279D1C5904F100D7ACFF /* ZTouchScrollView.m in Sources */,
 				ED5AF7E81BCE47A800612E3C /* AppFindBookViewController.m in Sources */,
 				EDBA42371BB3EDDD004B9A62 /* AppUtils.m in Sources */,
 				EDD363E61BC0FB43008CD9AC /* UITouchScrollView.m in Sources */,

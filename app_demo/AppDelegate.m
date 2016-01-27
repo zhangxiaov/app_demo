@@ -47,8 +47,8 @@
     
     // ====================
     
-    AppMainViewController *main = [[AppMainViewController alloc] init];
-    self.window.rootViewController = main;
+//    AppMainViewController *main = [[AppMainViewController alloc] init];
+//    self.window.rootViewController = main;
     
     //===
 //    TWFXToolBarViewController *c = [[TWFXToolBarViewController alloc] init];
@@ -65,9 +65,9 @@
 //    self.window.rootViewController = controller;
     
     //
-//    testvc* controller = [[testvc alloc] init];
-//    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:controller];
-//    self.window.rootViewController = navc;
+    testvc* controller = [[testvc alloc] init];
+    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:controller];
+    self.window.rootViewController = navc;
     
     
     //

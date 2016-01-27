@@ -14,4 +14,5 @@
 //据字长 分页 存入db
 + (void)paging:(NSString *)bookID;
 
++ (NSString*)pageContent:(NSString*)bookID offset:(NSString*)offset offset2:(NSString*)offset2;
 @end

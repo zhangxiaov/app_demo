@@ -10,4 +10,5 @@
 @class ZBookInfo;
 @interface ZBookContentViewController : UIViewController
 @property (nonatomic, strong) ZBookInfo* bookInfo;
+- (instancetype)initWith:(ZBookInfo*)bookInfo;
 @end

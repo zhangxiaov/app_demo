@@ -8,6 +8,7 @@
 
 #import "ZDBManager.h"
 #import "ZBookInfo.h"
+#import "ZBookManager.h"
 
 @interface ZDBManager ()
 @property (nonatomic, strong) FMDatabase* db;
@@ -25,6 +26,19 @@
     });
     
     return instance;
+}
+
+- (NSArray*)getPageIndexs:(NSString*)bookID {
+    NSString* s = [ZBookManager manager].fontSize;
+    NSString* sql = [NSString stringWithFormat:@"select book_byteIndexs_%@ from t_bookshelf where book_id = ?", s];
+    FMResultSet* rs = [[ZDBManager manager].db executeQuery:sql, bookID];
+    NSArray* array;
+    while ([rs next]) {
+        NSString* indexs = [rs stringForColumn:[NSString stringWithFormat:@"book_byteIndexs_%@", s]];
+        array = [indexs componentsSeparatedByString:@","];
+    }
+    
+    return array;
 }
 
 - (NSDictionary*)getFontInfo {

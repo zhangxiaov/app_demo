@@ -170,4 +170,16 @@
     [ZUtil byteIndexForPages:bookID]; //存 字节索引
 }
 
++ (NSString*)pageContent:(NSString*)bookID offset:(NSString*)offset offset2:(NSString*)offset2 {
+    NSString* document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    NSString* path = [[document stringByAppendingPathComponent:bookID] stringByAppendingPathExtension:@"txt"];
+    
+    NSFileHandle* fh = [NSFileHandle fileHandleForReadingAtPath:path];
+    NSInteger o1 = [offset integerValue];
+    NSInteger o2 = [offset2 integerValue];
+    [fh seekToFileOffset:o1];
+    NSString* pageContent = [[NSString alloc] initWithData:[fh readDataOfLength:o2 - o1] encoding:NSUTF8StringEncoding];
+    return pageContent;
+}
+
 @end

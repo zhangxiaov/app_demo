@@ -11,6 +11,7 @@
 #import "ZBookshelfSupplementaryView.h"
 #import "AppConfig.h"
 #import "ZDBManager.h"
+#import "ZBookContentViewController.h"
 
 @interface ZBookshelfViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -59,7 +60,7 @@
 #pragma mark UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    ZBookContentViewController* controller = [ZBookContentViewController alloc] init;
 }
 
 #pragma mark setter

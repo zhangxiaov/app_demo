@@ -16,6 +16,9 @@
 //取书架
 - (NSArray*)getBookshelf;
 
+//页码 字节索引
+- (NSArray*)getPageIndexs:(NSString*)bookID;
+
 //书籍简介 db
 - (ZBookInfo*)getBookInfo:(NSString*)bookID;
 

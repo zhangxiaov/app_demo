@@ -6,6 +6,12 @@
 //  Copyright © 2016年 张新伟. All rights reserved.
 //
 
+
+
 @interface ZModel : NSObject
+
+- (instancetype)initWithDict:(NSDictionary*)dict;
+
+- (NSDictionary*)jsonKeyAndClassPropertyMap;
 
 @end

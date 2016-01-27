@@ -56,6 +56,25 @@ typedef NS_ENUM(NSInteger, ZMessageTableScroll) {
     ZMessageTableScrollNo,
 };
 
+typedef NS_ENUM(NSInteger, ZPropertyType) {
+    ZPropertyTypeNone = 0,
+    ZPropertyTypeBOOL,
+    ZPropertyTypeInt16,
+    ZPropertyTypeInt32,
+    ZPropertyTypeInt64,
+    ZPropertyTypeFloat,
+    ZPropertyTypeDouble,
+    ZPropertyTypeNumber,
+    ZPropertyTypeDate,
+    ZPropertyTypeString,
+    ZPropertyTypeMutableString,
+    ZPropertyTypeArray,
+    ZPropertyTypeMutableArray,
+    ZPropertyTypeDictionary,
+    ZPropertyTypeMutableDictionary,
+    ZPropertyTypeModel
+};
+
 #define statusBarHeight  [[UIApplication sharedApplication] statusBarFrame].size.height
 
 #endif
